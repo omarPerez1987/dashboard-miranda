@@ -24,23 +24,19 @@ function App() {
           <Route path="/" element={<LoginPage />} />
           {data ? (
             <>
-              <Route
-                path="/dashboard"
-                element={<DashboardPage />}
-                fallback={<Navigate to="/" />}
-              >
-                <Route path="bookings" element={<BokkingsPage />}>
-                  <Route path=":id"></Route>
-                </Route>
-                <Route path="rooms" element={<RoomsPage />}>
-                  <Route path=":id"></Route>
-                </Route>
-                <Route path="users" element={<UsersPage />}>
-                  <Route path=":id"></Route>
-                </Route>
-                <Route path="contact" element={<ContactPage />}>
-                  <Route path=":id"></Route>
-                </Route>
+              <Route path="/dashboard" element={<DashboardPage />} />
+
+              <Route path="bookings" element={<BokkingsPage />}>
+                <Route path=":id"></Route>
+              </Route>
+              <Route path="rooms" element={<RoomsPage />}>
+                <Route path=":id"></Route>
+              </Route>
+              <Route path="users" element={<UsersPage />}>
+                <Route path=":id"></Route>
+              </Route>
+              <Route path="contact" element={<ContactPage />}>
+                <Route path=":id"></Route>
               </Route>
             </>
           ) : null}

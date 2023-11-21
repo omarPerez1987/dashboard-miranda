@@ -5,6 +5,7 @@ import RoomsPage from "./pages/RoomsPage";
 import UsersPage from "./pages/UsersPage";
 import ContactPage from "./pages/ContactPage";
 import DashboardPage from "./pages/DashboardPage";
+import HomePage from "./pages/HomePage";
 import { useEffect, useState } from "react";
 
 function App() {
@@ -24,19 +25,20 @@ function App() {
           <Route path="/" element={<LoginPage />} />
           {data ? (
             <>
-              <Route path="/dashboard" element={<DashboardPage />} />
-
-              <Route path="bookings" element={<BokkingsPage />}>
-                <Route path=":id"></Route>
-              </Route>
-              <Route path="rooms" element={<RoomsPage />}>
-                <Route path=":id"></Route>
-              </Route>
-              <Route path="users" element={<UsersPage />}>
-                <Route path=":id"></Route>
-              </Route>
-              <Route path="contact" element={<ContactPage />}>
-                <Route path=":id"></Route>
+              <Route path="/home" element={<HomePage />}>
+                <Route path="/home/dashboard" element={<DashboardPage />} />
+                <Route path="/home/bookings" element={<BokkingsPage />}>
+                  <Route path=":id"></Route>
+                </Route>
+                <Route path="/home/rooms" element={<RoomsPage />}>
+                  <Route path=":id"></Route>
+                </Route>
+                <Route path="/home/users" element={<UsersPage />}>
+                  <Route path=":id"></Route>
+                </Route>
+                <Route path="/home/contact" element={<ContactPage />}>
+                  <Route path=":id"></Route>
+                </Route>
               </Route>
             </>
           ) : null}

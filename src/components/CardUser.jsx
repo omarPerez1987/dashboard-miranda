@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { CardUserStyled } from "../componentsStyle/CardUserStyled";
 import { useNavigate } from "react-router-dom";
+import User from '../../public/cardUser/bxs-user.svg'
 
 const CardUser = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const CardUser = () => {
     e.preventDefault();
     if (formData.email === "test@test.com" && formData.password === "9999") {
       localStorage.setItem("formData", JSON.stringify(formData));
-      navigate("/dashboard");
+      navigate("/home/dashboard");
     } else {
       alert("Escribe correctamente los datos");
       setFormData(initialState);
@@ -34,7 +35,7 @@ const CardUser = () => {
   return (
     <>
       <CardUserStyled>
-        <img src="../../public/cardUser/bxs-user.svg" alt="" />
+        <img className="card-img" src={User} alt="" />
         <form onSubmit={handleSubmit}>
           <input
             type="email"

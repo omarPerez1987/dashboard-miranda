@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import { TableStyled } from "../componentsStyle/tables/TableStyled";
+import HeaderTableUser from "../components/tables/User/HeaderTableUser";
 
 const UsersPage = () => {
   return (
-    <div>UsersPage</div>
-  )
-}
+    <TableStyled>
+      <HeaderTableUser />
+    </TableStyled>
+  );
+};
 
-export default UsersPage
+export default UsersPage;

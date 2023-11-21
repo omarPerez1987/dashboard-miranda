@@ -1,23 +1,36 @@
 import styled from "styled-components";
 
 export const CardUserStyled = styled.article`
+  margin: 0 auto;
   padding: 1em 0em;
-  margin: 1em;
-  width: 25em;
+  width: 14.5em;
   height: auto;
   background-color: #ffffff;
   box-shadow: 0px 20px 30px #00000014;
   border-radius: 1em;
   display: flex;
-  flex-direction: column;
   align-items: center;
-
-  img {
-    width: 30%;
-    height: auto;
-    background-color: #C5C5C5;
-    margin: 2em;
+  flex-direction: column;
+  
+  & .card-img {
+    width: 4.3em;
+    height: 4.3em;
+    background-color: #c5c5c5;
+    margin-bottom: 1em;
     border-radius: 10px;
+  }
+
+  & .card-name {
+    font-size: 1rem;
+    color: #393939;
+    margin-bottom: 0.5em;
+  }
+
+  & .card-email {
+    font-size: 0.7rem;
+    letter-spacing: 0px;
+    color: #b2b2b2;
+    margin-bottom: 1em;
   }
 
   form {
@@ -31,23 +44,24 @@ export const CardUserStyled = styled.article`
 
   input {
     width: 80%;
-    height: 2.5em;
+    height: 1.5em;
     padding: 1em;
   }
 
   button {
-    width: 30%;
+    width: 70%;
     padding: 0.5em;
-    background-color: #E2E2E2;
-    color: #6D6D6D;
+    background-color: #EBF1EF;
+    color: #799283;
     font-size: 1rem;
-    border-radius: 0.7em;
+    border-radius: 0.5em;
     font-weight: 600;
     border: none;
     cursor: pointer;
   }
   button:hover {
-    background-color: #E8FFEE;
-    color: #5AD07A;
+    background-color: #e8ffee;
+    color: #5ad07a;
   }
+
 `;

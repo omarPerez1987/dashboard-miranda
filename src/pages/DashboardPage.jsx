@@ -3,9 +3,7 @@ import NavMenu from '../components/NavMenu'
 
 const DashboardPage = () => {
   return (
-    <section>
-      <NavMenu/>
-    </section>
+    <p>dashboard</p>
   )
 }
 

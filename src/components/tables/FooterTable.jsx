@@ -1,0 +1,20 @@
+import React from "react";
+import { FooterTableStyled} from "../../componentsStyle/tables/FooterTableStyled";
+
+const FooterTable = () => {
+  return (
+    <FooterTableStyled>
+      <div>Showing 1 of 102 Data</div>
+      <div className="container-pagination">
+        <button className="prev-next">Prev</button>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>4</button>
+        <button className="prev-next">Next</button>
+      </div>
+    </FooterTableStyled>
+  );
+};
+
+export default FooterTable;

@@ -6,11 +6,17 @@ export const TableStyled = styled.section`
   flex-direction: column;
   align-items: center;
   width: 90%;
-  height: 100em;
+  height: auto;
   margin-top: 3.5em;
-  border: 1px solid red;
-
-  div {
-    display: flex;
+  
+  table {
+    width: 100%;
   }
+  tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+
+  }
+
 `;

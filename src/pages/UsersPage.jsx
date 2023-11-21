@@ -1,11 +1,29 @@
 import React from "react";
 import { TableStyled } from "../componentsStyle/tables/TableStyled";
-import HeaderTableUser from "../components/tables/User/HeaderTableUser";
+import RowTableUser from "../components/tables/User/RowTableUser";
+import OrderTableUser from "../components/tables/User/OrderTableUser";
+import FooterTable from "../components/tables/FooterTable";
+import TheadTableUser from "../components/tables/User/TheadTableUser";
 
 const UsersPage = () => {
   return (
     <TableStyled>
-      <HeaderTableUser />
+      <OrderTableUser />
+      <table>
+        <TheadTableUser />
+        <tbody>
+          <RowTableUser />
+          <RowTableUser />
+          <RowTableUser />
+          <RowTableUser />
+          <RowTableUser />
+          <RowTableUser />
+          <RowTableUser />
+          <RowTableUser />
+          <RowTableUser />
+        </tbody>
+      </table>
+      <FooterTable />
     </TableStyled>
   );
 };

@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
-export const HeaderTableStyled = styled.div`
-  margin-top: 3.5em;
+export const OrderTableStyled = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 90%;
+  width: 100%;
   height: 2.5em;
+  padding: 0.5em;
+  margin-bottom: 2.1em;
   
 
   div {

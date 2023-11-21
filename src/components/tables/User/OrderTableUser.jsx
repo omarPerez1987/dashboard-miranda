@@ -1,10 +1,10 @@
 import React from "react";
-import { HeaderTableStyled } from "../../../componentsStyle/tables/HeaderTableStyled";
+import { OrderTableStyled } from "../../../componentsStyle/tables/OrderTableStyled";
 import { IoIosArrowDown } from "react-icons/io";
 
-const HeaderTableUser = () => {
+const OrderTableUser = () => {
   return (
-    <HeaderTableStyled>
+    <OrderTableStyled>
       <div>
         <h4>All Guest</h4>
         <h4>Pending</h4>
@@ -17,8 +17,8 @@ const HeaderTableUser = () => {
           Newest <IoIosArrowDown />
         </button>
       </div>
-    </HeaderTableStyled>
+    </OrderTableStyled>
   );
 };
 
-export default HeaderTableUser;
+export default OrderTableUser;

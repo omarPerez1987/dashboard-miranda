@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const OrderTableStyled = styled.div`
+margin-top: 5.6em;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  width: 90%;
   height: 4em;
-  padding: 0.8em;
   margin-bottom: 3.3em;  
 
   div {

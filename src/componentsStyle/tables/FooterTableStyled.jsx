@@ -2,16 +2,15 @@ import styled from "styled-components";
 
 export const FooterTableStyled = styled.div`
   margin: 2.8em 0em;
-  width: 100%;
+  width: 90%;
   height: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.6em;
-
+  
   & .container-pagination {
+    gap: 0.5em;
     display: flex;
-    gap: 1em;
     color: #135846;
   }
   p {
@@ -19,8 +18,8 @@ export const FooterTableStyled = styled.div`
     font-size: 1.6rem;
   }
   button {
-    font-size: 1.2rem;
-    padding: 1.2em 2.5em;
+    font-size: 1.3rem;
+    padding: 1em 2em;
     background-color: transparent;
     border: none;
     border-radius: 12px;
@@ -34,6 +33,6 @@ export const FooterTableStyled = styled.div`
     border: 1px solid #135846;
     background-color: #ffffff;
     color: #135846;
-    padding: 1.2em 2.5em;
+    padding: 1em 2em;
   }
 `;

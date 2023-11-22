@@ -2,59 +2,59 @@ import styled from "styled-components";
 
 export const CardUserStyled = styled.article`
   margin: 0 auto;
-  padding: 1em 0em;
-  width: 14.5em;
+  padding: 1.6em 0em;
+  width: 23.2em;
   height: auto;
   background-color: #ffffff;
   box-shadow: 0px 20px 30px #00000014;
-  border-radius: 1em;
+  border-radius: 1.6em;
   display: flex;
   align-items: center;
   flex-direction: column;
   
   & .card-img {
-    width: 4.3em;
-    height: 4.3em;
+    width: 6.8em;
+    height: 6.8em;
     background-color: #c5c5c5;
-    margin-bottom: 1em;
-    border-radius: 10px;
+    margin-bottom: 1.6em;
+    border-radius: 1.6rem;
   }
 
   & .card-name {
-    font-size: 1rem;
+    font-size: 1.6rem;
     color: #393939;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.8em;
   }
 
   & .card-email {
-    font-size: 0.7rem;
+    font-size: 1.1rem;
     letter-spacing: 0px;
     color: #b2b2b2;
-    margin-bottom: 1em;
+    margin-bottom: 1.6em;
   }
 
   form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1em;
+    gap: 1.6em;
     width: 80%;
-    padding: 1em;
+    padding: 1.6em;
   }
 
   input {
     width: 80%;
-    height: 1.5em;
-    padding: 1em;
+    height: 2.4em;
+    padding: 1.6em;
   }
 
   button {
     width: 70%;
-    padding: 0.5em;
+    padding: 0.8em;
     background-color: #EBF1EF;
     color: #799283;
-    font-size: 1rem;
-    border-radius: 0.5em;
+    font-size: 1.6rem;
+    border-radius: 0.8em;
     font-weight: 600;
     border: none;
     cursor: pointer;

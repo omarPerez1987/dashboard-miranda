@@ -4,10 +4,10 @@ import { TfiKey } from "react-icons/tfi";
 import { LuCalendarCheck2 } from "react-icons/lu";
 import { FaUsers } from "react-icons/fa";
 import { BsTelephoneInbound } from "react-icons/bs";
-import { NavMenustyled } from "../componentsStyle/NavMenuStyled";
-import { NavLinkStyled } from "../componentsStyle/NavMenuStyled";
-import { CardUserStyled } from "../componentsStyle/CardUserStyled";
-import Logo from "../../public/navMenu/logo-dashboard.png";
+import { NavMenustyled } from "../../componentsStyle/general/NavMenuStyled";
+import { NavLinkStyled } from "../../componentsStyle/general/NavMenuStyled";
+import { CardUserStyled } from "../../componentsStyle/general/CardUserStyled";
+import Logo from "../../../public/navMenu/logo-dashboard.png";
 
 const NavMenu = ({ menuOpen }) => {
   return (
@@ -48,7 +48,7 @@ const NavMenu = ({ menuOpen }) => {
           />
           <h3 className="card-name">Omar Perez</h3>
           <p className="card-email">test@test.com</p>
-          <button className="card-button">Contact Us</button>
+          <button className="card-button">Edit</button>
         </CardUserStyled>
 
         <div className="container-copyright">

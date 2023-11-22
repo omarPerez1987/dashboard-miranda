@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const TopMenuStyled = styled.section`
   width: 100%;
-  height: 120px;
+  height: 12em;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -13,13 +13,13 @@ export const TopMenuStyled = styled.section`
     display: flex;
     align-items: baseline;
     justify-content: start;
-    gap: 2em;
-    padding-left: 1em;
+    gap: 3.2em;
+    padding-left: 1.6em;
   }
   & .container-right {
     height: auto;
     justify-content: end;
-    padding-right: 3em;
+    padding-right: 4.8em;
   }
   
   svg {
@@ -30,7 +30,7 @@ export const TopMenuStyled = styled.section`
   
   h1 {
     color: #135846;
-    font-size: 1.7rem;
+    font-size: 2.7rem;
     font-weight: 600;
   }
   button {

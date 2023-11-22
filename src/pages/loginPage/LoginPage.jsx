@@ -1,5 +1,5 @@
 import React from "react";
-import CardUser from "../../components/CardUser";
+import CardUser from "../../components/general/CardUser";
 import "./loginPage.css";
 
 const LoginPage = () => {

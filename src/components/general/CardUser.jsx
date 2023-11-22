@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { CardUserStyled } from "../componentsStyle/CardUserStyled";
+import { CardUserStyled } from "../../componentsStyle/general/CardUserStyled";
 import { useNavigate } from "react-router-dom";
-import User from '../../public/cardUser/bxs-user.svg'
+import User from '../../../public/cardUser/bxs-user.svg'
 
 const CardUser = () => {
   const navigate = useNavigate();

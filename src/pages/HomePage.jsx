@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import NavMenu from "../components/NavMenu";
-import { HomeStyled } from "../componentsStyle/HomeStyled";
-import TopMenu from "../components/TopMenu";
-import { ColumnStyled } from "../componentsStyle/ColumnStyled";
+import NavMenu from "../components/general/NavMenu";
+import { HomeStyled } from "../componentsStyle/general/HomeStyled";
+import TopMenu from "../components/general/TopMenu";
+import { ColumnStyled } from "../componentsStyle/general/ColumnStyled";
 
 const HomePage = () => {
   const [menuOpen, setMenuOpen] = useState(true);

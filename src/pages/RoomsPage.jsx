@@ -1,10 +1,9 @@
-import React from 'react'
-import TableUser from '../components/tables/User/TableUser'
+import React from "react";
 
 const RoomsPage = () => {
   return (
-    <TableUser />
-  )
-}
+    <h1>rooms</h1>
+  );
+};
 
-export default RoomsPage
+export default RoomsPage;

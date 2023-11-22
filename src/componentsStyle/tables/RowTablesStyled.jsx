@@ -7,11 +7,12 @@ export const RowTablesStyled = styled.tr`
   display: flex;
   justify-content: space-between;
   padding: 0.5em;
-
+  
   td {
-    width: auto;
     height: 100%;
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 0.5em;
   }
 

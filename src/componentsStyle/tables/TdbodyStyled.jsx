@@ -2,37 +2,61 @@ import styled from "styled-components";
 
 export const TdbodyStyled = styled.td`
   color: #393939;
-  font-size: 1.6rem;
-  font-weight: medium;
+  font-size: 1.2rem;
+  font-weight: 400;
   text-align: start;
   max-width: 200px;
-  padding-right: 1em;
+  padding: 1em 1em 1em 0em;
 
   p {
-    font-size: 1.6rem;
-    font-weight: medium;
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
   }
 
   span {
-    font-size: 1.4rem;
-    font-weight: normal;
+    font-size: 1rem;
+    font-weight: 400;
   }
 
   button {
     padding: 0.5em 1em;
     height: auto;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     border-radius: 12px;
     border: none;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   h6 {
-   color: #135846;
-   font-size: 1.4rem;
-   font-weight: normal;
+    color: #135846;
+    font-size: 1rem;
+    font-weight: 600;
   }
-  
+  .available {
+    padding: 1em 2.5em;
+    font-weight: 500;
+    width: 125px;
+    height: 48px;
+    background-color: #5ad07a;
+    color: #ffffff;
+  }
+  .available::before {
+    content: "Available";
+  }
+
+  .booked {
+    padding: 1em 2.5em;
+    font-weight: 500;
+    background-color: #e23428;
+    color: #ffffff;
+  }
+  .booked::before {
+    content: "Booked";
+  }
+
   .view-active {
     padding: 0.5em 2em;
     color: #212121;
@@ -45,25 +69,44 @@ export const TdbodyStyled = styled.td`
     background-color: transparent;
   }
 
+  .--inactive {
+    background-color: transparent;
+    color: #e23428;
+  }
+  .--inactive::before {
+    content: "INACTIVE";
+  }
+
+  .--active {
+    background-color: transparent;
+    color: #5ad07a;
+  }
+  .--active::before {
+    content: "ACTIVE";
+  }
+
   .--red {
-    color: #E23428;
-    background-color: #FFEDEC;
+    color: #e23428;
+    background-color: #ffedec;
   }
+  .--red::before {
+    content: "Check Out";
+  }
+
   .--green {
-    color: #E8FFEE;
-    background-color: #5AD07A;
+    color: #e8ffee;
+    background-color: #5ad07a;
   }
-  .--grey {
-    color: #6D6D6D;
-    background-color: #E2E2E2;
+  .--green::before {
+    content: "Check In";
   }
-  .--black {
-    color: #BEBEBE;
-    background-color: #575757;
+
+  .--yellow {
+    color: #212121;
+    background-color: #dfdf1eb0;
   }
-  
-  .active {
-    
+  .--yellow::before {
+    content: "In Progress";
   }
 
   svg {

@@ -7,6 +7,6 @@ export const TheadStyled = styled.thead`
     text-align: start;
     color: #393939;
     font-weight: bold;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
   }
 `;

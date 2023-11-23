@@ -2,47 +2,47 @@ import React from "react";
 import { TableStyle } from "../../../componentsStyle/tables/TableStyled";
 import { TheadStyled } from "../../../componentsStyle/tables/TheadStyled";
 import { TrbodyStyled } from "../../../componentsStyle/tables/TrbodyStyled";
-import { TdbodyNameStyled } from "../../../componentsStyle/tables/TdbodyNameStyled";
 import { TdbodyStyled } from "../../../componentsStyle/tables/TdbodyStyled";
+import { TdbodyNameStyled } from "../../../componentsStyle/tables/TdbodyNameStyled";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
-import room from "../../../../public/Rooms/Room.jpg";
+import user from "../../../../public/cardUser/bxs-user.svg";
 
-const TableRooms = () => {
+const TableBookings = () => {
   return (
     <TableStyle>
       <TheadStyled>
         <tr>
-          <th>Room Name</th>
-          <th>Bed Type</th>
-          <th>Facilities</th>
-          <th>Price</th>
-          <th>Offer Price</th>
+          <th>Guest</th>
+          <th>Order Date</th>
+          <th>Check In</th>
+          <th>Check Out</th>
+          <th>Special Request</th>
+          <th>Room Type</th>
           <th>Status</th>
         </tr>
       </TheadStyled>
       <tbody>
         <TrbodyStyled>
           <TdbodyNameStyled>
-            <img className="image-room" src={room} alt="" />
+            <img src={user} alt="" />
             <div>
-              <p>Deluxe A-91234</p>
-              <span>#12341225</span>
+              <span>#000123456</span>
+              <p>Cahyadi Purnomo</p>
             </div>
           </TdbodyNameStyled>
+          <TdbodyStyled>Oct 30th 2020 09:21 AM</TdbodyStyled>
           <TdbodyStyled>
-            <p>Double Bed</p>
+            <p>Nov 2th, 2020</p> <span>9.46 PM</span>
           </TdbodyStyled>
           <TdbodyStyled>
-            AC, Shower, Double Bed, Towel, Bathup, Coffee Set, LED TV, Wifi
+            <p>Nov 4th, 2020</p> <span>6.12 PM</span>
           </TdbodyStyled>
           <TdbodyStyled>
-            <p>$145</p>
+            <button className="view-active">View Notes</button>
           </TdbodyStyled>
+          <TdbodyStyled><p>Deluxe A - 02</p></TdbodyStyled>
           <TdbodyStyled>
-            <p>20%</p>
-          </TdbodyStyled>
-          <TdbodyStyled>
-            <button className="booked"></button>
+            <button className="--red"></button>
           </TdbodyStyled>
           <TdbodyStyled>
             <PiDotsThreeVerticalBold />
@@ -53,4 +53,4 @@ const TableRooms = () => {
   );
 };
 
-export default TableRooms;
+export default TableBookings;

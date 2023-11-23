@@ -1,39 +1,27 @@
 import styled from "styled-components";
 
 export const OrderTableStyled = styled.div`
-margin-top: 5.6em;
+  margin-top: 3.6em;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 90%;
   height: 4em;
-  margin-bottom: 3.3em;  
 
   div {
     display: flex;
-    gap: 3.2em;
+    gap: 1em;
   }
   h4 {
-    font-size: 1.6rem;
+    text-align: center;
+    width: auto;
+    font-size: 1.2rem;
     font-weight: 400;
     height: 100%;
     color: #135846;
+    padding: 0.5em 2em;
   }
   h4:hover {
     border-bottom: 2px solid #135846;
-  }
-
-  button {
-    font-size: 1.6rem;
-    border: 1px solid #135846;
-    border-radius: 1.2rem;
-    width: 8em;
-    height: 2.5em;
-    display: flex;
-    align-items: center;
-    gap: 0.8em;
-    justify-content: center;
-    color: #135846;
-    background-color: transparent;
   }
 `;

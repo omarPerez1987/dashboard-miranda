@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const FooterTableStyled = styled.div`
-  margin: 2.8em 0em;
+  margin: 2em 0em;
   width: 90%;
   height: auto;
   display: flex;
@@ -15,10 +15,10 @@ export const FooterTableStyled = styled.div`
   }
   p {
     color: #135846;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
   }
   button {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     padding: 1em 2em;
     background-color: transparent;
     border: none;

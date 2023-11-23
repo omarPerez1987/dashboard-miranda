@@ -4,27 +4,32 @@ export const TdbodyNameStyled = styled.td`
   display: flex;
   gap: 0.8em;
   padding: 1em;
+  max-width: 200px;
   img {
     width: 45px;
     height: 45px;
     background-color: #c5c5c5;
   }
-  .image-room {
+  .image-user {
     width: 88px;
     height: 88px;
+  }
+  .image-room {
+    width: 150px;
+    height: 77px;
   }
   div {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
   }
   span {
     color: #799283;
-    font-size: 1.4rem;
-    font-weight: normal;
+    font-size: 1rem;
+    font-weight: 400;
   }
   p {
-    font-size: 1.6rem;
-    font-weight: medium;
+    font-size: 1.2rem;
+    font-weight: 600;
   }
 `;

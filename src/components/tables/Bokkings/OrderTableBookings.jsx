@@ -1,8 +1,9 @@
 import React from "react";
 import { OrderTableStyled } from "../../../componentsStyle/tables/OrderTableStyled";
 import { IoIosArrowDown } from "react-icons/io";
+import { NewestButton } from "../../../componentsStyle/general/ButtonStyled";
 
-const OrderTableUser = () => {
+const OrderTableBookings = () => {
   return (
     <OrderTableStyled>
       <div>
@@ -13,12 +14,12 @@ const OrderTableUser = () => {
         <h4>Refund</h4>
       </div>
       <div>
-        <button>
+        <NewestButton>
           Newest <IoIosArrowDown />
-        </button>
+        </NewestButton>
       </div>
     </OrderTableStyled>
   );
 };
 
-export default OrderTableUser;
+export default OrderTableBookings;

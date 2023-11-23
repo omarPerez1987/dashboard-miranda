@@ -1,17 +1,16 @@
 import React from "react";
 import { MainStyled } from "../componentsStyle/general/MainStyled";
-import OrderTableUser from "../components/tables/User/OrderTableUser"
-import FooterTable from "../components/tables/FooterTable"
-import TableUser from "../components/tables/User/TableUser"
+import FooterTable from "../components/tables/FooterTable";
+import OrderTableUsers from "../components/tables/User/OrderTableUsers";
+import TableUsers from "../components/tables/User/TableUsers";
 
 const UsersPage = () => {
   return (
     <MainStyled>
-      <OrderTableUser />
-      <TableUser />
+      <OrderTableUsers />
+      <TableUsers />
       <FooterTable />
     </MainStyled>
-
   );
 };
 

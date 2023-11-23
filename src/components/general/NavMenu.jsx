@@ -21,13 +21,18 @@ const NavMenu = ({ menuOpen }) => {
             Dashboard
           </NavLinkStyled>
 
+          <NavLinkStyled to="/home/bookings">
+            <LuCalendarCheck2 />
+            Bookings
+          </NavLinkStyled>
+
           <NavLinkStyled to="/home/rooms">
             <TfiKey /> Rooms
           </NavLinkStyled>
 
-          <NavLinkStyled to="/home/bookings">
-            <LuCalendarCheck2 />
-            Bookings
+          <NavLinkStyled to="/home/contact">
+            <BsTelephoneInbound />
+            Contact
           </NavLinkStyled>
 
           <NavLinkStyled to="/home/users">
@@ -35,10 +40,6 @@ const NavMenu = ({ menuOpen }) => {
             Users
           </NavLinkStyled>
 
-          <NavLinkStyled to="/home/contact">
-            <BsTelephoneInbound />
-            Contact
-          </NavLinkStyled>
         </div>
         <CardUserStyled>
           <img

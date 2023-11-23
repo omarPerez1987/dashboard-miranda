@@ -2,47 +2,46 @@ import React from "react";
 import { TableStyle } from "../../../componentsStyle/tables/TableStyled";
 import { TheadStyled } from "../../../componentsStyle/tables/TheadStyled";
 import { TrbodyStyled } from "../../../componentsStyle/tables/TrbodyStyled";
-import { TdbodyStyled } from "../../../componentsStyle/tables/TdbodyStyled";
 import { TdbodyNameStyled } from "../../../componentsStyle/tables/TdbodyNameStyled";
+import { TdbodyStyled } from "../../../componentsStyle/tables/TdbodyStyled";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
 import user from "../../../../public/cardUser/bxs-user.svg";
+import { IconTelTable } from "../../../componentsStyle/general/IconStyled";
 
-const TableUser = () => {
+const TableUsers = () => {
   return (
     <TableStyle>
       <TheadStyled>
         <tr>
-          <th>Guest</th>
-          <th>Order Date</th>
-          <th>Check In</th>
-          <th>Check Out</th>
-          <th>Special Request</th>
-          <th>Room Type</th>
+          <th>Name</th>
+          <th>Start Date</th>
+          <th>Description</th>
+          <th>Contact</th>
           <th>Status</th>
         </tr>
       </TheadStyled>
       <tbody>
         <TrbodyStyled>
           <TdbodyNameStyled>
-            <img src={user} alt="" />
+            <img className="image-user" src={user} alt="" />
             <div>
-              <span>#000123456</span>
-              <p>Cahyadi Purnomo</p>
+              <p>James Sitepu</p>
+              <span>#12341225</span>
+              <span>test@test.com</span>
             </div>
           </TdbodyNameStyled>
-          <TdbodyStyled>Oct 30th 2020 09:21 AM</TdbodyStyled>
           <TdbodyStyled>
-            <p>Nov 2th, 2020</p> <span>9.46 PM</span>
+            <p>Oct 30th 2020 </p>
           </TdbodyStyled>
           <TdbodyStyled>
-            <p>Nov 4th, 2020</p> <span>6.12 PM</span>
+            Answering guest inquiries, directing phone calls, coordinating
+            travel plans, and more.
           </TdbodyStyled>
           <TdbodyStyled>
-            <button className="view-active">View Notes</button>
+          <p><IconTelTable /> 012 334 55512</p>
           </TdbodyStyled>
-          <TdbodyStyled>Deluxe A - 02</TdbodyStyled>
           <TdbodyStyled>
-            <button className="--red">Refund</button>
+            <button className="--active"></button>
           </TdbodyStyled>
           <TdbodyStyled>
             <PiDotsThreeVerticalBold />
@@ -53,4 +52,4 @@ const TableUser = () => {
   );
 };
 
-export default TableUser;
+export default TableUsers;

@@ -7,5 +7,6 @@ export const MainStyled = styled.section`
   align-items: center;
   width: 100%;
   height: auto;
-  background-color: #F8F8F8;
+  min-height: 100vh;
+  background-color: #f8f8f8;
 `;

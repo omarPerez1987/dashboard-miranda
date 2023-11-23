@@ -4,7 +4,7 @@ import BokkingsPage from "./pages/BokkingsPage";
 import RoomsPage from "./pages/RoomsPage";
 import UsersPage from "./pages/UsersPage";
 import ContactPage from "./pages/ContactPage";
-import DashboardPage from "./pages/DashboardPage";
+import DashboardPage from "./pages/dashboard/DashboardPage";
 import HomePage from "./pages/HomePage";
 import { useEffect, useState } from "react";
 

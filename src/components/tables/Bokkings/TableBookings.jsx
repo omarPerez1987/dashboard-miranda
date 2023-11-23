@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { TableStyle } from "../../../componentsStyle/tables/TableStyled";
 import { TheadStyled } from "../../../componentsStyle/tables/TheadStyled";
 import { TrbodyStyled } from "../../../componentsStyle/tables/TrbodyStyled";
@@ -8,6 +9,7 @@ import { PiDotsThreeVerticalBold } from "react-icons/pi";
 import user from "../../../../public/cardUser/bxs-user.svg";
 
 const TableBookings = () => {
+  const id = 2;
   return (
     <TableStyle>
       <TheadStyled>
@@ -38,9 +40,13 @@ const TableBookings = () => {
             <p>Nov 4th, 2020</p> <span>6.12 PM</span>
           </TdbodyStyled>
           <TdbodyStyled>
-            <button className="view-active">View Notes</button>
+            <Link to={`/home/bookings/${id}`} className="view-active">
+              View Notes
+            </Link>
           </TdbodyStyled>
-          <TdbodyStyled><p>Deluxe A - 02</p></TdbodyStyled>
+          <TdbodyStyled>
+            <p>Deluxe A - 02</p>
+          </TdbodyStyled>
           <TdbodyStyled>
             <button className="--red"></button>
           </TdbodyStyled>

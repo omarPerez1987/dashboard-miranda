@@ -20,7 +20,6 @@ const OrderTableRooms = () => {
           Newest <IoIosArrowDown />
         </NewestButton>
       </div>
-
     </OrderTableStyled>
   )
 }

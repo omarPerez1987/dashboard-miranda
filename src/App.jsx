@@ -4,12 +4,13 @@ import BokkingsPage from "./pages/BokkingsPage";
 import RoomsPage from "./pages/RoomsPage";
 import UsersPage from "./pages/UsersPage";
 import ContactPage from "./pages/ContactPage";
-import DashboardPage from "./pages/dashboard/DashboardPage";
+import DashboardPage from "./pages/DashboardPage";
 import HomePage from "./pages/HomePage";
 import { useEffect, useState } from "react";
+import BookingsDetails from "./pages/BookingsDetails";
 
 function App() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState('paco');
 
   useEffect(() => {
     const savedFormData = localStorage.getItem("formData");
@@ -26,19 +27,15 @@ function App() {
           {data ? (
             <>
               <Route path="/home" element={<HomePage />}>
-                <Route path="/home/dashboard" element={<DashboardPage />} />
-                <Route path="/home/bookings" element={<BokkingsPage />}>
+                <Route path="dashboard" element={<DashboardPage />} />
+                <Route path="bookings" element={<BokkingsPage />}>
+                  <Route path=":id" element={<BookingsDetails />} />
+                </Route>
+                <Route path="rooms" element={<RoomsPage />} />
+                <Route path="users" element={<UsersPage />}>
                   <Route path=":id"></Route>
                 </Route>
-                <Route path="/home/rooms" element={<RoomsPage />}>
-                  <Route path=":id"></Route>
-                </Route>
-                <Route path="/home/users" element={<UsersPage />}>
-                  <Route path=":id"></Route>
-                </Route>
-                <Route path="/home/contact" element={<ContactPage />}>
-                  <Route path=":id"></Route>
-                </Route>
+                <Route path="/home/contact" element={<ContactPage />} />
               </Route>
             </>
           ) : null}

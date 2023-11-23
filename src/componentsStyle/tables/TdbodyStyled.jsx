@@ -21,19 +21,26 @@ export const TdbodyStyled = styled.td`
     font-weight: 400;
   }
 
-  button {
+  button,
+  a {
+    text-decoration: none;
     padding: 0.5em 1em;
     height: auto;
     font-size: 1.2rem;
     border-radius: 12px;
     border: none;
     font-weight: 600;
+    cursor: pointer;
   }
 
   h6 {
     color: #135846;
     font-size: 1rem;
     font-weight: 600;
+  }
+  .archived {
+    background-color: #e23428;
+    color: #ffffff;
   }
   .available {
     padding: 1em 2.5em;

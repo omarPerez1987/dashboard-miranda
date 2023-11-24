@@ -1,12 +1,13 @@
-import React from 'react'
+import React from "react";
+import { MainStyled } from "../componentsStyle/general/MainStyled";
+import Forms from "../components/forms/Forms";
 
 const NewUserPage = () => {
   return (
-    <>
-    <h1>soy un usuario</h1>
-    <h2>por aki estoy</h2>
-    </>
-  )
-}
+    <MainStyled>
+      <Forms />
+    </MainStyled>
+  );
+};
 
-export default NewUserPage
+export default NewUserPage;

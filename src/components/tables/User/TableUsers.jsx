@@ -6,10 +6,9 @@ import { TdbodyNameStyled } from "../../../componentsStyle/tables/TdbodyNameStyl
 import { TdbodyStyled } from "../../../componentsStyle/tables/TdbodyStyled";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
 import { IconTelTable } from "../../../componentsStyle/general/IconStyled";
-import users from "../../../JSON/users.json";
 import { ButtonVariantStyled } from "../../../componentsStyle/general/ButtonStyled";
 
-const TableUsers = () => {
+const TableUsers = ({users}) => {
   return (
     <TableStyle>
       <TheadStyled>

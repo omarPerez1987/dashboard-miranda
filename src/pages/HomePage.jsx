@@ -36,6 +36,9 @@ const HomePage = () => {
       case "/home/users":
         setTitle("Users List");
         break;
+      case "/home/new-user":
+        setTitle("Create User");
+        break;
     }
   }, [location.pathname]);
 

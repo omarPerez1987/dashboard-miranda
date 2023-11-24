@@ -6,10 +6,10 @@ import { TrbodyStyled } from "../../../componentsStyle/tables/TrbodyStyled";
 import { TdbodyStyled } from "../../../componentsStyle/tables/TdbodyStyled";
 import { TdbodyNameStyled } from "../../../componentsStyle/tables/TdbodyNameStyled";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
+import { ButtonVariantStyled } from "../../../componentsStyle/general/ButtonStyled";
 import bookings from "../../../JSON/bookings.json";
 
 const TableBookings = () => {
-
   return (
     <TableStyle>
       <TheadStyled>
@@ -44,25 +44,32 @@ const TableBookings = () => {
                 <p>{data.checkout}</p> <span>{data.checkoutTime}</span>
               </TdbodyStyled>
               <TdbodyStyled>
-                <Link
-                  to={`/home/bookings/${data.id}`}
-                  className={data.notes ? "view-active" : "view-desactive"}
-                >
-                  View Notes
-                </Link>
+                {data.notes ? (
+                  <ButtonVariantStyled type="view-active">
+                    View Notes
+                  </ButtonVariantStyled>
+                ) : (
+                  <ButtonVariantStyled type="view-inactive">
+                    View Notes
+                  </ButtonVariantStyled>
+                )}
               </TdbodyStyled>
               <TdbodyStyled>
                 <p>{data.Room}</p>
               </TdbodyStyled>
               <TdbodyStyled>
                 {data.status === "in" && (
-                  <button className="green">Check in</button>
+                  <ButtonVariantStyled type="in">Check in</ButtonVariantStyled>
                 )}
                 {data.status === "out" && (
-                  <button className="red">Check out</button>
+                  <ButtonVariantStyled type="out">
+                    Check out
+                  </ButtonVariantStyled>
                 )}
                 {data.status === "pending" && (
-                  <button className="yellow">In Progress</button>
+                  <ButtonVariantStyled type="pending">
+                    In Progress
+                  </ButtonVariantStyled>
                 )}
               </TdbodyStyled>
               <TdbodyStyled>

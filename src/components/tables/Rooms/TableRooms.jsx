@@ -5,14 +5,14 @@ import { TrbodyStyled } from "../../../componentsStyle/tables/TrbodyStyled";
 import { TdbodyNameStyled } from "../../../componentsStyle/tables/TdbodyNameStyled";
 import { TdbodyStyled } from "../../../componentsStyle/tables/TdbodyStyled";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
+import { ButtonVariantStyled } from "../../../componentsStyle/general/ButtonStyled";
 import rooms from "../../../JSON/rooms.json";
 
 const TableRooms = () => {
-  const [idRoom, setIdRoom] = useState('')
-  console.log(idRoom)
+  const [idRoom, setIdRoom] = useState("");
   return (
     <TableStyle>
-      <TheadStyled id= {idRoom}>
+      <TheadStyled>
         <tr>
           <th>Room Name</th>
           <th>Bed Type</th>
@@ -25,7 +25,7 @@ const TableRooms = () => {
       <tbody>
         {rooms &&
           rooms.map((room) => (
-            <TrbodyStyled key={room.id} onClick={() => setIdRoom(room.id)}>
+            <TrbodyStyled key={room.id} onClick={() => setIdRoom(room)}>
               <TdbodyNameStyled>
                 <img className="image-room" src={room.photo} alt="" />
                 <div>
@@ -42,9 +42,9 @@ const TableRooms = () => {
                 <p>{room.discount ? room.discount : "No offer"}</p>
               </TdbodyStyled>
               <TdbodyStyled>
-                <button
-                  className={room.available ? "available" : "booked"}
-                ></button>
+                <ButtonVariantStyled
+                  type={room.available === "Available" ? "available" : "booked"}
+                >{`${room.available}`}</ButtonVariantStyled>
               </TdbodyStyled>
               <TdbodyStyled>
                 <PiDotsThreeVerticalBold />

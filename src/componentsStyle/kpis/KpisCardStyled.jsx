@@ -11,21 +11,22 @@ export const KpiCardStyled = styled.article`
   border-radius: 1em;
   transition: 0.3s;
 
+  &:hover {
+    scale: 1.05;
+    box-shadow: 0px 16px 30px #00000014;
+  }
+  
   svg {
     width: 25px;
     height: 28px;
     color: #e23428;
   }
 
-  &:hover {
-    scale: 1.05;
-    box-shadow: 0px 16px 30px #00000014;
-
-    &.svg {
-      background-color: #e23428;
-      color: #fff;
-    }
+  svg:hover {
+    background-color: #e23428;
+    color: #fff;
   }
+
 
   .icon__container {
     background-color: #ffedec;

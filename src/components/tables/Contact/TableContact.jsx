@@ -5,6 +5,7 @@ import { TrbodyStyled } from "../../../componentsStyle/tables/TrbodyStyled";
 import { TdbodyStyled } from "../../../componentsStyle/tables/TdbodyStyled";
 import { TdbodyNameStyled } from "../../../componentsStyle/tables/TdbodyNameStyled";
 import contacts from "../../../JSON/contact.json";
+import { ButtonVariantStyled } from "../../../componentsStyle/general/ButtonStyled";
 
 const TableContact = () => {
   return (
@@ -37,7 +38,7 @@ const TableContact = () => {
               </TdbodyStyled>
               <TdbodyStyled>{data.review}</TdbodyStyled>
               <TdbodyStyled>
-                <button className="archived">ARCHIVE</button>
+                <ButtonVariantStyled type="archived">ARCHIVED</ButtonVariantStyled>
               </TdbodyStyled>
             </TrbodyStyled>
           ))}

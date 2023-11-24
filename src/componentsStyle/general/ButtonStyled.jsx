@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const CreateButton = styled.button`
   padding: 0.5em 2em;
@@ -25,3 +25,92 @@ export const NewestButton = styled.button`
   background-color: transparent;
 `;
 
+export const ButtonVariantStyled = styled.button`
+  text-decoration: none;
+  padding: 0.5em 1em;
+  height: auto;
+  font-size: 1.2rem;
+  border-radius: 12px;
+  border: none;
+  font-weight: 500;
+  background-color: transparent;
+  cursor: pointer;
+
+  ${(props) =>
+    props.request === "true" &&
+    css`
+      background-color: #eef9f2;
+      color: #212121;
+    `}
+
+  ${(props) => {
+    switch (props.type) {
+      case "available":
+        return css`
+          font-weight: 500;
+          width: 110px;
+          height: 60px;
+          background-color: #5ad07a;
+          color: #ffffff;
+        `;
+      case "booked":
+        return css`
+          font-weight: 500;
+          width: 110px;
+          height: 60px;
+          background-color: #e23428;
+          color: #ffffff;
+        `;
+      case "in":
+        return css`
+          width: 100px;
+          height: 35px;
+          color: #e8ffee;
+          background-color: #5ad07a;
+        `;
+      case "out":
+        return css`
+          width: 100px;
+          height: 35px;
+          color: #e23428;
+          background-color: #ffedec;
+        `;
+      case "pending":
+        return css`
+          width: 100px;
+          height: 35px;
+          color: #212121;
+          background-color: #dfdf1eb0;
+        `;
+      case "view-active":
+        return css`
+          color: #212121;
+          background-color: #eef9f2;
+          padding: 0.5em 2.5em;
+        `;
+      case "view-inactive":
+        return css`
+          color: #799283;
+          border: 1px solid #799283;
+          padding: 0.5em 2.5em;
+        `;
+      case "active":
+        return css`
+          background-color: transparent;
+          color: #5ad07a;
+          font-weight: 600;
+        `;
+      case "desactive":
+        return css`
+          background-color: transparent;
+          color: #e23428;
+          font-weight: 600;
+        `;
+      case "archived":
+        return css`
+          background-color: #e23428;
+          color: #ffffff;
+        `;
+    }
+  }}
+`;

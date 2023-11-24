@@ -7,6 +7,7 @@ import { TdbodyStyled } from "../../../componentsStyle/tables/TdbodyStyled";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
 import { IconTelTable } from "../../../componentsStyle/general/IconStyled";
 import users from "../../../JSON/users.json";
+import { ButtonVariantStyled } from "../../../componentsStyle/general/ButtonStyled";
 
 const TableUsers = () => {
   return (
@@ -36,7 +37,9 @@ const TableUsers = () => {
                 <p>{user.date}</p>
               </TdbodyStyled>
               <TdbodyStyled>
-              {user.description.length > 50 ? `${user.description.slice(0, 150)}...` : user.description}
+                {user.description.length > 50
+                  ? `${user.description.slice(0, 150)}...`
+                  : user.description}
               </TdbodyStyled>
               <TdbodyStyled>
                 <p>
@@ -44,7 +47,11 @@ const TableUsers = () => {
                 </p>
               </TdbodyStyled>
               <TdbodyStyled>
-                <button className={user.status ? 'active': 'inactive'}></button>
+                {user.status ? (
+                  <ButtonVariantStyled type="active">ACTIVE</ButtonVariantStyled>
+                ) : (
+                  <ButtonVariantStyled type="desactive">INACTIVE</ButtonVariantStyled>
+                )}
               </TdbodyStyled>
               <TdbodyStyled>
                 <PiDotsThreeVerticalBold />

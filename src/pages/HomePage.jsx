@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Outlet } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Outlet, useLocation } from "react-router-dom";
 import NavMenu from "../components/general/NavMenu";
 import { HomeStyled } from "../componentsStyle/general/HomeStyled";
 import TopMenu from "../components/general/TopMenu";
@@ -12,11 +12,38 @@ const HomePage = () => {
     setMenuOpen(!menuOpen);
   };
 
+  const location = useLocation();
+  const [title, setTitle] = useState("Dashboard");
+
+  useEffect(() => {
+    switch (location.pathname) {
+      case "/home/dashboard":
+        setTitle("Dashboard");
+        break;
+
+      case "/home/bookings":
+        setTitle("Bokkings List");
+        break;
+
+      case "/home/rooms":
+        setTitle("Room List");
+        break;
+
+      case "/home/contact":
+        setTitle("Contact List");
+        break;
+
+      case "/home/users":
+        setTitle("Users List");
+        break;
+    }
+  }, [location.pathname]);
+
   return (
     <HomeStyled>
-      <NavMenu menuOpen={menuOpen}/>
+      <NavMenu menuOpen={menuOpen} />
       <ColumnStyled>
-        <TopMenu hiddenMenu={hiddenMenu} menuOpen={menuOpen} />
+        <TopMenu hiddenMenu={hiddenMenu} menuOpen={menuOpen} title={title} />
         <Outlet />
       </ColumnStyled>
     </HomeStyled>

@@ -5,7 +5,8 @@ export const TdbodyStyled = styled.td`
   font-size: 1.2rem;
   font-weight: 400;
   text-align: start;
-  max-width: 200px;
+  width: auto;
+  max-width: 150px;
   padding: 1em 1em 1em 0em;
 
   p {
@@ -76,45 +77,38 @@ export const TdbodyStyled = styled.td`
     background-color: transparent;
   }
 
-  .--inactive {
+  .inactive {
     background-color: transparent;
     color: #e23428;
   }
-  .--inactive::before {
+  .inactive::before {
     content: "INACTIVE";
   }
 
-  .--active {
+  .active {
     background-color: transparent;
     color: #5ad07a;
   }
-  .--active::before {
+  .active::before {
     content: "ACTIVE";
   }
 
-  .--red {
+  .red {
     color: #e23428;
     background-color: #ffedec;
   }
-  .--red::before {
-    content: "Check Out";
-  }
+ 
 
-  .--green {
+  .green {
     color: #e8ffee;
     background-color: #5ad07a;
   }
-  .--green::before {
-    content: "Check In";
-  }
 
-  .--yellow {
+  .yellow {
     color: #212121;
     background-color: #dfdf1eb0;
   }
-  .--yellow::before {
-    content: "In Progress";
-  }
+
 
   svg {
     width: 24px;

@@ -3,6 +3,7 @@ import { ContactMainStyled } from "../componentsStyle/general/ContactMainStyled"
 import CardReviews from "../components/cardReviews/CardReviews";
 import TableContact from "../components/tables/Contact/TableContact";
 import OrderTableContact from "../components/tables/Contact/OrderTableContact";
+import FooterTable from '../components/tables/FooterTable'
 
 const ContactPage = () => {
   return (
@@ -14,6 +15,7 @@ const ContactPage = () => {
       </section>
       <OrderTableContact />
       <TableContact />
+      <FooterTable />
     </ContactMainStyled>
   );
 };

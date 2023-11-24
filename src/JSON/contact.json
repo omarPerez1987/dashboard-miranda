@@ -1,0 +1,102 @@
+[
+    {
+        "id": "E4f98K",
+        "date": "03.07.2023",
+        "hour": "3:40",
+        "name": "Stavros",
+        "last_name": "Carslake",
+        "email": "scarslake0@yellowpages.com",
+        "telephone": "797-519-2284",
+        "review": "The hotel exceeded my expectations. The staff was incredibly friendly and helpful. The room was spacious and clean with modern amenities. The location was perfect, close to attractions and public transportation. I highly recommend this hotel for a comfortable and enjoyable stay."
+    },
+    {
+        "id": "ItCiAL",
+        "date": "10.02.2023",
+        "hour": "21:37",
+        "name": "Georgianne",
+        "last_name": "Maitland",
+        "email": "gmaitland1@psu.edu",
+        "telephone": "481-123-0061",
+        "review": "I had a fantastic experience at this hotel. The room was stylish and comfortable, and the views were breathtaking. The staff went above and beyond to make my stay memorable. The on-site restaurant served delicious food. I would definitely stay here again and recommend it to others."
+    },
+    {
+        "id": "0l6k3R",
+        "date": "18.09.2023",
+        "hour": "08:22",
+        "name": "Dare",
+        "last_name": "McGivena",
+        "email": "dmcgivena2@cbsnews.com",
+        "telephone": "691-692-3507",
+        "review": "My stay at this hotel was outstanding. The room was well-appointed and had all the necessary comforts. The hotel's attention to detail was impressive. The staff was courteous and always ready to assist. I appreciated the central location, making it easy to explore the city. Highly recommended!"
+    },
+    {
+        "id": "AxTk2q",
+        "date": "03.08.2023",
+        "hour": "2:32",
+        "name": "Stacee",
+        "last_name": "Dot",
+        "email": "sdot3@cdc.gov",
+        "telephone": "471-366-4404",
+        "review": "An excellent hotel with top-notch service. The room was spacious, and the decor was tasteful. The staff was attentive to every detail, ensuring a pleasant stay. The hotel's location was ideal, offering easy access to shopping and dining options. I had a wonderful experience and would return in the future."
+    },
+    {
+        "id": "c7Lh44",
+        "date": "15.07.2023",
+        "hour": "5:44",
+        "name": "Mendel",
+        "last_name": "Nancarrow",
+        "email": "mnancarrow4@amazonaws.com",
+        "telephone": "587-144-8909",
+        "review": "I thoroughly enjoyed my time at this hotel. The atmosphere was welcoming, and the room was immaculate. The amenities provided added to the overall comfort. The staff was friendly and provided excellent service. The location was convenient for both business and leisure travelers. I would stay here again without hesitation."
+    },
+    {
+        "id": "19K0AC",
+        "date": "16.07.2023",
+        "hour": "22:37",
+        "name": "Fonsie",
+        "last_name": "Ahern",
+        "email": "fahern5@vk.com",
+        "telephone": "125-855-4724",
+        "review": "My experience at this hotel was exceptional. The room was well-furnished and provided a comfortable retreat. The staff's attention to detail and friendly demeanor stood out. The hotel's central location made it easy to explore nearby attractions. I would recommend this hotel to anyone looking for a memorable stay."
+    },
+    {
+        "id": "HwKQK1",
+        "date": "20.05.2023",
+        "hour": "23:45",
+        "name": "Newton",
+        "last_name": "Woodroofe",
+        "email": "nwoodroofe6@ox.ac.uk",
+        "telephone": "964-472-3517",
+        "review": "This hotel exceeded my expectations in every way. The room was spacious and elegantly designed. The staff provided exceptional service, making me feel valued as a guest. The on-site facilities were impressive, and the location was perfect for exploring the city. I would gladly return for another stay."
+    },
+    {
+        "id": "94Y5wV",
+        "date": "02.03.2023",
+        "hour": "21:15",
+        "name": "Dewitt",
+        "last_name": "Troup",
+        "email": "dtroup7@sciencedaily.com",
+        "telephone": "376-400-2040",
+        "review": "I had a delightful stay at this hotel. The room was cozy, and the amenities were modern. The staff was friendly and went out of their way to accommodate my requests. The hotel's location was convenient, with attractions and dining options within walking distance. I highly recommend this hotel for a memorable experience."
+    },
+    {
+        "id": "6EU0Yx",
+        "date": "04.08.2023",
+        "hour": "12:27",
+        "name": "Bettine",
+        "last_name": "Franzonetti",
+        "email": "bfranzonetti8@printfriendly.com",
+        "telephone": "268-338-4031",
+        "review": "My stay at this hotel was exceptional. The room was tastefully decorated, and the attention to detail was evident. The staff was friendly and provided excellent service. The hotel's amenities added to the overall experience, and the central location made it easy to explore the city. I would highly recommend this hotel for a luxurious and comfortable stay."
+    },
+    {
+        "id": "1EL0Y5",
+        "date": "04.08.2023",
+        "hour": "12:27",
+        "name": "Bettine",
+        "last_name": "Franzonetti",
+        "email": "bfranzonetti8@printfriendly.com",
+        "telephone": "268-338-4031",
+        "review": "My stay at this hotel was exceptional. The room was tastefully decorated, and the attention to detail was evident. The staff was friendly and provided excellent service. The hotel's amenities added to the overall experience, and the central location made it easy to explore the city. I would highly recommend this hotel for a luxurious and comfortable stay."
+    }
+]

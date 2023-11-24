@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { TableStyle } from "../../../componentsStyle/tables/TableStyled";
 import { TheadStyled } from "../../../componentsStyle/tables/TheadStyled";
 import { TrbodyStyled } from "../../../componentsStyle/tables/TrbodyStyled";
 import { TdbodyNameStyled } from "../../../componentsStyle/tables/TdbodyNameStyled";
 import { TdbodyStyled } from "../../../componentsStyle/tables/TdbodyStyled";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
-import room from "../../../../public/Rooms/Room.jpg";
+import rooms from "../../../JSON/rooms.json";
 
 const TableRooms = () => {
+  const [idRoom, setIdRoom] = useState('')
+  console.log(idRoom)
   return (
     <TableStyle>
-      <TheadStyled>
+      <TheadStyled id= {idRoom}>
         <tr>
           <th>Room Name</th>
           <th>Bed Type</th>
@@ -21,33 +23,34 @@ const TableRooms = () => {
         </tr>
       </TheadStyled>
       <tbody>
-        <TrbodyStyled>
-          <TdbodyNameStyled>
-            <img className="image-room" src={room} alt="" />
-            <div>
-              <p>Deluxe A-91234</p>
-              <span>#12341225</span>
-            </div>
-          </TdbodyNameStyled>
-          <TdbodyStyled>
-            <p>Double Bed</p>
-          </TdbodyStyled>
-          <TdbodyStyled>
-            AC, Shower, Double Bed, Towel, Bathup, Coffee Set, LED TV, Wifi
-          </TdbodyStyled>
-          <TdbodyStyled>
-            <p>$145</p>
-          </TdbodyStyled>
-          <TdbodyStyled>
-            <p>20%</p>
-          </TdbodyStyled>
-          <TdbodyStyled>
-            <button className="booked"></button>
-          </TdbodyStyled>
-          <TdbodyStyled>
-            <PiDotsThreeVerticalBold />
-          </TdbodyStyled>
-        </TrbodyStyled>
+        {rooms &&
+          rooms.map((room) => (
+            <TrbodyStyled key={room.id} onClick={() => setIdRoom(room.id)}>
+              <TdbodyNameStyled>
+                <img className="image-room" src={room.photo} alt="" />
+                <div>
+                  <p>{room.room}</p>
+                  <span>{room.id}</span>
+                </div>
+              </TdbodyNameStyled>
+              <TdbodyStyled>{room.bed}</TdbodyStyled>
+              <TdbodyStyled>{room.amenities}</TdbodyStyled>
+              <TdbodyStyled>
+                <p>{room.rate}</p>
+              </TdbodyStyled>
+              <TdbodyStyled>
+                <p>{room.discount ? room.discount : "No offer"}</p>
+              </TdbodyStyled>
+              <TdbodyStyled>
+                <button
+                  className={room.available ? "available" : "booked"}
+                ></button>
+              </TdbodyStyled>
+              <TdbodyStyled>
+                <PiDotsThreeVerticalBold />
+              </TdbodyStyled>
+            </TrbodyStyled>
+          ))}
       </tbody>
     </TableStyle>
   );

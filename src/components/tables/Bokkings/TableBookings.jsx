@@ -6,10 +6,10 @@ import { TrbodyStyled } from "../../../componentsStyle/tables/TrbodyStyled";
 import { TdbodyStyled } from "../../../componentsStyle/tables/TdbodyStyled";
 import { TdbodyNameStyled } from "../../../componentsStyle/tables/TdbodyNameStyled";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
-import user from "../../../../public/cardUser/bxs-user.svg";
+import bookings from "../../../JSON/bookings.json";
 
 const TableBookings = () => {
-  const id = 2;
+
   return (
     <TableStyle>
       <TheadStyled>
@@ -24,36 +24,52 @@ const TableBookings = () => {
         </tr>
       </TheadStyled>
       <tbody>
-        <TrbodyStyled>
-          <TdbodyNameStyled>
-            <img src={user} alt="" />
-            <div>
-              <span>#000123456</span>
-              <p>Cahyadi Purnomo</p>
-            </div>
-          </TdbodyNameStyled>
-          <TdbodyStyled>Oct 30th 2020 09:21 AM</TdbodyStyled>
-          <TdbodyStyled>
-            <p>Nov 2th, 2020</p> <span>9.46 PM</span>
-          </TdbodyStyled>
-          <TdbodyStyled>
-            <p>Nov 4th, 2020</p> <span>6.12 PM</span>
-          </TdbodyStyled>
-          <TdbodyStyled>
-            <Link to={`/home/bookings/${id}`} className="view-active">
-              View Notes
-            </Link>
-          </TdbodyStyled>
-          <TdbodyStyled>
-            <p>Deluxe A - 02</p>
-          </TdbodyStyled>
-          <TdbodyStyled>
-            <button className="--red"></button>
-          </TdbodyStyled>
-          <TdbodyStyled>
-            <PiDotsThreeVerticalBold />
-          </TdbodyStyled>
-        </TrbodyStyled>
+        {bookings &&
+          bookings.map((data) => (
+            <TrbodyStyled key={data.id}>
+              <TdbodyNameStyled>
+                <img src={data.photo} alt="" />
+                <div>
+                  <span>{data.id}</span>
+                  <p>{data.name}</p>
+                </div>
+              </TdbodyNameStyled>
+              <TdbodyStyled>
+                {data.orderDate} {data.checkinTime}
+              </TdbodyStyled>
+              <TdbodyStyled>
+                <p>{data.checkin}</p> <span>{data.checkinTime}</span>
+              </TdbodyStyled>
+              <TdbodyStyled>
+                <p>{data.checkout}</p> <span>{data.checkoutTime}</span>
+              </TdbodyStyled>
+              <TdbodyStyled>
+                <Link
+                  to={`/home/bookings/${data.id}`}
+                  className={data.notes ? "view-active" : "view-desactive"}
+                >
+                  View Notes
+                </Link>
+              </TdbodyStyled>
+              <TdbodyStyled>
+                <p>{data.Room}</p>
+              </TdbodyStyled>
+              <TdbodyStyled>
+                {data.status === "in" && (
+                  <button className="green">Check in</button>
+                )}
+                {data.status === "out" && (
+                  <button className="red">Check out</button>
+                )}
+                {data.status === "pending" && (
+                  <button className="yellow">In Progress</button>
+                )}
+              </TdbodyStyled>
+              <TdbodyStyled>
+                <PiDotsThreeVerticalBold />
+              </TdbodyStyled>
+            </TrbodyStyled>
+          ))}
       </tbody>
     </TableStyle>
   );

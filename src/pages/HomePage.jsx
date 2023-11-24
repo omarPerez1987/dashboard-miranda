@@ -39,6 +39,9 @@ const HomePage = () => {
       case "/home/new-user":
         setTitle("Create User");
         break;
+      case "/home/new-room":
+        setTitle("Create Room");
+        break;
     }
   }, [location.pathname]);
 

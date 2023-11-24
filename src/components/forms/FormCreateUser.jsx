@@ -9,11 +9,14 @@ import {
   TextAreaFormStyled,
 } from "../../componentsStyle/forms/FormStyled";
 
-const Forms = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [formData, setFormData] = useState({
+const FormCreateUser = () => {
+  const random1 = Math.floor(Math.random() * 999);
+  const random2 = Math.floor(Math.random() * 999);
+  const idUnique = `EMPL${random1}-${random2}`;
+  const initialStateForm = {
     image: null,
     name: "",
+    id: `${idUnique}`,
     lastName: "",
     position: "",
     email: "",
@@ -22,7 +25,20 @@ const Forms = () => {
     description: "",
     status: "",
     password: "",
-  });
+  };
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [formData, setFormData] = useState(initialStateForm);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("Datos del formulario:", formData); //aki el dispatch
+    // setFormData(initialStateForm)
+  };
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -33,22 +49,11 @@ const Forms = () => {
       setFormData((prevFormData) => ({ ...prevFormData, image: imageUrl }));
     }
   };
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Datos del formulario:", formData);
-  };
-
   return (
     <FormStyled onSubmit={handleSubmit}>
       <ContainerFormImage>
         {selectedImage ? (
-          <img src={selectedImage} alt=""/>
+          <img src={selectedImage} alt="" />
         ) : (
           <h1>Select an image</h1>
         )}
@@ -60,6 +65,17 @@ const Forms = () => {
           type="file"
           accept="image/*"
           onChange={handleImageChange}
+          required
+        />
+      </LabelFormStyled>
+
+      <LabelFormStyled>
+        Id
+        <InputFormStyled
+          type="text"
+          name="id"
+          value={formData.id}
+          onChange={handleChange}
           required
         />
       </LabelFormStyled>
@@ -184,4 +200,4 @@ const Forms = () => {
   );
 };
 
-export default Forms;
+export default FormCreateUser;

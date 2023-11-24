@@ -1,11 +1,11 @@
 import React from "react";
 import { MainStyled } from "../componentsStyle/general/MainStyled";
-import Forms from "../components/forms/Forms";
+import FormCreateUser from "../components/forms/FormCreateUser";
 
 const NewUserPage = () => {
   return (
     <MainStyled>
-      <Forms />
+      <FormCreateUser />
     </MainStyled>
   );
 };

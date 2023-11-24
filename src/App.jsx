@@ -9,6 +9,7 @@ import HomePage from "./pages/HomePage";
 import NewUserPage from "./pages/NewUserPage";
 import { useEffect, useState } from "react";
 import BookingsDetails from "./pages/BookingsDetails";
+import NewRoomPage from "./pages/NewRoomPage";
 
 function App() {
   const [data, setData] = useState("paco");
@@ -33,6 +34,7 @@ function App() {
                   <Route path=":id" element={<BookingsDetails />} />
                 </Route>
                 <Route path="rooms" element={<RoomsPage />} />
+                <Route path="new-room" element={<NewRoomPage />} />
                 <Route path="users" element={<UsersPage />} />
                 <Route path="new-user" element={<NewUserPage />} />
                 <Route path="contact" element={<ContactPage />} />

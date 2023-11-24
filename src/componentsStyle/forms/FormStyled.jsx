@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const FormStyled = styled.form`
   margin-top: 2em;
-  width: auto;
+  width: 40%;
   height: auto;
   background-color: #ffffff;
   border-radius: 20px;
@@ -21,9 +21,9 @@ export const ContainerFormImage = styled.div`
   text-align: center;
 
   img {
-      width: 100%;
-      height: 100%;
-      margin-bottom: 4em;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 4em;
   }
   h1 {
     margin-top: 2em;
@@ -57,7 +57,7 @@ export const InputFormStyled = styled.input`
   color: #135846;
   font-size: 1.2rem;
   font-weight: 600;
-  width: 44%;
+  width: 50%;
   margin-bottom: 2em;
 `;
 

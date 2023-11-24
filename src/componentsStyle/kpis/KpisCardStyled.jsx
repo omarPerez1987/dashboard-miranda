@@ -21,7 +21,7 @@ export const KpiCardStyled = styled.article`
     scale: 1.05;
     box-shadow: 0px 16px 30px #00000014;
 
-    &.icon__container {
+    &.svg {
       background-color: #e23428;
       color: #fff;
     }

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ModalStyled = styled.section`
   position: absolute;
   text-align: start;
-  top: 25%;
+  top: 10%;
   left: 30%;
   z-index: 99;
   padding: 3em;
@@ -47,6 +47,11 @@ export const ModalFormStyle = styled.form`
     width: 70%;
   }
 
+  textarea {
+    width: 70%;
+    height: 10em;
+  }
+
 
   svg {
     width: auto;
@@ -64,11 +69,10 @@ export const ModalFormStyle = styled.form`
 export const ContainerModalImageStyle = styled.div`
   width: 30%;
   height: 30%;
-  border: 1px solid red;
 `;
 
 export const ContainerModalFlexStyle = styled.div`
-  width: 100%;
+  width: 70%;
   display: flex;
   justify-content: space-evenly;
   gap: 1em;
@@ -76,6 +80,7 @@ export const ContainerModalFlexStyle = styled.div`
 `;
 
 export const ButtonModal = styled.button`
+margin-top: 4em;
   width: 109px;
   height: 48px;
   background-color: ${(props) =>

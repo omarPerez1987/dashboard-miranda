@@ -8,7 +8,7 @@ import { NavMenustyled } from "../../componentsStyle/general/NavMenuStyled";
 import { NavLinkStyled } from "../../componentsStyle/general/NavMenuStyled";
 import { CardUserStyled } from "../../componentsStyle/general/CardUserStyled";
 import Logo from "../../../public/navMenu/logo-dashboard.png";
-import ModalClient from "../modal/ModalClient";
+import ModalEditClient from "../modal/ModalEditClient";
 
 const NavMenu = ({ menuOpen }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -69,7 +69,7 @@ const NavMenu = ({ menuOpen }) => {
           </div>
         </NavMenustyled>
       )}
-      {openModal && <ModalClient setOpenModal={setOpenModal}/>}
+      {openModal && <ModalEditClient setOpenModal={setOpenModal}/>}
     </>
   );
 };

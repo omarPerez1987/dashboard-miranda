@@ -7,7 +7,7 @@ import { TdbodyStyled } from "../../../componentsStyle/tables/TdbodyStyled";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
 import { ButtonVariantStyled } from "../../../componentsStyle/general/ButtonStyled";
 import rooms from "../../../JSON/rooms.json";
-import ModalRoom from "../../modal/ModalRoom";
+import ModalEditRoom from "../../modal/ModalEditRoom";
 
 const TableRooms = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -65,7 +65,7 @@ const TableRooms = () => {
             ))}
         </tbody>
       </TableStyle>
-      {openModal && <ModalRoom room={dataRoom} setOpenModal={setOpenModal}/>}
+      {openModal && <ModalEditRoom room={dataRoom} setOpenModal={setOpenModal}/>}
     </>
   );
 };

@@ -6,7 +6,7 @@ import {
 import { ButtonFormStyled } from "../../componentsStyle/forms/FormStyled";
 import { CiCircleRemove } from "react-icons/ci";
 
-const ModalClient = ({ setOpenModal }) => {
+const ModalEditClient = ({ setOpenModal }) => {
   const initialStateForm = {
     id: ``,
     image: null,
@@ -80,4 +80,4 @@ const ModalClient = ({ setOpenModal }) => {
   );
 };
 
-export default ModalClient;
+export default ModalEditClient;

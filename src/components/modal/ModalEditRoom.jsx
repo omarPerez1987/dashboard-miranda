@@ -34,9 +34,7 @@ const ModalEditRoom = ({ room, setOpenModal }) => {
     // setFormData(initialStateForm)
   };
 
-  const handleDelete = () => {
-    
-  }
+  const handleDelete = () => {}; //eliminar la room
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];

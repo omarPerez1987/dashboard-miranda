@@ -15,18 +15,12 @@ export const KpiCardStyled = styled.article`
     scale: 1.05;
     box-shadow: 0px 16px 30px #00000014;
   }
-  
+
   svg {
     width: 25px;
     height: 28px;
     color: #e23428;
   }
-
-  svg:hover {
-    background-color: #e23428;
-    color: #fff;
-  }
-
 
   .icon__container {
     background-color: #ffedec;
@@ -36,6 +30,12 @@ export const KpiCardStyled = styled.article`
     align-items: center;
     justify-content: center;
     border-radius: 1em;
+    &:hover {
+      background-color: #e23428;
+      & svg {
+        color: #fff;
+      }
+    }
   }
 
   .text__container {

@@ -6,12 +6,16 @@ export const CardUserStyled = styled.article`
   width: 23.2em;
   height: auto;
   background-color: #ffffff;
-  box-shadow: 0px 20px 30px #00000014;
   border-radius: 1.6em;
   display: flex;
   align-items: center;
   flex-direction: column;
-  
+
+  &:hover {
+    box-shadow: 0px 20px 30px #00000014;
+    border: 1px solid #00000014;
+  }
+
   & .card-img {
     width: 6.8em;
     height: 6.8em;
@@ -51,7 +55,7 @@ export const CardUserStyled = styled.article`
   button {
     width: 70%;
     padding: 0.8em;
-    background-color: #EBF1EF;
+    background-color: #ebf1ef;
     color: #799283;
     font-size: 1.6rem;
     border-radius: 0.8em;
@@ -63,5 +67,4 @@ export const CardUserStyled = styled.article`
     background-color: #e8ffee;
     color: #5ad07a;
   }
-
 `;

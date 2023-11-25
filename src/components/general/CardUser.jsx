@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import { CardUserStyled } from "../../componentsStyle/general/CardUserStyled";
 import { useNavigate } from "react-router-dom";
-import User from '../../../public/cardUser/bxs-user.svg'
+import User from "../../../public/cardUser/bxs-user.svg";
 
 const CardUser = () => {
   const navigate = useNavigate();
+  const random1 = Math.floor(Math.random() * 999);
+  const random2 = Math.floor(Math.random() * 999);
+  const idUnique = `CL${random1}-${random2}`;
 
   const initialState = {
+    id: `${idUnique}`,
+    name: "",
+    lastName: "",
     email: "",
     password: "",
   };
@@ -37,6 +43,20 @@ const CardUser = () => {
       <CardUserStyled>
         <img className="card-img" src={User} alt="" />
         <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="name"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+          />
+          <input
+            type="text"
+            placeholder="last name"
+            name="lastName"
+            value={formData.lastName}
+            onChange={handleInputChange}
+          />
           <input
             type="email"
             placeholder="email"

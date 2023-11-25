@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import {
+  ButtonFacilityForm,
   ButtonFormStyled,
+  ContainerFacilitiesForm,
   ContainerFormImage,
   FormStyled,
   InputFormStyled,
@@ -27,7 +29,7 @@ const FormCreateRoom = () => {
     price: "",
     discount: "",
     cancellation: "",
-    amenities: [],
+    facilities: [],
   };
   const [selectedImage, setSelectedImage] = useState(null);
   const [formData, setFormData] = useState(initialStateForm);
@@ -39,7 +41,8 @@ const FormCreateRoom = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Datos del formulario:", formData);
+    // console.log("Datos del formulario:", formData); //aki el dispatch
+
     // setFormData(initialStateForm);
   };
 
@@ -54,6 +57,20 @@ const FormCreateRoom = () => {
         [imageKey]: imageUrl,
       }));
     }
+  };
+
+  const handleFacilityChange = (facility) => {
+    setFormData((prevFormData) => {
+      const facilities = [...prevFormData.facilities];
+
+      if (facilities.includes(facility)) {
+        facilities.splice(facilities.indexOf(facility), 1);
+      } else {
+        facilities.push(facility);
+      }
+
+      return { ...prevFormData, facilities };
+    });
   };
 
   return (
@@ -196,32 +213,35 @@ const FormCreateRoom = () => {
         required
       />
 
-      <LabelFormStyled>
-        Amenities
-        <SelectFormStyled
-          name="amenities"
-          value={formData.amenities}
-          onChange={handleChange}
-          multiple
-          required
-        >
-          <option value="" disabled>
-            Select amenities
-          </option>
-          <option value="Air">Air Conditioned</option>
-          <option value="Breakfast">Breakfast</option>
-          <option value="Cleaning">Cleaning</option>
-          <option value="Grocery">Grocery</option>
-          <option value="Shop">Shop near</option>
-          <option value="Online">24/7 Online Support</option>
-          <option value="security">Smart Security</option>
-          <option value="wifi">High speed WiFi</option>
-          <option value="kitchen">Kitchen</option>
-          <option value="shower">Shower relax</option>
-          <option value="single">Single bed</option>
-          <option value="locker">Strong Locker</option>
-        </SelectFormStyled>
-      </LabelFormStyled>
+      <LabelFormStyled>Facilities</LabelFormStyled>
+
+      <ContainerFacilitiesForm>
+        {[
+          "Swimming Pool",
+          "Air Conditioned",
+          "Breakfast",
+          "Cleaning",
+          "Grocery",
+          "Shop near",
+          "24/7 Online Support",
+          "Smart Security",
+          "High speed WiFi",
+          "Kitchen",
+          "Shower relax",
+          "Single bed",
+          "Strong Locker",
+        ].map((facility) => (
+          <ButtonFacilityForm
+            key={facility}
+            type="button"
+            label={facility}
+            selected={formData.facilities.includes(facility)}
+            onClick={() => handleFacilityChange(facility)}
+          >
+            {facility}
+          </ButtonFacilityForm>
+        ))}
+      </ContainerFacilitiesForm>
 
       <ButtonFormStyled type="submit">Crear</ButtonFormStyled>
     </FormStyled>

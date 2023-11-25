@@ -82,3 +82,23 @@ export const ButtonFormStyled = styled.button`
   border-radius: 12px;
   padding: 1em 2em;
 `;
+
+export const ContainerFacilitiesForm = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 21m;
+  margin: 2em 0em 4em 0em;
+  width: 100%;
+`;
+
+export const ButtonFacilityForm = styled.button`
+  border: 1px solid #135846;
+  margin: 5px;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 1.2em;
+  background-color: ${(props) => (props.selected ? "#135846" : "#FFFFFF")};
+  color: ${(props) => (props.selected ? "white" : "grey")};
+  cursor: pointer;
+`;

@@ -12,12 +12,13 @@ import BookingsDetails from "./pages/BookingsDetails";
 import NewRoomPage from "./pages/NewRoomPage";
 
 function App() {
-  const [data, setData] = useState("paco");
+  const [data, setData] = useState("");
 
   useEffect(() => {
     const savedFormData = localStorage.getItem("formData");
     if (savedFormData) {
       setData(JSON.parse(savedFormData));
+      //pasar estos datos a redux
     }
   }, []);
 

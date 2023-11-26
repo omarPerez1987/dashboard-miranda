@@ -11,6 +11,8 @@
         "checkoutTime": "2:05 AM",
         "notes": null,
         "Room": "Deluxe A - 9",
+        "price": "200",
+        "facilities": ["Smart Security", "High speed WiFi"],
         "status": "in"
     },
     {
@@ -25,6 +27,8 @@
         "checkoutTime": "1:06 AM",
         "notes": "Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\n\nFusce consequat. Nulla nisl. Nunc nisl.",
         "Room": "Deluxe A - 1",
+        "price": "200",
+        "facilities": ["Smart Security", "High speed WiFi"],
         "status": "pending"
     },
     {
@@ -39,6 +43,8 @@
         "checkoutTime": "3:27 AM",
         "notes": "Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.",
         "Room": "Deluxe A - 4",
+        "price": "200",
+        "facilities": ["Smart Security", "High speed WiFi"],
         "status": "in"
     },
     {
@@ -53,6 +59,8 @@
         "checkoutTime": "2:40 AM",
         "notes": "Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
         "Room": "Deluxe A - 9",
+        "price": "200",
+        "facilities": ["Smart Security", "High speed WiFi"],
         "status": "in"
     },
     {
@@ -67,6 +75,8 @@
         "checkoutTime": "4:12 AM",
         "notes": null,
         "Room": "Deluxe A - 8",
+        "price": "200",
+        "facilities": ["Smart Security", "High speed WiFi"],
         "status": "out"
     },
     {
@@ -81,6 +91,8 @@
         "checkoutTime": "11:06 AM",
         "notes": null,
         "Room": "Deluxe A - 3",
+        "price": "200",
+        "facilities": ["Smart Security", "High speed WiFi"],
         "status": "out"
     },
     {
@@ -95,6 +107,8 @@
         "checkoutTime": "12:40 AM",
         "notes": null,
         "Room": "Deluxe A - 3",
+        "price": "200",
+        "facilities": ["Smart Security", "High speed WiFi"],
         "status": "pending"
     },
     {
@@ -109,6 +123,8 @@
         "checkoutTime": "8:15 AM",
         "notes": null,
         "Room": "Deluxe A - 4",
+        "price": "200",
+        "facilities": ["Smart Security", "High speed WiFi"],
         "status": "in"
     },
     {
@@ -123,6 +139,8 @@
         "checkoutTime": "10:04 AM",
         "notes": "Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.",
         "Room": "Deluxe A - 4",
+        "price": "200",
+        "facilities": ["Smart Security", "High speed WiFi"],
         "status": "out"
     },
     {
@@ -137,6 +155,8 @@
         "checkoutTime": "6:34 AM",
         "notes": "Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.",
         "Room": "Deluxe A - 2",
+        "price": "200",
+        "facilities": ["Smart Security", "High speed WiFi"],
         "status": "pending"
     }
 ]

@@ -1,22 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { CardReviewsStyled } from "../../componentsStyle/cardReviews/CardreviewsStyled";
 import { CiCircleCheck } from "react-icons/ci";
 import { CiCircleRemove } from "react-icons/ci";
+import ModalReviews from "../modal/ModalReviews";
 
-const CardReviews = () => {
+const CardReviews = ({contact}) => {
+  const [openModal, setOpenModal] = useState(false)
   return (
-    <CardReviewsStyled>
+    <>
+    <CardReviewsStyled onClick={() => setOpenModal(true)}>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam
+        {`${contact.review.substring(0, 150)} ...`}
       </p>
       <div>
         <div>
           <img src="#" alt="" />
           <div className="name-user">
-            <h5>Kusnaidi Anderson</h5>
-            <span>4m ago</span>
+            <h5>{contact.name} {contact.last_name}</h5>
+            <span>{contact.hour}</span>
           </div>
         </div>
         <div className="container-icons">
@@ -25,6 +26,8 @@ const CardReviews = () => {
         </div>
       </div>
     </CardReviewsStyled>
+    {openModal&& <ModalReviews review={contact.review} setOpenModal={setOpenModal}/>}
+    </>
   );
 };
 

@@ -48,16 +48,16 @@ export const ButtonVariantStyled = styled.button`
       case "available":
         return css`
           font-weight: 500;
-          width: 110px;
-          height: 60px;
+          width: 90px;
+          height: 40px;
           background-color: #5ad07a;
           color: #ffffff;
         `;
       case "booked":
         return css`
           font-weight: 500;
-          width: 110px;
-          height: 60px;
+          width: 90px;
+          height: 40px;
           background-color: #e23428;
           color: #ffffff;
         `;

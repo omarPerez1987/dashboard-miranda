@@ -4,7 +4,7 @@ import {
   ModalStyled,
   ContainerModalFlexStyle,
   ContainerModalImageStyle,
-  ButtonModal,
+  ButtonModalStyled,
 } from "../../componentsStyle/modal/ModalStyled";
 import { ButtonFacilityForm } from "../../componentsStyle/forms/FormStyled";
 import { CiCircleRemove } from "react-icons/ci";
@@ -157,10 +157,10 @@ const ModalEditRoom = ({ room, setOpenModal }) => {
           ))}
         </ContainerModalFlexStyle>
         <ContainerModalFlexStyle>
-          <ButtonModal type="submit" color="edit">
+          <ButtonModalStyled type="submit" color="edit">
             Edit
-          </ButtonModal>
-          <ButtonModal type="submit ">Delete</ButtonModal>
+          </ButtonModalStyled>
+          <ButtonModalStyled type="submit ">Delete</ButtonModalStyled>
         </ContainerModalFlexStyle>
       </ModalFormStyle>
     </ModalStyled>

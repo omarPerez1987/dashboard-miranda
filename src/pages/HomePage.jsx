@@ -25,6 +25,10 @@ const HomePage = () => {
         setTitle("Bokkings List");
         break;
 
+      // case "/home/bookings-details/:id":
+      //   setTitle("Bokking Details");
+      //   break;
+
       case "/home/rooms":
         setTitle("Room List");
         break;
@@ -36,9 +40,11 @@ const HomePage = () => {
       case "/home/users":
         setTitle("Users List");
         break;
+
       case "/home/new-user":
         setTitle("Create User");
         break;
+        
       case "/home/new-room":
         setTitle("Create Room");
         break;

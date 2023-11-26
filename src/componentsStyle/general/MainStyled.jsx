@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MainStyled = styled.section`
+export const MainStyled = styled.main`
   margin: 0 auto;
   display: flex;
   flex-direction: column;

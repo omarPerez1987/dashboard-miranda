@@ -8,11 +8,11 @@ import DashboardPage from "./pages/DashboardPage";
 import HomePage from "./pages/HomePage";
 import NewUserPage from "./pages/NewUserPage";
 import { useEffect, useState } from "react";
-import BookingsDetails from "./pages/BookingsDetails";
+import BookingDetailsPage from "./pages/BookingDetailsPage";
 import NewRoomPage from "./pages/NewRoomPage";
 
 function App() {
-  const [data, setData] = useState("");
+  const [data, setData] = useState({});
 
   useEffect(() => {
     const savedFormData = localStorage.getItem("formData");
@@ -31,9 +31,12 @@ function App() {
             <>
               <Route path="/home" element={<HomePage />}>
                 <Route path="dashboard" element={<DashboardPage />} />
-                <Route path="bookings" element={<BokkingsPage />}>
-                  <Route path=":id" element={<BookingsDetails />} />
-                </Route>
+                <Route path="bookings" element={<BokkingsPage />} />
+                <Route
+                  path="bookings-details/:id"
+                  element={<BookingDetailsPage />}
+                />
+
                 <Route path="rooms" element={<RoomsPage />} />
                 <Route path="new-room" element={<NewRoomPage />} />
                 <Route path="users" element={<UsersPage />} />

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ModalStyled = styled.section`
   position: absolute;
   text-align: start;
-  top: 10%;
+  top: 15%;
   left: 30%;
   z-index: 99;
   padding: 3em;
@@ -52,7 +52,6 @@ export const ModalFormStyle = styled.form`
     height: 10em;
   }
 
-
   svg {
     width: auto;
     height: 30px;
@@ -79,8 +78,8 @@ export const ContainerModalFlexStyle = styled.div`
   flex-wrap: wrap;
 `;
 
-export const ButtonModal = styled.button`
-margin-top: 4em;
+export const ButtonModalStyled = styled.button`
+  margin-top: 4em;
   width: 109px;
   height: 48px;
   background-color: ${(props) =>
@@ -91,4 +90,18 @@ margin-top: 4em;
   border: none;
   border-radius: 20px;
   cursor: pointer;
+`;
+
+export const CardModalStyled = styled.article`
+  margin: 0 auto;
+  width: 40%;
+  color: #135846;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  align-items: center;
+  p {
+    font-size: 1.4rem;
+  }
 `;

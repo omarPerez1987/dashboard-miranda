@@ -5,9 +5,8 @@ import { TbCalendarCheck } from "react-icons/tb";
 import { RiLoginBoxLine } from "react-icons/ri";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import CardReviews from "../components/cardReviews/CardReviews";
-import {
-  DashboardMainStyled,
-} from "../componentsStyle/general/DashboardMainStyled";
+import { DashboardMainStyled } from "../componentsStyle/general/DashboardMainStyled";
+import contacts from "../../src/JSON/contact.json";
 
 const DashboardPage = () => {
   return (
@@ -24,9 +23,12 @@ const DashboardPage = () => {
           Latest Review by Customers
         </h3>
         <div className="container-reviews__box-card">
-          <CardReviews />
-          <CardReviews />
-          <CardReviews />
+          {contacts &&
+            contacts
+              .slice(0, 3)
+              .map((contact) => (
+                <CardReviews key={contact.id} contact={contact} />
+              ))}
         </div>
       </section>
     </DashboardMainStyled>

@@ -24,11 +24,14 @@ const UsersPage = () => {
       dispatch(getUsersListApiThunk());
     } else if (usersListStatus === "pending") {
       setSpinner(true);
-    } else if (usersListStatus === "fulfilled") {
+    } else if (
+      usersListStatus === "fulfilled" &&
+      usersListData.length !== users.length
+    ) {
       setUsers(usersListData);
       setSpinner(false);
     }
-  }, [dispatch, usersListData, usersListStatus]);
+  }, [dispatch, usersListData, usersListStatus, users]);
 
   return (
     <MainStyled>

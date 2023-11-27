@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TableStyle } from "../../../componentsStyle/tables/TableStyled";
 import { TheadStyled } from "../../../componentsStyle/tables/TheadStyled";
 import { TrbodyStyled } from "../../../componentsStyle/tables/TrbodyStyled";
@@ -8,10 +8,17 @@ import { PiDotsThreeVerticalBold } from "react-icons/pi";
 import { IconTelTable } from "../../../componentsStyle/general/IconStyled";
 import { ButtonVariantStyled } from "../../../componentsStyle/general/ButtonStyled";
 import ModalEditUsers from "../../modal/ModalEditUsers";
+import { getUsersData} from "../../../features/users/usersSlices";
+import { useSelector } from "react-redux";
 
 const TableUsers = ({ users }) => {
+  const usersListData = useSelector(getUsersData);
   const [openModal, setOpenModal] = useState(false);
   const [dataUser, setDataUser] = useState({});
+
+  useEffect(() => {
+    console.log(usersListData)
+  }, [openModal]);
 
   return (
     <>
@@ -73,7 +80,9 @@ const TableUsers = ({ users }) => {
             ))}
         </tbody>
       </TableStyle>
-      {openModal && <ModalEditUsers user={dataUser} setOpenModal={setOpenModal}/>}
+      {openModal && (
+        <ModalEditUsers user={dataUser} setOpenModal={setOpenModal} />
+      )}
     </>
   );
 };

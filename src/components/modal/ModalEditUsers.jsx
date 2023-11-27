@@ -7,10 +7,16 @@ import {
   ButtonModalStyled,
 } from "../../componentsStyle/modal/ModalStyled";
 import { CiCircleRemove } from "react-icons/ci";
+import { useDispatch } from "react-redux";
+import { updateUser } from "../../features/users/usersSlices";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-const ModalEditUsers = ({ user, setOpenModal }) => {
-  console.log(user);
-  const initialStateForm = {
+const ModalEditUsers = ({ user, setOpenModal}) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  let initialStateForm = {
     photo: user.photo,
     id: user.id,
     name: user.name,
@@ -30,8 +36,9 @@ const ModalEditUsers = ({ user, setOpenModal }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Datos del formulario:", formData); // aki el dispatch
-    // setFormData(initialStateForm)
+    dispatch(updateUser(formData));
+    setOpenModal(false);
+    toast.success('Usuario editado con exito!')
   };
 
   const handleDelete = () => {}; //eliminar la room

@@ -8,8 +8,11 @@ import {
   SelectFormStyled,
   TextAreaFormStyled,
 } from "../../componentsStyle/forms/FormStyled";
+import { addUser } from "../../features/users/usersSlices";
+import { useDispatch } from "react-redux";
 
 const FormCreateUser = () => {
+  const dispatch = useDispatch();
   const random1 = Math.floor(Math.random() * 999);
   const random2 = Math.floor(Math.random() * 999);
   const idUnique = `EMPL${random1}-${random2}`;
@@ -20,7 +23,7 @@ const FormCreateUser = () => {
     lastName: "",
     position: "",
     email: "",
-    phoneNumber: "",
+    phone: "",
     startDate: "",
     description: "",
     status: "",
@@ -36,8 +39,9 @@ const FormCreateUser = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Datos del formulario:", formData); //aki el dispatch
-    // setFormData(initialStateForm)
+    dispatch(addUser(formData))
+    // console.log("Datos del formulario:", formData); //aki el dispatch
+    setFormData(initialStateForm)
   };
 
   const handleImageChange = (event) => {
@@ -139,8 +143,8 @@ const FormCreateUser = () => {
         <InputFormStyled
           placeholder="phone..."
           type="number"
-          name="phoneNumber"
-          value={formData.phoneNumber}
+          name="phone"
+          value={formData.phone}
           onChange={handleChange}
           required
         />

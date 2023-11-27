@@ -9,4 +9,11 @@ export const MainStyled = styled.main`
   height: auto;
   min-height: 100vh;
   background-color: #f8f8f8;
+
+  & h1 {
+    margin-top: 3em;
+    font-size: 2rem;
+    color: #135846;
+  }
 `;
+

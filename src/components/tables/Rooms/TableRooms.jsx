@@ -6,10 +6,9 @@ import { TdbodyNameStyled } from "../../../componentsStyle/tables/TdbodyNameStyl
 import { TdbodyStyled } from "../../../componentsStyle/tables/TdbodyStyled";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
 import { ButtonVariantStyled } from "../../../componentsStyle/general/ButtonStyled";
-import rooms from "../../../JSON/rooms.json";
 import ModalEditRoom from "../../modal/ModalEditRoom";
 
-const TableRooms = () => {
+const TableRooms = ({ rooms }) => {
   const [openModal, setOpenModal] = useState(false);
   const [dataRoom, setDataRoom] = useState({});
 
@@ -53,9 +52,7 @@ const TableRooms = () => {
                 </TdbodyStyled>
                 <TdbodyStyled>
                   <ButtonVariantStyled
-                    type={
-                      room.status === "Available" ? "available" : "booked"
-                    }
+                    type={room.status === "Available" ? "available" : "booked"}
                   >{`${room.status}`}</ButtonVariantStyled>
                 </TdbodyStyled>
                 <TdbodyStyled>
@@ -65,7 +62,9 @@ const TableRooms = () => {
             ))}
         </tbody>
       </TableStyle>
-      {openModal && <ModalEditRoom room={dataRoom} setOpenModal={setOpenModal}/>}
+      {openModal && (
+        <ModalEditRoom room={dataRoom} setOpenModal={setOpenModal} />
+      )}
     </>
   );
 };

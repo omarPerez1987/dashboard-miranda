@@ -11,14 +11,14 @@ import { useEffect, useState } from "react";
 import BookingDetailsPage from "./pages/BookingDetailsPage";
 import NewRoomPage from "./pages/NewRoomPage";
 
-function App() {
+function AppRoutes() {
   const [data, setData] = useState({});
 
   useEffect(() => {
     const savedFormData = localStorage.getItem("formData");
     if (savedFormData) {
       setData(JSON.parse(savedFormData));
-      //pasar estos datos a redux
+      //pasar estos datos a context
     }
   }, []);
 
@@ -51,4 +51,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppRoutes;

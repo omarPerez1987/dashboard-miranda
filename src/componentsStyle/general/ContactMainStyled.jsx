@@ -8,7 +8,13 @@ export const ContactMainStyled = styled.main`
   width: 100%;
   height: 100%;
 
-  .container-reviews {
+  & h1 {
+    margin-top: 3em;
+    font-size: 2rem;
+    color: #135846;
+  }
+
+  & .container-reviews {
     width: 90%;
     display: flex;
     flex-wrap: wrap;

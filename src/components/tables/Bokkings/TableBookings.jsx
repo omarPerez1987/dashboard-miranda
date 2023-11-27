@@ -8,9 +8,8 @@ import { TdbodyNameStyled } from "../../../componentsStyle/tables/TdbodyNameStyl
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
 import { ButtonVariantStyled } from "../../../componentsStyle/general/ButtonStyled";
 import ModalNotesBookings from "../../modal/ModalNotesBookings";
-import bookings from "../../../JSON/bookings.json";
 
-const TableBookings = () => {
+const TableBookings = ({ bookings }) => {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [infoNotes, setInfoNotes] = useState(false);

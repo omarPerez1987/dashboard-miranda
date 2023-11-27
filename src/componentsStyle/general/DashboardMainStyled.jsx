@@ -10,9 +10,10 @@ export const DashboardMainStyled = styled.main`
   
   .container-kpis {
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     justify-content: space-between;
-    gap: 3.8em;
+    gap: 2em;
   }
   
   .container-reviews {

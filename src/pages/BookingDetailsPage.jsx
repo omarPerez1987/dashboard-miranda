@@ -9,6 +9,7 @@ import {
   DetailsInfoFacilitiesStyled,
   DetailsInfoPersonStyled,
   DetailsInfoRoomStyled,
+  DetailsLabelStyled,
   DetailsTextStyled,
 } from "../componentsStyle/general/BookingDetailsStyled";
 import bookings from "../../src/JSON/bookings.json";
@@ -84,14 +85,39 @@ const BookingDetailsPage = () => {
               <h6>Facilities</h6>
               <div className="container-buttons">
                 {details.facilities.map((item) => (
-                  <DetailsButtonfacilitiesStyled>
+                  <DetailsButtonfacilitiesStyled key={details.id}>
                     {item}
                   </DetailsButtonfacilitiesStyled>
                 ))}
               </div>
             </DetailsInfoFacilitiesStyled>
           </DetailsTextStyled>
-          <DetailsImageStyled></DetailsImageStyled>
+
+          <DetailsImageStyled>
+            <div className="container-label">
+              {details.status === "in" && (
+                <DetailsLabelStyled status={details.status}>
+                  <p>booked</p>
+                </DetailsLabelStyled>
+              )}
+              {details.status === "out" && (
+                <DetailsLabelStyled status={details.status}>
+                  <p>free</p>
+                </DetailsLabelStyled>
+              )}
+              {details.status === "pending" && (
+                <DetailsLabelStyled status={details.status}>
+                  <p>pending</p>
+                </DetailsLabelStyled>
+              )}
+            </div>
+            <img src={details.photo} alt="" />
+            <div className="container-text">
+              <h1>Bed Room</h1>
+              <p>{`${details.notes.slice(0, 100)}...`}</p>
+
+            </div>
+          </DetailsImageStyled>
         </BookingDetailsStyled>
       )}
     </MainStyled>

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const BookingDetailsStyled = styled.section`
   width: 90%;
@@ -13,7 +13,6 @@ export const DetailsTextStyled = styled.div`
   width: 50%;
   height: 100%;
   padding: 3em;
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -90,6 +89,9 @@ export const DetailsCheckStyled = styled.div`
   padding: 0em 3em 2em 0em;
   gap: 3em;
   border-bottom: 1px solid #6e6e6ec5;
+  & .box-check {
+    width: 15rem;
+  }
 
   & h6 {
     color: #6e6e6e;
@@ -113,10 +115,12 @@ export const DetailsInfoRoomStyled = styled.div`
   justify-content: space-around;
   & .container-room {
     display: flex;
-    width: 85%;
+    width: 100%;
     justify-content: space-between;
     margin-bottom: 1em;
+    gap: 3em;
     &__info {
+      width: 15rem;
       h6 {
         color: #6e6e6e;
         font-size: 1.2em;
@@ -171,7 +175,82 @@ export const DetailsButtonfacilitiesStyled = styled.button`
 export const DetailsImageStyled = styled.div`
   width: 50%;
   height: 100%;
-  border: 1px solid blue;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+
+  & img {
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  & .container-label {
+    width: 100%;
+    height: 20rem;
+    background-color: transparent;
+    display: flex;
+    justify-content: end;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  & .container-text {
+    z-index: 1;
+    padding: 4em;
+    & h1 {
+      color: white;
+      font-size: 1.6rem;
+      font-weight: 500;
+      margin-bottom: 1em;
+    }
+    & p {
+      font-size: 1.2rem;
+      color: #6E6E6E;
+    }
+  }
+`;
+export const DetailsLabelStyled = styled.label`
+  position: relative;
+  margin-top: 2.8em;
+  margin-right: -4.7em;
+  font-weight: 600;
+  transform: rotate(45deg);
+  width: 20rem;
+  height: 5rem;
+  color: #fff;
+  background-color: red;
+  box-shadow: 0px 20px 30px #00000014;
+
+  ${(props) => {
+    switch (props.status) {
+      case "in":
+        return css`
+          background-color: red;
+        `;
+      case "out":
+        return css`
+          background-color: #5ad07a;
+        `;
+      case "pending":
+        return css`
+          background-color: #e2e212;
+        `;
+    }
+  }}
+
+  & p {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+  }
 `;

@@ -228,7 +228,7 @@ export const DetailsLabelStyled = styled.label`
   box-shadow: 0px 20px 30px #00000014;
 
   ${(props) => {
-    switch (props.status) {
+    switch (props.type) {
       case "in":
         return css`
           background-color: red;

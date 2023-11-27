@@ -79,13 +79,13 @@ const BookingDetailsPage = () => {
                   </h3>
                 </div>
               </div>
-              <p>{details.notes}</p>
+              {details.notes ? <p>{details.notes}</p> : <h1>No hay notas</h1>}
             </DetailsInfoRoomStyled>
             <DetailsInfoFacilitiesStyled>
               <h6>Facilities</h6>
               <div className="container-buttons">
                 {details.facilities.map((item) => (
-                  <DetailsButtonfacilitiesStyled key={details.id}>
+                  <DetailsButtonfacilitiesStyled>
                     {item}
                   </DetailsButtonfacilitiesStyled>
                 ))}
@@ -96,17 +96,17 @@ const BookingDetailsPage = () => {
           <DetailsImageStyled>
             <div className="container-label">
               {details.status === "in" && (
-                <DetailsLabelStyled status={details.status}>
+                <DetailsLabelStyled type={details.status}>
                   <p>booked</p>
                 </DetailsLabelStyled>
               )}
               {details.status === "out" && (
-                <DetailsLabelStyled status={details.status}>
+                <DetailsLabelStyled type={details.status}>
                   <p>free</p>
                 </DetailsLabelStyled>
               )}
               {details.status === "pending" && (
-                <DetailsLabelStyled status={details.status}>
+                <DetailsLabelStyled type={details.status}>
                   <p>pending</p>
                 </DetailsLabelStyled>
               )}
@@ -114,8 +114,11 @@ const BookingDetailsPage = () => {
             <img src={details.photo} alt="" />
             <div className="container-text">
               <h1>Bed Room</h1>
-              <p>{`${details.notes.slice(0, 100)}...`}</p>
-
+              {details.notes ? (
+                <p>{`${details.notes.slice(0, 100)}...`}</p>
+              ) : (
+                <h1>No hay datos</h1>
+              )}
             </div>
           </DetailsImageStyled>
         </BookingDetailsStyled>

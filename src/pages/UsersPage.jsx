@@ -24,10 +24,7 @@ const UsersPage = () => {
       dispatch(getUsersListApiThunk());
     } else if (usersListStatus === "pending") {
       setSpinner(true);
-    } else if (
-      usersListStatus === "fulfilled" &&
-      usersListData.length !== users.length
-    ) {
+    } else if (usersListStatus === "fulfilled" && usersListData !== users) {
       setUsers(usersListData);
       setSpinner(false);
     }

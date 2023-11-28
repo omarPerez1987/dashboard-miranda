@@ -11,7 +11,6 @@ export const usersSlice = createSlice({
   reducers: {
     addUser: (state, action) => {
       state.data = [action.payload, ...state.data];
-      console.log("Nuevo estado después de agregar un usuario:", action);
     },
 
     updateUser: (state, action) => {
@@ -21,6 +20,10 @@ export const usersSlice = createSlice({
       if (index !== -1) {
         state.data[index] = action.payload;
       }
+    },
+
+    deleteUser: (state, action) => {
+      state.data = state.data.filter((user) => user.id !== action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -38,7 +41,7 @@ export const usersSlice = createSlice({
       });
   },
 });
-export const { addUser, updateUser } = usersSlice.actions;
+export const { addUser, updateUser, deleteUser } = usersSlice.actions;
 export const getUsersData = (state) => state.users.data;
 export const getUsersStatus = (state) => state.users.status;
 export const getUsersError = (state) => state.users.error;

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./main.css";
-import AppRoutes from "./Routes.jsx";
+import AppRoutes from "./AppRoutes.jsx";
 import { Provider } from "react-redux";
 import { store } from "./app/store.js";
 import { ToastContainer } from "react-toastify";
@@ -20,7 +20,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme="colored"
       />
       <AppRoutes />
     </Provider>

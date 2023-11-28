@@ -10,6 +10,8 @@ import NewUserPage from "./pages/NewUserPage";
 import { useEffect, useState } from "react";
 import BookingDetailsPage from "./pages/BookingDetailsPage";
 import NewRoomPage from "./pages/NewRoomPage";
+import UsersEditPage from "./pages/UsersEditPage";
+import EditRoomPage from "./pages/EditRoomPage";
 
 function AppRoutes() {
   const [data, setData] = useState({});
@@ -39,7 +41,9 @@ function AppRoutes() {
 
                 <Route path="rooms" element={<RoomsPage />} />
                 <Route path="new-room" element={<NewRoomPage />} />
+                <Route path="edit-room/:id" element={<EditRoomPage />} />
                 <Route path="users" element={<UsersPage />} />
+                <Route path="edit-user/:id" element={<UsersEditPage />} />
                 <Route path="new-user" element={<NewUserPage />} />
                 <Route path="contact" element={<ContactPage />} />
               </Route>

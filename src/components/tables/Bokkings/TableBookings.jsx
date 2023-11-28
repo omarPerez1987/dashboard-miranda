@@ -13,6 +13,7 @@ const TableBookings = ({ bookings }) => {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [infoNotes, setInfoNotes] = useState(false);
+  
   return (
     <>
       <TableStyle>
@@ -32,7 +33,7 @@ const TableBookings = ({ bookings }) => {
             bookings.map((data) => (
               <TrbodyStyled
                 key={data.id}
-                onClick={() => navigate(`/home/bookings-details/${data.id}`)}
+                onClick={() => {navigate(`/home/bookings-details/${data.id}`)}}
               >
                 <TdbodyNameStyled>
                   <img src={data.photo} alt="" />
@@ -68,20 +69,20 @@ const TableBookings = ({ bookings }) => {
                   )}
                 </TdbodyStyled>
                 <TdbodyStyled>
-                  <p>{data.Room}</p>
+                  <p>{data.room}</p>
                 </TdbodyStyled>
                 <TdbodyStyled>
-                  {data.status === "in" && (
+                  {data.check === "in" && (
                     <ButtonVariantStyled type="in">
                       Check in
                     </ButtonVariantStyled>
                   )}
-                  {data.status === "out" && (
+                  {data.check === "out" && (
                     <ButtonVariantStyled type="out">
                       Check out
                     </ButtonVariantStyled>
                   )}
-                  {data.status === "pending" && (
+                  {data.check === "pending" && (
                     <ButtonVariantStyled type="pending">
                       In Progress
                     </ButtonVariantStyled>

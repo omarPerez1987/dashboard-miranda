@@ -12,18 +12,20 @@ import {
   DetailsLabelStyled,
   DetailsTextStyled,
 } from "../componentsStyle/general/BookingDetailsStyled";
-import bookings from "../../src/JSON/bookings.json";
 import { FaPhone } from "react-icons/fa6";
 import { BiMessageSquareDetail } from "react-icons/bi";
 import { SlOptionsVertical } from "react-icons/sl";
+import { getBookingsData } from "../features/bookings/bookingsSlices";
+import { useSelector } from "react-redux";
 
 const BookingDetailsPage = () => {
   const { id } = useParams();
   const [details, setDetails] = useState(null);
-  // console.log(details);
+  const bookingsListData = useSelector(getBookingsData);
+  console.log(details);
 
   useEffect(() => {
-    const searchBooking = bookings.find(
+    const searchBooking = bookingsListData.find(
       (booking) => booking.id.toString() === id
     );
     setDetails(searchBooking);
@@ -79,7 +81,7 @@ const BookingDetailsPage = () => {
                   </h3>
                 </div>
               </div>
-              {details.notes ? <p>{details.notes}</p> : <h1>No hay notas</h1>}
+              {details.notes ? <p>{details.notes}</p> : <h1>No notes</h1>}
             </DetailsInfoRoomStyled>
             <DetailsInfoFacilitiesStyled>
               <h6>Facilities</h6>
@@ -117,7 +119,7 @@ const BookingDetailsPage = () => {
               {details.notes ? (
                 <p>{`${details.notes.slice(0, 100)}...`}</p>
               ) : (
-                <h1>No hay datos</h1>
+                <h1>No notes</h1>
               )}
             </div>
           </DetailsImageStyled>

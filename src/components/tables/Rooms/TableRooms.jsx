@@ -6,66 +6,57 @@ import { TdbodyNameStyled } from "../../../componentsStyle/tables/TdbodyNameStyl
 import { TdbodyStyled } from "../../../componentsStyle/tables/TdbodyStyled";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
 import { ButtonVariantStyled } from "../../../componentsStyle/general/ButtonStyled";
-import ModalEditRoom from "../../modal/ModalEditRoom";
+import { useNavigate } from "react-router-dom";
 
 const TableRooms = ({ rooms }) => {
-  const [openModal, setOpenModal] = useState(false);
-  const [dataRoom, setDataRoom] = useState({});
+  const navigate = useNavigate();
 
   return (
-    <>
-      <TableStyle>
-        <TheadStyled>
-          <tr>
-            <th>Room Name</th>
-            <th>Bed Type</th>
-            <th>Facilities</th>
-            <th>Price</th>
-            <th>Offer Price</th>
-            <th>Status</th>
-          </tr>
-        </TheadStyled>
-        <tbody>
-          {rooms &&
-            rooms.map((room) => (
-              <TrbodyStyled
-                key={room.id}
-                onClick={() => {
-                  setOpenModal(true);
-                  setDataRoom(room);
-                }}
-              >
-                <TdbodyNameStyled>
-                  <img className="image-room" src={room.photo} alt="" />
-                  <div>
-                    <p>{room.room}</p>
-                    <span>{room.id}</span>
-                  </div>
-                </TdbodyNameStyled>
-                <TdbodyStyled>{room.bed}</TdbodyStyled>
-                <TdbodyStyled>{room.facilities}</TdbodyStyled>
-                <TdbodyStyled>
-                  <p>{room.price}</p>
-                </TdbodyStyled>
-                <TdbodyStyled>
-                  <p>{room.discount ? room.discount : "No offer"}</p>
-                </TdbodyStyled>
-                <TdbodyStyled>
-                  <ButtonVariantStyled
-                    type={room.status === "Available" ? "available" : "booked"}
-                  >{`${room.status}`}</ButtonVariantStyled>
-                </TdbodyStyled>
-                <TdbodyStyled>
-                  <PiDotsThreeVerticalBold />
-                </TdbodyStyled>
-              </TrbodyStyled>
-            ))}
-        </tbody>
-      </TableStyle>
-      {openModal && (
-        <ModalEditRoom room={dataRoom} setOpenModal={setOpenModal} />
-      )}
-    </>
+    <TableStyle>
+      <TheadStyled>
+        <tr>
+          <th>Room Name</th>
+          <th>Bed Type</th>
+          <th>Facilities</th>
+          <th>Price</th>
+          <th>Offer Price</th>
+          <th>Status</th>
+        </tr>
+      </TheadStyled>
+      <tbody>
+        {rooms &&
+          rooms.map((room) => (
+            <TrbodyStyled
+              key={room.id}
+              onClick={() => navigate(`/home/edit-room/${room.id}`)}
+            >
+              <TdbodyNameStyled>
+                <img className="image-room" src={room.photo} alt="" />
+                <div>
+                  <p>{room.room}</p>
+                  <span>{room.id}</span>
+                </div>
+              </TdbodyNameStyled>
+              <TdbodyStyled>{room.bed}</TdbodyStyled>
+              <TdbodyStyled>{room.facilities}</TdbodyStyled>
+              <TdbodyStyled>
+                <p>{room.price}</p>
+              </TdbodyStyled>
+              <TdbodyStyled>
+                <p>{room.discount ? room.discount : "No offer"}</p>
+              </TdbodyStyled>
+              <TdbodyStyled>
+                <ButtonVariantStyled
+                  type={room.status === "Available" ? "available" : "booked"}
+                >{`${room.status}`}</ButtonVariantStyled>
+              </TdbodyStyled>
+              <TdbodyStyled>
+                <PiDotsThreeVerticalBold />
+              </TdbodyStyled>
+            </TrbodyStyled>
+          ))}
+      </tbody>
+    </TableStyle>
   );
 };
 

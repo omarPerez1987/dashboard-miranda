@@ -8,7 +8,11 @@ export const bookingsSlice = createSlice({
     status: "idle",
     error: null,
   },
-  reducers: {},
+  reducers: {
+    mixBookingAndRoom: (state, action) => {
+      state.data = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getBookingsListThunk.fulfilled, (state, action) => {
@@ -25,6 +29,21 @@ export const bookingsSlice = createSlice({
   },
 });
 
+export const { mixBookingAndRoom } = bookingsSlice.actions;
 export const getBookingsData = (state) => state.bookings.data;
 export const getBookingsStatus = (state) => state.bookings.status;
 export const getBookingsError = (state) => state.bookings.error;
+
+// const filterBooking = state.data;
+
+// const filterRoom = action.payload.filter((room) => {
+//   return room.id;
+// });
+// console.log(filterBooking);
+// console.log(filterRoom, "action");
+
+// {
+//   if (booking.idRoom === action.payload.id) {
+//     state.data = booking.push(action.payload);
+//   }
+// });

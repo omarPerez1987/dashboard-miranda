@@ -36,12 +36,12 @@ export const ButtonVariantStyled = styled.button`
   background-color: transparent;
   cursor: pointer;
 
-  ${(props) =>
+  /* ${(props) =>
     props.request === "true" &&
     css`
       background-color: #eef9f2;
       color: #212121;
-    `}
+    `} */
 
   ${(props) => {
     switch (props.type) {
@@ -94,13 +94,13 @@ export const ButtonVariantStyled = styled.button`
           border: 1px solid #799283;
           padding: 0.5em 2.5em;
         `;
-      case "active":
+      case "true":
         return css`
           background-color: transparent;
           color: #5ad07a;
           font-weight: 600;
         `;
-      case "desactive":
+      case "false":
         return css`
           background-color: transparent;
           color: #e23428;

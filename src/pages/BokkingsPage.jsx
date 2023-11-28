@@ -8,28 +8,51 @@ import {
   getBookingsData,
   getBookingsError,
   getBookingsStatus,
+  mixBookingAndRoom,
 } from "../features/bookings/bookingsSlices";
 import { getBookingsListThunk } from "../features/bookings/bookingsThunks";
+import { getRoomsData, getRoomsStatus } from "../features/rooms/roomsSlices";
+import { getRoomsListApiThunk } from "../features/rooms/roomsThunk";
 
 const BokkingsPage = () => {
   const dispatch = useDispatch();
   const bookingsListData = useSelector(getBookingsData);
   const bookingsListStatus = useSelector(getBookingsStatus);
   const bookingsListError = useSelector(getBookingsError);
+  const roomsListData = useSelector(getRoomsData);
+  const roomsListStatus = useSelector(getRoomsStatus);
   const [bookings, setBookings] = useState([]);
-  
   const [spinner, setSpinner] = useState(true);
 
+  const bookingAndRoom = () => {
+    const dataMix = [];
+    for (let i = 0; i < bookingsListData.length; i++) {
+      const booking = bookingsListData[i];
+      for (let j = 0; j < roomsListData.length; j++) {
+        const room = roomsListData[j];
+        if (booking.idRoom === room.id) {
+          dataMix.push({ ...booking, ...room });
+        }
+      }
+    }
+    return dataMix;
+  };
+
   useEffect(() => {
-    if (bookingsListStatus === "idle") {
+    if (bookingsListStatus && roomsListStatus === "idle") {
       dispatch(getBookingsListThunk());
+      dispatch(getRoomsListApiThunk());
     } else if (bookingsListStatus === "pending") {
       setSpinner(true);
-    } else if (bookingsListStatus === "fulfilled") {
-      setBookings(bookingsListData);
+    } else if (bookingsListStatus && roomsListStatus === "fulfilled") {
+      dispatch(mixBookingAndRoom(bookingAndRoom()));
       setSpinner(false);
     }
-  }, [dispatch, bookingsListStatus, bookingsListData]);
+  }, [bookingsListStatus]);
+
+  useEffect(() => {
+    setBookings(bookingsListData);
+  }, [bookingsListData]);
 
   return (
     <MainStyled>

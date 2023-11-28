@@ -1,60 +1,73 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  ModalFormStyle,
-  ModalStyled,
+  ButtonModalStyled,
   ContainerModalFlexStyle,
   ContainerModalImageStyle,
-  ButtonModalStyled,
-} from "../../componentsStyle/modal/ModalStyled";
+  ModalFormStyle,
+  EditStyled,
+} from "../componentsStyle/modal/ModalStyled";
 import { CiCircleRemove } from "react-icons/ci";
-import { useDispatch } from "react-redux";
-import { updateUser } from "../../features/users/usersSlices";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteUser,
+  getUsersData,
+  updateUser,
+} from "../features/users/usersSlices";
 import { toast } from "react-toastify";
+import { useNavigate, useParams } from "react-router-dom";
 
-const ModalEditUsers = ({ user, setOpenModal}) => {
-  const dispatch = useDispatch();
+const UsersEditPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const usersListData = useSelector(getUsersData);
+  const { id } = useParams();
 
-  let initialStateForm = {
-    photo: user.photo,
-    id: user.id,
-    name: user.name,
-    email: user.email,
-    startDate: user.startDate,
-    description: user.description,
-    phone: user.phone,
-    status: user.status,
-  };
+  const [user, setUser] = useState({
+    id: "",
+    photo: "",
+    name: "",
+    email: "",
+    startDate: "",
+    description: "",
+    phone: "",
+    status: "",
+  });
 
-  const [formData, setFormData] = useState(initialStateForm);
+  useEffect(() => {
+    const searchUser = usersListData.find((user) => user.id.toString() === id);
+    setUser(searchUser);
+  }, [usersListData]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    setUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event, user) => {
     event.preventDefault();
-    dispatch(updateUser(formData));
-    setOpenModal(false);
-    toast.success('Usuario editado con exito!')
+    dispatch(updateUser(user));
+    toast.success("Usuario editado con exito!");
+    navigate("/home/users");
   };
 
-  const handleDelete = () => {}; //eliminar la room
+  const handleDelete = (id) => {
+    dispatch(deleteUser(id));
+    toast.warn("Usuario eliminado con exito!");
+    navigate("/home/users");
+  };
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    setFormData((prevFormData) => ({ ...prevFormData, image: file }));
+    setUser((prevUser) => ({ ...prevUser, image: file }));
   };
 
   return (
-    <ModalStyled onSubmit={handleSubmit}>
+    <EditStyled onSubmit={(event) => handleSubmit(event, user)}>
       <ModalFormStyle>
-        <CiCircleRemove onClick={() => setOpenModal(false)} />
+        <CiCircleRemove onClick={() => navigate("/home/users")} />
         <h1>EDIT USER</h1>
         <ContainerModalImageStyle>
-          <img src={formData.photo} alt="" />
+          <img src={user.photo} alt="" />
         </ContainerModalImageStyle>
 
         <label>Photo</label>
@@ -65,7 +78,7 @@ const ModalEditUsers = ({ user, setOpenModal}) => {
           placeholder="..."
           type="text"
           name="name"
-          value={formData.name}
+          value={user.name}
           onChange={handleChange}
           required
         />
@@ -74,7 +87,7 @@ const ModalEditUsers = ({ user, setOpenModal}) => {
           placeholder="..."
           type="text"
           name="email"
-          value={formData.email}
+          value={user.email}
           onChange={handleChange}
           required
         />
@@ -83,7 +96,7 @@ const ModalEditUsers = ({ user, setOpenModal}) => {
           placeholder="..."
           type="text"
           name="startDate"
-          value={formData.startDate}
+          value={user.startDate}
           onChange={handleChange}
           required
         />
@@ -92,7 +105,7 @@ const ModalEditUsers = ({ user, setOpenModal}) => {
           placeholder="..."
           type="text"
           name="description"
-          value={formData.description}
+          value={user.description}
           onChange={handleChange}
           required
         />
@@ -101,7 +114,7 @@ const ModalEditUsers = ({ user, setOpenModal}) => {
           placeholder="..."
           type="text"
           name="phone"
-          value={formData.phone}
+          value={user.phone}
           onChange={handleChange}
           required
         />
@@ -111,7 +124,7 @@ const ModalEditUsers = ({ user, setOpenModal}) => {
         <select
           type="text"
           name="status"
-          value={formData.status}
+          value={user.status}
           onChange={handleChange}
           required
         >
@@ -127,11 +140,18 @@ const ModalEditUsers = ({ user, setOpenModal}) => {
           <ButtonModalStyled type="submit" color="edit">
             Edit
           </ButtonModalStyled>
-          <ButtonModalStyled type="submit ">Delete</ButtonModalStyled>
+          <ButtonModalStyled
+            type="button"
+            onClick={() => {
+              handleDelete(user.id);
+            }}
+          >
+            Delete
+          </ButtonModalStyled>
         </ContainerModalFlexStyle>
       </ModalFormStyle>
-    </ModalStyled>
+    </EditStyled>
   );
 };
 
-export default ModalEditUsers;
+export default UsersEditPage;

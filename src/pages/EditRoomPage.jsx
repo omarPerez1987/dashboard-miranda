@@ -1,49 +1,72 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { CiCircleRemove } from "react-icons/ci";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  ModalFormStyle,
-  ModalStyled,
+  deleteRoom,
+  getRoomsData,
+  updateRoom,
+} from "../features/rooms/roomsSlices";
+import {
+  ButtonModalStyled,
   ContainerModalFlexStyle,
   ContainerModalImageStyle,
-  ButtonModalStyled,
-} from "../../componentsStyle/modal/ModalStyled";
-import { ButtonFacilityForm } from "../../componentsStyle/forms/FormStyled";
-import { CiCircleRemove } from "react-icons/ci";
+  EditStyled,
+  ModalFormStyle,
+} from "../componentsStyle/modal/ModalStyled";
+import { ButtonFacilityForm } from "../componentsStyle/forms/FormStyled";
+import { toast } from "react-toastify";
 
-const ModalEditRoom = ({ room, setOpenModal }) => {
-  const initialStateForm = {
-    id: room.id,
-    image: room.photo,
-    room: room.room,
-    bed: room.bed,
-    price: room.price,
-    discount: room.discount,
-    facilities: room.facilities,
-    status: room.status,
-  };
+const EditRoomPage = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const roomsListData = useSelector(getRoomsData);
+  const { id } = useParams();
 
-  const [formData, setFormData] = useState(initialStateForm);
+  const [room, setRoom] = useState({
+    bed: "",
+    cancel: "",
+    description: "",
+    discount: "",
+    facilities: "",
+    id: "",
+    photo: "",
+    price: "",
+    room: "",
+    status: "",
+  });
+
+  useEffect(() => {
+    const searchRoom = roomsListData.find((room) => room.id.toString() === id);
+    setRoom(searchRoom);
+  }, [roomsListData]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    setRoom((prevRoomData) => ({ ...prevRoomData, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event, room) => {
     event.preventDefault();
-    console.log("Datos del formulario:", formData); // aki el dispatch
-    // setFormData(initialStateForm)
+    dispatch(updateRoom(room));
+    toast.success("Habitación editada con exito!");
+    navigate("/home/rooms");
   };
 
-  const handleDelete = () => {}; //eliminar la room
+  const handleDelete = (id) => {
+    dispatch(deleteRoom(id));
+    toast.warn("Habitación eliminada con exito!");
+    navigate("/home/rooms");
+  };
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    setFormData((prevFormData) => ({ ...prevFormData, image: file }));
+    setRoom((prevRoomData) => ({ ...prevRoomData, image: file }));
   };
 
   const handleFacilityChange = (facility) => {
-    setFormData((prevFormData) => {
-      const facilities = [...prevFormData.facilities];
+    setRoom((prevRoomData) => {
+      const facilities = [...prevRoomData.facilities];
 
       if (facilities.includes(facility)) {
         facilities.splice(facilities.indexOf(facility), 1);
@@ -51,17 +74,17 @@ const ModalEditRoom = ({ room, setOpenModal }) => {
         facilities.push(facility);
       }
 
-      return { ...prevFormData, facilities };
+      return { ...prevRoomData, facilities };
     });
   };
 
   return (
-    <ModalStyled onSubmit={handleSubmit}>
+    <EditStyled onSubmit={(event) => handleSubmit(event, room)}>
       <ModalFormStyle>
-        <CiCircleRemove onClick={() => setOpenModal(false)} />
+        <CiCircleRemove onClick={() => navigate("/home/rooms")} />
         <h1>EDIT ROOM</h1>
         <ContainerModalImageStyle>
-          <img src={formData.image} alt="" />
+          <img src={room.image} alt="" />
         </ContainerModalImageStyle>
 
         <label>Photo</label>
@@ -72,7 +95,7 @@ const ModalEditRoom = ({ room, setOpenModal }) => {
           placeholder="room name..."
           type="text"
           name="room"
-          value={formData.room}
+          value={room.room}
           onChange={handleChange}
           required
         />
@@ -82,7 +105,7 @@ const ModalEditRoom = ({ room, setOpenModal }) => {
           placeholder="bed type..."
           type="text"
           name="bed"
-          value={formData.bed}
+          value={room.bed}
           onChange={handleChange}
           required
         >
@@ -101,7 +124,7 @@ const ModalEditRoom = ({ room, setOpenModal }) => {
           placeholder="price..."
           type="text"
           name="price"
-          value={formData.price}
+          value={room.price}
           onChange={handleChange}
           required
         />
@@ -110,7 +133,7 @@ const ModalEditRoom = ({ room, setOpenModal }) => {
           placeholder="offer price..."
           type="text"
           name="discount"
-          value={formData.discount}
+          value={room.discount}
           onChange={handleChange}
         />
         <label>Status</label>
@@ -118,7 +141,7 @@ const ModalEditRoom = ({ room, setOpenModal }) => {
           placeholder="status..."
           type="text"
           name="status"
-          value={formData.status}
+          value={room.status}
           onChange={handleChange}
           required
         >
@@ -149,7 +172,7 @@ const ModalEditRoom = ({ room, setOpenModal }) => {
               key={facility}
               type="button"
               label={facility}
-              selected={formData.facilities.includes(facility)}
+              selected={room.facilities.includes(facility)}
               onClick={() => handleFacilityChange(facility)}
             >
               {facility}
@@ -160,11 +183,18 @@ const ModalEditRoom = ({ room, setOpenModal }) => {
           <ButtonModalStyled type="submit" color="edit">
             Edit
           </ButtonModalStyled>
-          <ButtonModalStyled type="submit ">Delete</ButtonModalStyled>
+          <ButtonModalStyled
+            type="button"
+            onClick={() => {
+              handleDelete(room.id);
+            }}
+          >
+            Delete
+          </ButtonModalStyled>
         </ContainerModalFlexStyle>
       </ModalFormStyle>
-    </ModalStyled>
+    </EditStyled>
   );
 };
 
-export default ModalEditRoom;
+export default EditRoomPage;

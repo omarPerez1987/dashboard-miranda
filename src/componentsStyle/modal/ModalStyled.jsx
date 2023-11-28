@@ -14,6 +14,17 @@ export const ModalStyled = styled.section`
   border-radius: 20px;
 `;
 
+export const EditStyled = styled.section`
+  margin: 0 auto;
+  margin-top: 4em;
+  padding: 3em;
+  width: 60%;
+  height: auto;
+  background-color: #fff;
+  border: 1px solid #135846;
+  border-radius: 20px;
+`;
+
 export const ModalFormStyle = styled.form`
   margin: 0 auto;
   width: 90%;
@@ -24,41 +35,41 @@ export const ModalFormStyle = styled.form`
   gap: 1em;
   align-items: center;
 
-  h1 {
+  & h1 {
     width: 100%;
     font-size: 2rem;
     text-align: center;
   }
 
-  img {
+  & img {
     width: 100%;
     width: 100%;
   }
-  select {
+  & select {
     width: 70%;
   }
 
-  label {
+  & label {
     width: 70%;
     font-weight: 600;
     font-size: 1.2rem;
   }
-  input {
+  & input {
     width: 70%;
   }
 
-  textarea {
+  & textarea {
     width: 70%;
     height: 10em;
   }
 
-  svg {
+  & svg {
     width: auto;
     height: 30px;
     align-self: end;
     color: #e23428;
   }
-  svg:hover {
+  & svg:hover {
     background-color: #e23428;
     color: white;
     border-radius: 100%;

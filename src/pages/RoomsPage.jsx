@@ -24,12 +24,12 @@ const RoomsPage = () => {
       dispatch(getRoomsListApiThunk());
     } else if (roomsListStatus === "pending") {
       setSpinner(true);
-    } else if (roomsListStatus === "fulfilled") {
+    } else if (roomsListStatus === "fulfilled" && roomsListData !== rooms) {
       setRooms(roomsListData);
       setSpinner(false);
     }
   }, [dispatch, roomsListData, roomsListStatus]);
-  
+
   return (
     <MainStyled>
       {roomsListError ? (

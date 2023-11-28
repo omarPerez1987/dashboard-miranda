@@ -5,12 +5,27 @@ import { TrbodyStyled } from "../../../componentsStyle/tables/TrbodyStyled";
 import { TdbodyStyled } from "../../../componentsStyle/tables/TdbodyStyled";
 import { TdbodyNameStyled } from "../../../componentsStyle/tables/TdbodyNameStyled";
 import { ButtonVariantStyled } from "../../../componentsStyle/general/ButtonStyled";
-import contacts from "../../../JSON/contact.json";
 import ModalReviews from "../../modal/ModalReviews";
+import { useDispatch } from "react-redux";
+import { updateArchived } from "../../../features/contact/contactsSlices";
 
-const TableContact = () => {
+const TableContact = ({ contacts }) => {
   const [openModal, setOpenModal] = useState(false);
   const [dataReview, setDataReview] = useState({});
+  const dispatch = useDispatch();
+
+  // const changePublish = (id) => {
+  //   const updatedContacts = contacts.map((contact) =>
+  //     contact.id === id ? { ...contact, archived: 'archived' } : contact
+  //   );
+  //   dispatch(updateArchived(updat))
+  
+  //   console.log(updatedContacts.find((contact) => contact.id === id)?.archived);
+  // };
+  
+  // changePublish();
+  
+
   return (
     <>
       <TableStyle>
@@ -51,9 +66,18 @@ const TableContact = () => {
                   150
                 )} ...`}</TdbodyStyled>
                 <TdbodyStyled>
-                  <ButtonVariantStyled type="archived">
-                    ARCHIVED
-                  </ButtonVariantStyled>
+                  {data.archived === "archived" ? (
+                    <ButtonVariantStyled type="archived">
+                      ARCHIVED
+                    </ButtonVariantStyled>
+                  ) : (
+                    <ButtonVariantStyled
+                      type="publish"
+                      // onClick={() => changePublish(data.id)}
+                    >
+                      PUBLISH
+                    </ButtonVariantStyled>
+                  )}
                 </TdbodyStyled>
               </TrbodyStyled>
             ))}

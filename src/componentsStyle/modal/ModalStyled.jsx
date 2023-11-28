@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ModalStyled = styled.section`
   position: absolute;
   text-align: start;
-  top: 15%;
+  top: 20%;
   left: 30%;
   z-index: 99;
   padding: 3em;

@@ -36,13 +36,6 @@ export const ButtonVariantStyled = styled.button`
   background-color: transparent;
   cursor: pointer;
 
-  /* ${(props) =>
-    props.request === "true" &&
-    css`
-      background-color: #eef9f2;
-      color: #212121;
-    `} */
-
   ${(props) => {
     switch (props.type) {
       case "available":
@@ -108,7 +101,14 @@ export const ButtonVariantStyled = styled.button`
         `;
       case "archived":
         return css`
+          width: 9rem;
           background-color: #e23428;
+          color: #ffffff;
+        `;
+      case "publish":
+        return css`
+          width: 9rem;
+          background-color: #5ad07a;
           color: #ffffff;
         `;
     }

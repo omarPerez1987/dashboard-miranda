@@ -6,7 +6,9 @@ import {
 import { ButtonFormStyled } from "../../componentsStyle/forms/FormStyled";
 import { CiCircleRemove } from "react-icons/ci";
 
+
 const ModalEditClient = ({ setOpenModal }) => {
+
   const initialStateForm = {
     id: ``,
     image: null,
@@ -23,8 +25,7 @@ const ModalEditClient = ({ setOpenModal }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Datos del formulario:", formData); //aki el dispatch
-    // setFormData(initialStateForm)
+    console.log("Datos del formulario:", formData); //al context
   };
   return (
     <ModalStyled onSubmit={handleSubmit}>

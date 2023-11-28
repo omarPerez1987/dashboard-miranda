@@ -22,7 +22,6 @@ const BookingDetailsPage = () => {
   const { id } = useParams();
   const [details, setDetails] = useState(null);
   const bookingsListData = useSelector(getBookingsData);
-  console.log(details);
 
   useEffect(() => {
     const searchBooking = bookingsListData.find(

@@ -7,16 +7,16 @@ export const DashboardMainStyled = styled.main`
   width: 100%;
   height: 100%;
   padding: 3em;
-  
-  .container-kpis {
+
+  & .container-kpis {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    justify-content: space-between;
-    gap: 2em;
+    justify-content: space-around;
+    gap: 1em;
   }
-  
-  .container-reviews {
+
+  & .container-reviews {
     margin-top: 10em;
     border-radius: 20px;
     display: flex;
@@ -26,6 +26,7 @@ export const DashboardMainStyled = styled.main`
     gap: 3.8em;
     background-color: #ffffff;
     padding: 3em;
+
     & h3 {
       color: #393939;
       font-size: 1.6rem;

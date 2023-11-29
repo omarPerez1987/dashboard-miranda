@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const CardReviewsStyled = styled.article`
-  width: 43em;
-  height: 27em;
+  width: 33em;
+  height: 20em;
   border-radius: 20px;
   padding: 3rem;
   background-color: #ffffff;
@@ -16,7 +16,7 @@ export const CardReviewsStyled = styled.article`
   }
 
   p {
-    font-size: 1.4rem;
+    font-size: 1rem;
     color: #4e4e4e;
     width: 85%;
   }

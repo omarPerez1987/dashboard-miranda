@@ -14,18 +14,6 @@ const TableContact = ({ contacts }) => {
   const [dataReview, setDataReview] = useState({});
   const dispatch = useDispatch();
 
-  // const changePublish = (id) => {
-  //   const updatedContacts = contacts.map((contact) =>
-  //     contact.id === id ? { ...contact, archived: 'archived' } : contact
-  //   );
-  //   dispatch(updateArchived(updat))
-  
-  //   console.log(updatedContacts.find((contact) => contact.id === id)?.archived);
-  // };
-  
-  // changePublish();
-  
-
   return (
     <>
       <TableStyle>
@@ -40,13 +28,7 @@ const TableContact = ({ contacts }) => {
         <tbody>
           {contacts &&
             contacts.map((data) => (
-              <TrbodyStyled
-                key={data.id}
-                onClick={() => {
-                  setOpenModal(true);
-                  setDataReview(data.review);
-                }}
-              >
+              <TrbodyStyled key={data.id}>
                 <TdbodyNameStyled>
                   <div>
                     <p>{data.date}</p>
@@ -61,19 +43,24 @@ const TableContact = ({ contacts }) => {
                   <span>{data.email}</span>
                   <h6>{data.telephone}</h6>
                 </TdbodyStyled>
-                <TdbodyStyled>{`${data.review.substring(
-                  0,
-                  150
-                )} ...`}</TdbodyStyled>
+                <TdbodyStyled
+                  onClick={() => {
+                    setOpenModal(true);
+                    setDataReview(data.review);
+                  }}
+                >{`${data.review.substring(0, 150)} ...`}</TdbodyStyled>
                 <TdbodyStyled>
-                  {data.archived === "archived" ? (
-                    <ButtonVariantStyled type="archived">
+                  {data.archived ? (
+                    <ButtonVariantStyled
+                      status={"true"}
+                      onClick={() => dispatch(updateArchived(data))}
+                    >
                       ARCHIVED
                     </ButtonVariantStyled>
                   ) : (
                     <ButtonVariantStyled
-                      type="publish"
-                      // onClick={() => changePublish(data.id)}
+                      status={"false"}
+                      onClick={() => dispatch(updateArchived(data))}
                     >
                       PUBLISH
                     </ButtonVariantStyled>

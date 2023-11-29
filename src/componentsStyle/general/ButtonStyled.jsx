@@ -37,6 +37,23 @@ export const ButtonVariantStyled = styled.button`
   cursor: pointer;
 
   ${(props) => {
+    switch (props.status) {
+      case "true":
+        return css`
+          width: 9rem;
+          background-color: #e23428;
+          color: #ffffff;
+        `;
+      case "false":
+        return css`
+          width: 9rem;
+          background-color: #5ad07a;
+          color: #ffffff;
+        `;
+    }
+  }}
+
+  ${(props) => {
     switch (props.type) {
       case "available":
         return css`

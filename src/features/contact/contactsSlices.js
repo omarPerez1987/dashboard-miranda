@@ -5,26 +5,27 @@ export const contactsSlice = createSlice({
   name: "contacts",
   initialState: {
     data: [],
-    filteredData: [],
-    isArchivedFilterActive: false,
     status: "idle",
     error: null,
   },
   reducers: {
-    archived: (state, action) => {
-      state.isArchivedFilterActive = action.payload;
-      if (action.payload) {
-        state.filteredData = state.data.filter(
-          (contact) => contact.archived === "archived"
+    updateArchived: (state, action) => {
+      const contacts = state.data;
+      const index = contacts.findIndex(
+        (contact) => contact.id === action.payload.id
+      );
+      if (index !== -1) {
+        const updatedContact = {
+          ...contacts[index],
+          archived: !contacts[index].archived,
+        };
+        state.data = contacts.map((contact, i) =>
+          i === index ? updatedContact : contact
         );
-      } else {
-        state.filteredData = state.data;
       }
     },
-
-    updateArchived: (state, action) => {
-      state.data = action.payload;
-    },
+    
+    
   },
   extraReducers: (builder) => {
     builder
@@ -42,10 +43,10 @@ export const contactsSlice = createSlice({
   },
 });
 
-export const { updateArchived, archived } = contactsSlice.actions;
-export const getContactData = (state) =>
-  state.contacts.isArchivedFilterActive
-    ? state.contacts.filteredData
-    : state.contacts.data;
+export const { updateArchived } = contactsSlice.actions;
+export const getContactsData = (state) => state.contacts.data;
 export const getContactStatus = (state) => state.contacts.status;
 export const getContactsError = (state) => state.contacts.error;
+
+export const getContactsArchived = (state) =>
+  state.contacts.data.filter((contact) => contact.archived === true);

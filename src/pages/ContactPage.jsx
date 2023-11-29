@@ -6,19 +6,23 @@ import OrderTableContact from "../components/tables/Contact/OrderTableContact";
 import FooterTable from "../components/tables/FooterTable";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getContactData,
+  getContactsData,
   getContactStatus,
   getContactsError,
+  getContactsArchived,
 } from "../features/contact/contactsSlices";
 import { getContactsListApiThunk } from "../features/contact/contactsThunk";
 
 const ContactPage = () => {
   const dispatch = useDispatch();
-  const contactsListData = useSelector(getContactData);
+  const contactsListData = useSelector(getContactsData);
+  const contactsListDataArchived = useSelector(getContactsArchived);
   const contactsListStatus = useSelector(getContactStatus);
   const contactsListError = useSelector(getContactsError);
   const [spinner, setSpinner] = useState(true);
+
   const [contacts, setContacts] = useState([]);
+  const [archived, setArchived] = useState(false);
 
   useEffect(() => {
     if (contactsListStatus === "idle") {
@@ -30,7 +34,6 @@ const ContactPage = () => {
       setSpinner(false);
     }
   }, [dispatch, contactsListData, contactsListStatus]);
-
 
   return (
     <ContactMainStyled>
@@ -47,8 +50,13 @@ const ContactPage = () => {
                   <CardReviews key={contact.id} contact={contact} />
                 ))}
               </section>
-              <OrderTableContact />
-              <TableContact contacts={contacts} />
+              <OrderTableContact setArchived={setArchived} />
+
+              <TableContact
+                contacts={
+                  archived ? contactsListDataArchived : contactsListData
+                }
+              />
               <FooterTable />
             </>
           )}

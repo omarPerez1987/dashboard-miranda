@@ -8,7 +8,7 @@ import CardReviews from "../components/cardReviews/CardReviews";
 import { DashboardMainStyled } from "../componentsStyle/general/DashboardMainStyled";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getContactData,
+  getContactsData,
   getContactStatus,
   getContactsError,
 } from "../features/contact/contactsSlices";
@@ -16,7 +16,7 @@ import { getContactsListApiThunk } from "../features/contact/contactsThunk";
 
 const DashboardPage = () => {
   const dispatch = useDispatch();
-  const contactsListData = useSelector(getContactData);
+  const contactsListData = useSelector(getContactsData);
   const contactsListStatus = useSelector(getContactStatus);
   const contactsListError = useSelector(getContactsError);
   const [contacts, setContacts] = useState([]);

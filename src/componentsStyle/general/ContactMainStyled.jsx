@@ -15,10 +15,10 @@ export const ContactMainStyled = styled.main`
   }
 
   & .container-reviews {
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    gap: 2em;
+    gap: 1em;
   }
 `;

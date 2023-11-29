@@ -108,5 +108,170 @@
         "telephone": "268-338-4031",
         "archived": true,
         "review": "My stay at this hotel was exceptional. The room was tastefully decorated, and the attention to detail was evident. The staff was friendly and provided excellent service. The hotel's amenities added to the overall experience, and the central location made it easy to explore the city. I would highly recommend this hotel for a luxurious and comfortable stay."
+    },
+    {
+        "id": "Rndm4X",
+        "date": "30.06.2023",
+        "hour": "12:10",
+        "name": "María",
+        "last_name": "Rodríguez",
+        "email": "mrodriguez@example.com",
+        "telephone": "555-111-2222",
+        "archived": false,
+        "review": "Una estancia increíble en este hotel. La habitación era espaciosa y bien decorada. El personal fue amable y servicial. La ubicación del hotel era perfecta, cerca de atracciones y transporte público. Lo recomendaría sin dudarlo."
+    },
+    {
+        "id": "Rndm7A",
+        "date": "12.08.2023",
+        "hour": "14:55",
+        "name": "Carlos",
+        "last_name": "Martínez",
+        "email": "cmartinez@example.com",
+        "telephone": "555-987-1234",
+        "archived": false,
+        "review": "Tuve una experiencia increíble en este hotel. La habitación era elegante y cómoda. El personal fue amigable y siempre dispuesto a ayudar. La ubicación del hotel facilitó mi exploración de la ciudad. Definitivamente regresaría."
+    },
+    {
+        "id": "Rndm1",
+        "date": "14.11.2023",
+        "hour": "08:55",
+        "name": "Alejandro",
+        "last_name": "Gutiérrez",
+        "email": "agutierrez@example.com",
+        "telephone": "555-123-4567",
+        "archived": false,
+        "review": "Mi estancia en este hotel fue excelente. La habitación era cómoda y bien equipada. El personal fue amable y brindó un servicio excepcional. La ubicación del hotel facilitó la exploración de la ciudad. Definitivamente lo recomendaría."
+    },
+    {
+        "id": "Rndm8B",
+        "date": "25.03.2023",
+        "hour": "10:40",
+        "name": "Ana",
+        "last_name": "López",
+        "email": "alopez@example.com",
+        "telephone": "555-555-5678",
+        "archived": true,
+        "review": "Mi estancia en este hotel fue encantadora. La habitación tenía un ambiente acogedor y las comodidades modernas. El personal fue amable y el servicio fue excelente. La ubicación central del hotel hizo que mi viaje fuera aún más conveniente."
+    },
+    {
+        "id": "Rndm2",
+        "date": "22.09.2023",
+        "hour": "15:20",
+        "name": "Isabel",
+        "last_name": "Sánchez",
+        "email": "isanchez@example.com",
+        "telephone": "555-987-6543",
+        "archived": false,
+        "review": "Una experiencia maravillosa en este hotel. La habitación era elegante y acogedora. El personal se esforzó al máximo para hacer mi estancia memorable. El restaurante del hotel ofrecía deliciosa comida. Sin duda, volvería y lo recomendaría a otros."
+    },
+    {
+        "id": "Rndm5Y",
+        "date": "17.04.2023",
+        "hour": "09:30",
+        "name": "Roberto",
+        "last_name": "García",
+        "email": "rgarcia@example.com",
+        "telephone": "555-333-4444",
+        "archived": true,
+        "review": "Mi experiencia en este hotel fue excepcional. La habitación estaba impecable y bien equipada. El personal hizo todo lo posible para garantizar una estancia agradable. La ubicación central del hotel facilitó la exploración de la ciudad. Volvería sin dudarlo."
+    },
+    {
+        "id": "Rndm6Z",
+        "date": "08.01.2023",
+        "hour": "18:15",
+        "name": "Lucía",
+        "last_name": "Fernández",
+        "email": "lfernandez@example.com",
+        "telephone": "555-555-6789",
+        "archived": false,
+        "review": "Mi estancia en este hotel fue estupenda. La habitación era acogedora y bien iluminada. El personal fue atento y amable. La ubicación del hotel era conveniente para explorar la ciudad. Lo recomendaría a amigos y familiares."
+    },
+    {
+        "id": "Rndm9C",
+        "date": "19.06.2023",
+        "hour": "17:20",
+        "name": "Elena",
+        "last_name": "Gómez",
+        "email": "egomez@example.com",
+        "telephone": "555-876-5432",
+        "archived": false,
+        "review": "Disfruté mucho de mi tiempo en este hotel. La atmósfera era acogedora y la habitación estaba impecable. Las comodidades proporcionadas contribuyeron a la comodidad general. El personal fue amigable y brindó un excelente servicio. La ubicación fue conveniente tanto para viajes de negocios como de placer."
+    },
+    {
+        "id": "Rndm3",
+        "date": "05.12.2023",
+        "hour": "19:45",
+        "name": "Javier",
+        "last_name": "López",
+        "email": "jlopez@example.com",
+        "telephone": "555-555-5555",
+        "archived": true,
+        "review": "Mi estancia en este hotel fue fantástica. La habitación era moderna y confortable, y las vistas eran impresionantes. El personal hizo todo lo posible para que mi estancia fuera inolvidable. Definitivamente me quedaría aquí nuevamente y lo recomendaría a otros."
+    },
+    {
+        "id": "Rndm10D",
+        "date": "02.05.2023",
+        "hour": "22:30",
+        "name": "Sofía",
+        "last_name": "Martínez",
+        "email": "smartinez@example.com",
+        "telephone": "555-222-3333",
+        "archived": false,
+        "review": "Mi experiencia en este hotel fue excepcional. La habitación era elegante y cómoda. El personal brindó un servicio excepcional, haciéndome sentir valorado como huésped. Las instalaciones en el lugar eran impresionantes y la ubicación era perfecta para explorar la ciudad. Volvería con gusto para otra estancia."
+    },
+    {
+        "id": "Rndm11E",
+        "date": "14.07.2023",
+        "hour": "11:11",
+        "name": "Miguel",
+        "last_name": "Gómez",
+        "email": "mgomez@example.com",
+        "telephone": "555-444-5555",
+        "archived": false,
+        "review": "Tuve una estancia encantadora en este hotel. La habitación era acogedora y las comodidades eran modernas. El personal fue amigable y se esforzó al máximo para satisfacer mis solicitudes. La ubicación del hotel era conveniente, con atracciones y opciones gastronómicas a poca distancia. Recomiendo encarecidamente este hotel para una experiencia memorable."
+    },
+    {
+        "id": "Rndm12F",
+        "date": "08.10.2023",
+        "hour": "13:45",
+        "name": "Laura",
+        "last_name": "Rodríguez",
+        "email": "lrodriguez@example.com",
+        "telephone": "555-555-9876",
+        "archived": true,
+        "review": "Este hotel superó mis expectativas en todos los sentidos. La habitación era espaciosa y elegantemente diseñada. El personal brindó un servicio excepcional, haciéndome sentir valorado como huésped. Las instalaciones en el lugar eran impresionantes y la ubicación era perfecta para explorar la ciudad. Volvería con gusto para otra estancia."
+    },
+    {
+        "id": "Rndm13G",
+        "date": "30.04.2023",
+        "hour": "18:30",
+        "name": "Daniel",
+        "last_name": "Hernández",
+        "email": "dhernandez@example.com",
+        "telephone": "555-789-1234",
+        "archived": false,
+        "review": "Mi estancia en este hotel fue excelente. La habitación era cómoda y bien equipada. El personal fue amable y siempre dispuesto a ayudar. La ubicación del hotel facilitó la exploración de la ciudad. Definitivamente lo recomendaría."
+    },
+    {
+        "id": "Rndm14H",
+        "date": "22.11.2023",
+        "hour": "20:20",
+        "name": "Ana",
+        "last_name": "García",
+        "email": "agarcia@example.com",
+        "telephone": "555-987-6543",
+        "archived": false,
+        "review": "Una experiencia maravillosa en este hotel. La habitación era elegante y acogedora. El personal se esforzó al máximo para hacer mi estancia memorable. El restaurante del hotel ofrecía deliciosa comida. Sin duda, volvería y lo recomendaría a otros."
+    },
+    {
+        "id": "Rndm15I",
+        "date": "05.09.2023",
+        "hour": "09:15",
+        "name": "Luis",
+        "last_name": "Martínez",
+        "email": "lmartinez@example.com",
+        "telephone": "555-123-4567",
+        "archived": false,
+        "review": "Mi estancia en este hotel fue estupenda. La habitación era acogedora y bien iluminada. El personal fue atento y amable. La ubicación del hotel era conveniente para explorar la ciudad. Lo recomendaría a amigos y familiares."
     }
 ]

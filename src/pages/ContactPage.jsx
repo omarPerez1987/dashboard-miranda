@@ -28,6 +28,8 @@ const ContactPage = () => {
   const [contactsOrder, setContactsOrder] = useState([]);
   const [archived, setArchived] = useState(false);
   const [newest, setNewest] = useState(false);
+  const [numberPage, setNumberPage] = useState("default");
+  // console.log(contacts);
 
   useEffect(() => {
     if (contactsListStatus === "idle") {
@@ -36,7 +38,7 @@ const ContactPage = () => {
       setSpinner(true);
     } else if (contactsListStatus === "fulfilled") {
       setSpinner(false);
-      setContacts(contactsListData);
+      setContacts(switchPagination());
       setContactsOrder(orderContacts());
     }
   }, [dispatch, contactsListData, contactsListStatus]);
@@ -83,6 +85,35 @@ const ContactPage = () => {
     }
   }, [newest, contactsListStatus, contactsListDataArchived]);
 
+  //PAGINATION***************************************
+  const switchPagination = () => {
+    let prev = numberPage - 1;
+    let next = numberPage + 1;
+
+    console.log(numberPage);
+
+    switch (numberPage) {
+      case "default":
+        return contactsListData.slice(0, 10);
+      case 0:
+        prev === -1 ? setNumberPage(4) : setNumberPage(-1);
+      case 1:
+        return contactsListData.slice(0, 10);
+      case 2:
+        return contactsListData.slice(10, 20);
+      case 3:
+        return contactsListData.slice(20, 30);
+      case 4:
+        return contactsListData.slice(30, 40);
+      case 5:
+        next === 6 ? setNumberPage(1) : setNumberPage(+1);
+      default:
+        return [];
+    }
+  };
+
+  //  console.log(switchPagination())
+
   return (
     <ContactMainStyled>
       {contactsListError ? (
@@ -103,8 +134,13 @@ const ContactPage = () => {
                 setNewest={setNewest}
               />
 
-              <TableContact contacts={archived ? contactsArchived : contacts} />
-              <FooterTable />
+              <TableContact
+                contacts={archived ? contactsArchived : switchPagination()}
+              />
+              <FooterTable
+                setNumberPage={setNumberPage}
+                numberOfItems={contactsListData.length}
+              />
             </>
           )}
         </>

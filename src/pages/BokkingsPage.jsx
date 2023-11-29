@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import OrderTableBookings from "../components/tables/Bokkings/OrderTableBookings";
 import TableBookings from "../components/tables/Bokkings/TableBookings";
 import { MainStyled } from "../componentsStyle/general/MainStyled";
+import { SpinnerStyled } from "../componentsStyle/general/SpinnerStyled";
 import FooterTable from "../components/tables/FooterTable";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -60,13 +61,15 @@ const BokkingsPage = () => {
         <h1>Hubo un error al obtener los datos de los usuarios</h1>
       ) : (
         <>
-          <OrderTableBookings />
           {spinner ? (
-            <h1>Loading...</h1>
+            <SpinnerStyled />
           ) : (
-            <TableBookings bookings={bookings} />
+            <>
+              <OrderTableBookings />
+              <TableBookings bookings={bookings} />
+              <FooterTable />
+            </>
           )}
-          <FooterTable />
         </>
       )}
     </MainStyled>

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { OrderTableStyled } from "../../../componentsStyle/tables/OrderTableStyled";
 import { NewestButton } from "../../../componentsStyle/general/ButtonStyled";
 import { IoIosArrowDown } from "react-icons/io";
 
-const OrderTableContact = ({setArchived}) => {
+const OrderTableContact = ({ setArchived, setNewest }) => {
+  const [newOrOld, setNewOrOld] = useState(true);
 
   return (
     <OrderTableStyled>
@@ -12,9 +13,23 @@ const OrderTableContact = ({setArchived}) => {
         <h4 onClick={() => setArchived(true)}>Archived</h4>
       </div>
       <div>
-        <NewestButton>
-          Newest <IoIosArrowDown />
-        </NewestButton>
+        {newOrOld ? (
+          <NewestButton
+            onClick={() => {
+              setNewOrOld(false), setNewest(true);
+            }}
+          >
+            Newest <IoIosArrowDown />
+          </NewestButton>
+        ) : (
+          <NewestButton
+            onClick={() => {
+              setNewOrOld(true), setNewest(false);
+            }}
+          >
+            Default <IoIosArrowDown />
+          </NewestButton>
+        )}
       </div>
     </OrderTableStyled>
   );

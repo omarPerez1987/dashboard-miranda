@@ -5,6 +5,6 @@ export const getBookingsListThunk = createAsyncThunk(
   "bookings/getBookingsFromApi",
   () => {
     return bookings;
-     // throw new Error("Error al obtener los datos de los usuarios");
+    //  throw new Error("Error al obtener los datos de los usuarios");
   }
 );

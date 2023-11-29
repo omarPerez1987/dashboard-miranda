@@ -19,7 +19,6 @@ const ContactPage = () => {
   const contactsListError = useSelector(getContactsError);
   const [spinner, setSpinner] = useState(true);
   const [contacts, setContacts] = useState([]);
-  const [archived, setArchived] = useState(false);
 
   useEffect(() => {
     if (contactsListStatus === "idle") {
@@ -32,9 +31,6 @@ const ContactPage = () => {
     }
   }, [dispatch, contactsListData, contactsListStatus]);
 
-  const contactArchived = () => {
-    return contacts.filter((contact) => contact.archived === "archived");
-  };
 
   return (
     <ContactMainStyled>
@@ -51,12 +47,8 @@ const ContactPage = () => {
                   <CardReviews key={contact.id} contact={contact} />
                 ))}
               </section>
-              <OrderTableContact setArchived={setArchived} />
-              {!archived ? (
-                <TableContact contacts={contacts} />
-              ) : (
-                <TableContact contacts={contactArchived()} />
-              )}
+              <OrderTableContact />
+              <TableContact contacts={contacts} />
               <FooterTable />
             </>
           )}

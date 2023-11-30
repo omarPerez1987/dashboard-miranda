@@ -1,22 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { OrderTableStyled } from "../../../componentsStyle/tables/OrderTableStyled";
-import { IoIosArrowDown } from "react-icons/io";
-import { NewestButton } from "../../../componentsStyle/general/ButtonStyled";
+import { SelectFooterStyled } from "../../../componentsStyle/general/ButtonStyled";
 
-const OrderTableBookings = () => {
+const OrderTableBookings = ({ setStateStatus, setSelectFooter }) => {
   return (
     <OrderTableStyled>
       <div>
-        <h4>All Guest</h4>
-        <h4>Pending</h4>
-        <h4>Booked</h4>
-        <h4>Canceled</h4>
-        <h4>Refund</h4>
+        <h4 onClick={() => setStateStatus("All")}>All Guest</h4>
+        <h4 onClick={() => setStateStatus("Pending")}>Pending</h4>
+        <h4 onClick={() => setStateStatus("In")}>Check in</h4>
+        <h4 onClick={() => setStateStatus("Out")}>Check out</h4>
       </div>
       <div>
-        <NewestButton>
-          Newest <IoIosArrowDown />
-        </NewestButton>
+        <SelectFooterStyled onChange={(e) => setSelectFooter(e.target.value)}>
+          <option disabled>Select</option>
+          <option value="date">Booking date</option>
+          <option value="entryDate">Entry date</option>
+          <option value="outDate">Departure date</option>
+          <option value="alpha">[ A - Z ]</option>
+        </SelectFooterStyled>
       </div>
     </OrderTableStyled>
   );

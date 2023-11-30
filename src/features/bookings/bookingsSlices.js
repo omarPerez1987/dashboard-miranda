@@ -9,9 +9,6 @@ export const bookingsSlice = createSlice({
     error: null,
   },
   reducers: {
-    mixBookingAndRoom: (state, action) => {
-      state.data = action.payload;
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -29,7 +26,16 @@ export const bookingsSlice = createSlice({
   },
 });
 
-export const { mixBookingAndRoom } = bookingsSlice.actions;
 export const getBookingsData = (state) => state.bookings.data;
 export const getBookingsStatus = (state) => state.bookings.status;
 export const getBookingsError = (state) => state.bookings.error;
+
+export const getRoomsCheckIn = (state) =>
+  state.bookings.data.filter((booking) => booking.check === "in");
+
+export const getRoomsCheckOut = (state) =>
+  state.bookings.data.filter((booking) => booking.check === "out");
+
+export const getRoomsCheckPending = (state) =>
+  state.bookings.data.filter((booking) => booking.check === "pending");
+

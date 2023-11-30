@@ -25,6 +25,17 @@ export const NewestButton = styled.button`
   background-color: transparent;
 `;
 
+export const SelectFooterStyled = styled.select`
+  font-size: 1.2rem;
+  border: 1px solid #135846;
+  border-radius: 1.2rem;
+  width: 12em;
+  height: 2.5em;
+  color: #135846;
+  background-color: transparent;
+  text-align: center;
+`;
+
 export const ButtonVariantStyled = styled.button`
   text-decoration: none;
   padding: 0.5em 1em;

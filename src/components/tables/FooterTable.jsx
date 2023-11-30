@@ -3,6 +3,9 @@ import { FooterTableStyled } from "../../componentsStyle/tables/FooterTableStyle
 
 const FooterTable = ({ currentPage, onPageChange, numberOfItems }) => {
 
+  const itemsPerPage = 10;
+  const endIndex = Math.min(currentPage * itemsPerPage, numberOfItems);
+
   const handlePageClick = (data) => {
     const selectedPage = data.selected + 1;
     onPageChange(selectedPage);
@@ -11,12 +14,12 @@ const FooterTable = ({ currentPage, onPageChange, numberOfItems }) => {
   return (
     <FooterTableStyled>
       <div>
-        <p>Showing 1 of {numberOfItems} Data</p>
+        <p>Showing {endIndex} of {numberOfItems} Data</p>
       </div>
       <div className="container-pagination">
         <ReactPaginate
           pageCount={Math.ceil(numberOfItems / 10)}
-          pageRangeDisplayed={3}
+          pageRangeDisplayed={4}
           marginPagesDisplayed={1}
           onPageChange={handlePageClick}
           containerClassName={'pagination'}

@@ -9,51 +9,161 @@ import {
   getBookingsData,
   getBookingsError,
   getBookingsStatus,
-  mixBookingAndRoom,
+  getRoomsCheckIn,
+  getRoomsCheckOut,
+  getRoomsCheckPending,
 } from "../features/bookings/bookingsSlices";
 import { getBookingsListThunk } from "../features/bookings/bookingsThunks";
-import { getRoomsData, getRoomsStatus } from "../features/rooms/roomsSlices";
+import { getRoomsData } from "../features/rooms/roomsSlices";
 import { getRoomsListApiThunk } from "../features/rooms/roomsThunk";
 
 const BokkingsPage = () => {
   const dispatch = useDispatch();
   const bookingsListData = useSelector(getBookingsData);
+  const bookingsListCheckIn = useSelector(getRoomsCheckIn);
+  const bookingsListCheckOut = useSelector(getRoomsCheckOut);
+  const bookingsListPending = useSelector(getRoomsCheckPending);
   const bookingsListStatus = useSelector(getBookingsStatus);
   const bookingsListError = useSelector(getBookingsError);
   const roomsListData = useSelector(getRoomsData);
-  const roomsListStatus = useSelector(getRoomsStatus);
-  const [bookings, setBookings] = useState([]);
   const [spinner, setSpinner] = useState(true);
 
-  const bookingAndRoom = () => {
-    const dataMix = [];
-    for (let i = 0; i < bookingsListData.length; i++) {
-      const booking = bookingsListData[i];
-      for (let j = 0; j < roomsListData.length; j++) {
-        const room = roomsListData[j];
-        if (booking.idRoom === room.id) {
-          dataMix.push({ ...booking, ...room });
-        }
-      }
-    }
-    return dataMix;
-  };
+  const [stateStatus, setStateStatus] = useState("All");
+  const [bookings, setBookings] = useState([]);
+  const [rooms, setRooms] = useState([]);
+  // console.log(bookings)
+
+  const [selectFooter, setSelectFooter] = useState("date");
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    if (bookingsListStatus && roomsListStatus === "idle") {
+    if (bookingsListStatus === "idle") {
       dispatch(getBookingsListThunk());
       dispatch(getRoomsListApiThunk());
     } else if (bookingsListStatus === "pending") {
       setSpinner(true);
-    } else if (bookingsListStatus && roomsListStatus === "fulfilled") {
-      dispatch(mixBookingAndRoom(bookingAndRoom()));
+    } else if (bookingsListStatus === "fulfilled") {
+      setRooms(roomsListData);
+      switchBookingsList()
       setSpinner(false);
     }
-  }, [bookingsListStatus]);
+  }, [
+    dispatch,
+    bookingsListData,
+    bookingsListStatus,
+    bookingsListCheckIn,
+    bookingsListCheckOut,
+    bookingsListPending,
+    stateStatus,
+    rooms
+  ]);
+
+  const bookingAndRoom = (selectList) => {
+    const combinedData = [];
+
+    selectList.forEach((booking) => {
+      const correspondingRoom = rooms.find(
+        (room) => room.id === booking.idRoom
+      );
+
+      if (correspondingRoom) {
+        combinedData.push({ ...booking, ...correspondingRoom });
+      }
+    });
+
+    return combinedData;
+  };
+
+  const switchBookingsList = () => {
+    switch (stateStatus) {
+      case "All":
+        setBookings(bookingAndRoom(bookingsListData));
+        break;
+      case "In":
+        setBookings(bookingAndRoom(bookingsListCheckIn));
+        break;
+      case "Out":
+        setBookings(bookingAndRoom(bookingsListCheckOut));
+        break;
+      case "Pending":
+        setBookings(bookingAndRoom(bookingsListPending));
+        break;
+      default:
+        break;
+    }
+  };
+
+
+  const orderUsers = () => {
+    switch (selectFooter) {
+      case "date":
+        const orderedBookingsDate = [...bookings];
+        orderedBookingsDate.sort((a, b) => {
+          const dateA = new Date(a.orderDate.split(".").reverse().join("-"));
+          const dateB = new Date(b.orderDate.split(".").reverse().join("-"));
+          return dateA - dateB;
+        });
+        return orderedBookingsDate;
+      case "entryDate":
+        const orderedBookingsCheckin = [...bookings];
+        orderedBookingsCheckin.sort((a, b) => {
+          const dateA = new Date(a.checkin.split(".").reverse().join("-"));
+          const dateB = new Date(b.checkin.split(".").reverse().join("-"));
+          return dateA - dateB;
+        });
+        return orderedBookingsCheckin;
+      case "outDate":
+        const orderedBookingsCheckOut = [...bookings];
+        orderedBookingsCheckOut.sort((a, b) => {
+          const dateA = new Date(a.checkout.split(".").reverse().join("-"));
+          const dateB = new Date(b.checkout.split(".").reverse().join("-"));
+          return dateA - dateB;
+        });
+        return orderedBookingsCheckOut;
+
+      case "alpha":
+        const orderedBookingsAlpha = [...bookings];
+        orderedBookingsAlpha.sort((a, b) => {
+          return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
+        });
+        return orderedBookingsAlpha;
+
+      default:
+        break;
+    }
+  };
 
   useEffect(() => {
-    setBookings(bookingsListData);
-  }, [bookingsListData]);
+    const orderedBookings = orderUsers();
+    setBookings(orderedBookings);
+  }, [selectFooter]);
+
+  //PAGINATION***************************************
+
+  const handlePageChange = (selectedPage) => {
+    setCurrentPage(selectedPage);
+  };
+
+  const switchPagination = () => {
+    switch (currentPage) {
+      case 1:
+        return bookings.slice(0, 10);
+
+      case 2:
+        return bookings.slice(10, 20);
+
+      case 3:
+        return bookings.slice(20, 30);
+
+      case 4:
+        return bookings.slice(30, 40);
+
+      default:
+        return [];
+    }
+  };
+
+  const bookingsSlices = switchPagination();
 
   return (
     <MainStyled>
@@ -65,9 +175,17 @@ const BokkingsPage = () => {
             <SpinnerStyled />
           ) : (
             <>
-              <OrderTableBookings />
-              <TableBookings bookings={bookings} />
-              <FooterTable />
+              <OrderTableBookings
+                setStateStatus={setStateStatus}
+                setSelectFooter={setSelectFooter}
+              />
+              <TableBookings bookings={bookingsSlices} />
+
+              <FooterTable
+                currentPage={currentPage}
+                onPageChange={handlePageChange}
+                numberOfItems={bookings.length}
+              />
             </>
           )}
         </>

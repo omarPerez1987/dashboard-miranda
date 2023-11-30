@@ -28,8 +28,9 @@ const ContactPage = () => {
   const [contactsOrder, setContactsOrder] = useState([]);
   const [archived, setArchived] = useState(false);
   const [newest, setNewest] = useState(false);
-  const [numberPage, setNumberPage] = useState("default");
-  // console.log(contacts);
+
+  const [numberPage, setNumberPage] = useState([0, 10]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     if (contactsListStatus === "idle") {
@@ -86,31 +87,7 @@ const ContactPage = () => {
   }, [newest, contactsListStatus, contactsListDataArchived]);
 
   //PAGINATION***************************************
-  const switchPagination = () => {
-    let prev = numberPage - 1;
-    let next = numberPage + 1;
 
-    console.log(numberPage);
-
-    switch (numberPage) {
-      case "default":
-        return contactsListData.slice(0, 10);
-      case 0:
-        prev === -1 ? setNumberPage(4) : setNumberPage(-1);
-      case 1:
-        return contactsListData.slice(0, 10);
-      case 2:
-        return contactsListData.slice(10, 20);
-      case 3:
-        return contactsListData.slice(20, 30);
-      case 4:
-        return contactsListData.slice(30, 40);
-      case 5:
-        next === 6 ? setNumberPage(1) : setNumberPage(+1);
-      default:
-        return [];
-    }
-  };
 
   //  console.log(switchPagination())
 

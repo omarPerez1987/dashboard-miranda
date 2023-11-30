@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { OrderTableStyled } from "../../../componentsStyle/tables/OrderTableStyled";
 import { IoIosArrowDown } from "react-icons/io";
@@ -7,22 +7,36 @@ import {
   NewestButton,
 } from "../../../componentsStyle/general/ButtonStyled";
 
-const OrderTableUsers = () => {
+const OrderTableUsers = ({setStateStatus, setNewest}) => {
+  const [origin, setOrigin] = useState(true);
   return (
     <OrderTableStyled>
       <div>
-        <h4>All Employee</h4>
-        <h4>Active Employee</h4>
-        <h4>Inactive Employee</h4>
+        <h4 onClick={() => setStateStatus('All')} >All Employee</h4>
+        <h4 onClick={() => setStateStatus('Active')} >Active Employee</h4>
+        <h4 onClick={() => setStateStatus('Inactive')} >Inactive Employee</h4>
       </div>
       <div>
         <Link to={'/home/new-user'}>
           <CreateButton>+ New Employee</CreateButton>
         </Link>
-
-        <NewestButton>
-          Newest <IoIosArrowDown />
-        </NewestButton>
+        {origin ? (
+          <NewestButton
+            onClick={() => {
+              setOrigin(false), setNewest(true);
+            }}
+          >
+            Date <IoIosArrowDown />
+          </NewestButton>
+        ) : (
+          <NewestButton
+            onClick={() => {
+              setOrigin(true), setNewest(false);
+            }}
+          >
+            Default <IoIosArrowDown />
+          </NewestButton>
+        )}
       </div>
     </OrderTableStyled>
   );

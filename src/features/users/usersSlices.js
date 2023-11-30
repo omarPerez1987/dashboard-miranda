@@ -45,3 +45,8 @@ export const { addUser, updateUser, deleteUser } = usersSlice.actions;
 export const getUsersData = (state) => state.users.data;
 export const getUsersStatus = (state) => state.users.status;
 export const getUsersError = (state) => state.users.error;
+
+export const getUsersActive = (state) =>
+  state.users.data.filter((user) => user.status === "true");
+export const getUsersInactive = (state) =>
+  state.users.data.filter((user) => user.status === "false");

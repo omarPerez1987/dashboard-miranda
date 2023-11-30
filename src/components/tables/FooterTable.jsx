@@ -1,22 +1,32 @@
-import React from "react";
+import ReactPaginate from 'react-paginate';
 import { FooterTableStyled } from "../../componentsStyle/tables/FooterTableStyled";
 
-const FooterTable = ({ setNumberPage, numberOfItems }) => {
+const FooterTable = ({ currentPage, onPageChange, numberOfItems }) => {
+
+  const handlePageClick = (data) => {
+    const selectedPage = data.selected + 1;
+    onPageChange(selectedPage);
+  };
+
   return (
     <FooterTableStyled>
       <div>
         <p>Showing 1 of {numberOfItems} Data</p>
       </div>
       <div className="container-pagination">
-        <button className="prev-next" onClick={() => setNumberPage('prev')}>Prev</button>
-        <button onClick={() => setNumberPage('page1')}>1</button>
-        <button onClick={() => setNumberPage('page2')}>2</button>
-        <button onClick={() => setNumberPage('page3')}>3</button>
-        <button onClick={() => setNumberPage('page4')}>4</button>
-        <button className="prev-next" onClick={() => setNumberPage('next')}>Next</button>
+        <ReactPaginate
+          pageCount={Math.ceil(numberOfItems / 10)}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={1}
+          onPageChange={handlePageClick}
+          containerClassName={'pagination'}
+          activeClassName={'active'}
+          forcePage={currentPage - 1}
+        />
       </div>
     </FooterTableStyled>
   );
 };
 
 export default FooterTable;
+

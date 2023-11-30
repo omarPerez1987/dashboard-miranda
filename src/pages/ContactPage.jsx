@@ -21,7 +21,6 @@ const ContactPage = () => {
   const contactsListError = useSelector(getContactsError);
   const [spinner, setSpinner] = useState(true);
 
-  const [contacts, setContacts] = useState([]);
   const [contactsArchived, setContactsArchived] = useState(
     contactsListDataArchived
   );
@@ -29,7 +28,7 @@ const ContactPage = () => {
   const [archived, setArchived] = useState(false);
   const [newest, setNewest] = useState(false);
 
-  const [numberPage, setNumberPage] = useState([0, 10]);
+  const [contacts, setContacts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -39,26 +38,25 @@ const ContactPage = () => {
       setSpinner(true);
     } else if (contactsListStatus === "fulfilled") {
       setSpinner(false);
-      setContacts(switchPagination());
+      setContacts(contactsListData);
       setContactsOrder(orderContacts());
     }
   }, [dispatch, contactsListData, contactsListStatus]);
 
   //ORDERED CONTACTS***********************************
   const orderContacts = () => {
-    const orderedContacts = [...contactsListData];
+    const orderedContacts = [...contacts];
     orderedContacts.sort((a, b) => {
       const dateA = new Date(a.date.split(".").reverse().join("-"));
       const dateB = new Date(b.date.split(".").reverse().join("-"));
       return dateA - dateB;
     });
-    setContacts(orderedContacts);
     return orderedContacts;
   };
 
   useEffect(() => {
     if (newest && contactsListStatus === "fulfilled") {
-      orderContacts();
+      setContacts(orderContacts());
     }
     if (!newest && contactsListStatus === "fulfilled") {
       setContacts(contactsListData);
@@ -73,13 +71,12 @@ const ContactPage = () => {
       const dateB = new Date(b.date.split(".").reverse().join("-"));
       return dateA - dateB;
     });
-    setContactsArchived(orderedContactArchived);
     return orderedContactArchived;
   };
 
   useEffect(() => {
     if (newest && contactsListStatus === "fulfilled") {
-      orderContactsArchived();
+      setContactsArchived(orderContactsArchived());
     }
     if (!newest && contactsListStatus === "fulfilled") {
       setContactsArchived(contactsListDataArchived);
@@ -88,8 +85,30 @@ const ContactPage = () => {
 
   //PAGINATION***************************************
 
+  const handlePageChange = (selectedPage) => {
+    setCurrentPage(selectedPage);
+  };
 
-  //  console.log(switchPagination())
+  const switchPagination = () => {
+    switch (currentPage) {
+      case 1:
+        return contacts.slice(0, 10);
+
+      case 2:
+        return contacts.slice(10, 20);
+
+      case 3:
+        return contacts.slice(20, 30);
+
+      case 4:
+        return contacts.slice(30, 40);
+
+      default:
+        return [];
+    }
+  };
+
+  const contactSlices = switchPagination();
 
   return (
     <ContactMainStyled>
@@ -112,10 +131,11 @@ const ContactPage = () => {
               />
 
               <TableContact
-                contacts={archived ? contactsArchived : switchPagination()}
+                contacts={archived ? contactsArchived : contactSlices}
               />
               <FooterTable
-                setNumberPage={setNumberPage}
+                currentPage={currentPage}
+                onPageChange={handlePageChange}
                 numberOfItems={contactsListData.length}
               />
             </>

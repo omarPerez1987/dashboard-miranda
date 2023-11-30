@@ -4,7 +4,7 @@ import { NewestButton } from "../../../componentsStyle/general/ButtonStyled";
 import { IoIosArrowDown } from "react-icons/io";
 
 const OrderTableContact = ({ setArchived, setNewest }) => {
-  const [newOrOld, setNewOrOld] = useState(true);
+  const [origin, setOrigin] = useState(true);
 
   return (
     <OrderTableStyled>
@@ -13,10 +13,10 @@ const OrderTableContact = ({ setArchived, setNewest }) => {
         <h4 onClick={() => setArchived(true)}>Archived</h4>
       </div>
       <div>
-        {newOrOld ? (
+        {origin ? (
           <NewestButton
             onClick={() => {
-              setNewOrOld(false), setNewest(true);
+              setOrigin(false), setNewest(true);
             }}
           >
             Newest <IoIosArrowDown />
@@ -24,7 +24,7 @@ const OrderTableContact = ({ setArchived, setNewest }) => {
         ) : (
           <NewestButton
             onClick={() => {
-              setNewOrOld(true), setNewest(false);
+              setOrigin(true), setNewest(false);
             }}
           >
             Default <IoIosArrowDown />

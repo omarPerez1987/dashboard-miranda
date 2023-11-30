@@ -7,32 +7,38 @@ export const FooterTableStyled = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  
+
   & .container-pagination {
     gap: 0.5em;
     display: flex;
     color: #135846;
   }
-  p {
-    color: #135846;
-    font-size: 1.2rem;
+
+  & .pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    gap: 1em;
   }
-  button {
-    font-size: 1.1rem;
+
+  & .pagination li {
+    margin-right: 5px;
+  }
+
+  & .pagination a {
+    text-decoration: none;
     padding: 1em 2em;
+    border: 1px solid #ddd;
+    color: #333;
+    font-size: 1rem;
     background-color: transparent;
     border: none;
     border-radius: 12px;
-  }
-  button:hover {
-    background-color: #135846;
-    color: #ffffff;
+    cursor: pointer;
   }
 
-  & .prev-next {
-    border: 1px solid #135846;
-    background-color: #ffffff;
-    color: #135846;
-    padding: 1em 2em;
+  & .pagination .active a {
+    background-color: #135846;
+    color: #fff;
   }
 `;

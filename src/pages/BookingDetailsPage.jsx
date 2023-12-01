@@ -25,6 +25,17 @@ const BookingDetailsPage = () => {
   const bookingsListData = useSelector(getBookingsData);
   const roomsListData = useSelector(getRoomsData);
 
+  
+  
+  
+  
+  
+  
+  useEffect(() => {
+    console.log(bookingsListData);
+    console.log(roomsListData);
+  }, [id]);
+  
   // useEffect(() => {
   //   const combinedData = [];
   //   const searchBooking = bookingsListData.find(
@@ -41,16 +52,6 @@ const BookingDetailsPage = () => {
   //   }
   //   setDetails(combinedData);
   // }, [id, bookingsListData, roomsListData]);
-
-
-
-
-
-
-  useEffect(() => {
-    console.log(bookingsListData);
-    console.log(roomsListData);
-  }, [id]);
 
   return (
     <h1>Hola soy {id}</h1>

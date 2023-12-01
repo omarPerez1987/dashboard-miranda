@@ -10,8 +10,12 @@ import {
   SelectFormStyled,
   TextAreaFormStyled,
 } from "../../componentsStyle/forms/FormStyled";
+import { addRoom } from "../../features/rooms/roomsSlices";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
 
 const FormCreateRoom = () => {
+  const dispatch = useDispatch()
   const random1 = Math.floor(Math.random() * 999);
   const random2 = Math.floor(Math.random() * 999);
   const idUnique = `ROOM${random1}-${random2}`;
@@ -41,9 +45,11 @@ const FormCreateRoom = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    dispatch(addRoom(formData))
+    toast.success('Creado exitosamente')
     // console.log("Datos del formulario:", formData); //aki el dispatch
 
-    // setFormData(initialStateForm);
+    setFormData(initialStateForm);
   };
 
   const handleImageChange = (event, imageKey) => {

@@ -50,9 +50,6 @@ const BokkingsPage = () => {
     dispatch,
     bookingsListData,
     bookingsListStatus,
-    bookingsListCheckIn,
-    bookingsListCheckOut,
-    bookingsListPending,
     stateStatus,
     rooms,
   ]);
@@ -95,7 +92,7 @@ const BokkingsPage = () => {
     }
   };
 
-  const orderUsers = () => {
+  const orderBookings = () => {
     switch (selectFooter) {
       case "date":
         const orderedBookingsDate = [...bookings];
@@ -135,7 +132,7 @@ const BokkingsPage = () => {
   };
 
   useEffect(() => {
-    const orderedBookings = orderUsers();
+    const orderedBookings = orderBookings();
     setBookings(orderedBookings);
   }, [selectFooter]);
 

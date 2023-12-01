@@ -10,6 +10,10 @@ export const FormStyled = styled.form`
   display: flex;
   flex-direction: column;
   padding: 3em;
+
+  & p {
+    color: red;
+  }
 `;
 
 export const ContainerFormImage = styled.div`

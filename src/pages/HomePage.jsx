@@ -25,9 +25,9 @@ const HomePage = () => {
         setTitle("Bokkings List");
         break;
 
-      // case "/home/bookings-details/:id":
-      //   setTitle("Bokking Details");
-      //   break;
+      case "/home/new-booking":
+        setTitle("Create Booking");
+        break;
 
       case "/home/rooms":
         setTitle("Room List");

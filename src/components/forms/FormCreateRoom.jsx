@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 
 const FormCreateRoom = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const random1 = Math.floor(Math.random() * 999);
   const random2 = Math.floor(Math.random() * 999);
   const idUnique = `ROOM${random1}-${random2}`;
@@ -45,9 +45,8 @@ const FormCreateRoom = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(addRoom(formData))
-    toast.success('Creado exitosamente')
-    // console.log("Datos del formulario:", formData); //aki el dispatch
+    dispatch(addRoom(formData));
+    toast.success("Creado exitosamente");
 
     setFormData(initialStateForm);
   };

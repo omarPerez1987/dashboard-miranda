@@ -10,6 +10,7 @@ import {
 } from "../../componentsStyle/forms/FormStyled";
 import { addUser } from "../../features/users/usersSlices";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const FormCreateUser = () => {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const FormCreateUser = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(addUser(formData))
-    // console.log("Datos del formulario:", formData); //aki el dispatch
+    toast.success('Creado exitosamente')
     setFormData(initialStateForm)
   };
 

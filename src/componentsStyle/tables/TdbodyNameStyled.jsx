@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const TdbodyNameStyled = styled.td`
   display: flex;
   gap: 0.8em;
-  padding: 1em;
+  padding: 1em 1em 1em 0em;
   max-width: 200px;
   img {
     width: 45px;

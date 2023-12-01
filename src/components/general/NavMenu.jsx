@@ -3,7 +3,7 @@ import { MdOutlineDashboard } from "react-icons/md";
 import { TfiKey } from "react-icons/tfi";
 import { LuCalendarCheck2 } from "react-icons/lu";
 import { FaUsers } from "react-icons/fa";
-import { BsTelephoneInbound } from "react-icons/bs";
+import { FaComments } from "react-icons/fa6";
 import { NavMenustyled } from "../../componentsStyle/general/NavMenuStyled";
 import { NavLinkStyled } from "../../componentsStyle/general/NavMenuStyled";
 import { CardUserStyled } from "../../componentsStyle/general/CardUserStyled";
@@ -34,7 +34,7 @@ const NavMenu = ({ menuOpen }) => {
             </NavLinkStyled>
 
             <NavLinkStyled to="/home/contact">
-              <BsTelephoneInbound />
+              <FaComments />
               Contact
             </NavLinkStyled>
 
@@ -69,7 +69,7 @@ const NavMenu = ({ menuOpen }) => {
           </div>
         </NavMenustyled>
       )}
-      {openModal && <ModalEditClient setOpenModal={setOpenModal}/>}
+      {openModal && <ModalEditClient setOpenModal={setOpenModal} />}
     </>
   );
 };

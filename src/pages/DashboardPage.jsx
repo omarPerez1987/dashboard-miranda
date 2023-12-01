@@ -28,10 +28,20 @@ const DashboardPage = () => {
     } else if (contactsListStatus === "pending") {
       setSpinner(true);
     } else if (contactsListStatus === "fulfilled") {
-      setContacts(contactsListData);
+      setContacts(orderContacts());
       setSpinner(false);
     }
   }, [dispatch, contactsListData, contactsListStatus]);
+
+  const orderContacts = () => {
+    const orderedContacts = [...contactsListData];
+    orderedContacts.sort((a, b) => {
+      const dateA = new Date(a.date.split(".").reverse().join("-"));
+      const dateB = new Date(b.date.split(".").reverse().join("-"));
+      return dateA - dateB;
+    });
+    return orderedContacts;
+  };
 
   return (
     <DashboardMainStyled>
@@ -44,20 +54,22 @@ const DashboardPage = () => {
       {contactsListError ? (
         <h1>Hubo un error al obtener los datos de los usuarios</h1>
       ) : (
-        <section className="container-reviews">
-          <h3 className="main-dashboard__container--reviews__title">
-            Latest Review by Customers
-          </h3>
+        <>
           {spinner ? (
             <h1>Loading...</h1>
           ) : (
-            <div className="container-reviews__box-card">
-              {contacts.slice(0, 3).map((contact) => (
-                <CardReviews key={contact.id} contact={contact} />
-              ))}
-            </div>
+            <section className="container-reviews">
+              <h3 className="main-dashboard__container--reviews__title">
+                Latest Review by Customers
+              </h3>
+              <div className="container-reviews__box-card">
+                {contacts.slice(0, 3).map((contact) => (
+                  <CardReviews key={contact.id} contact={contact} />
+                ))}
+              </div>
+            </section>
           )}
-        </section>
+        </>
       )}
     </DashboardMainStyled>
   );

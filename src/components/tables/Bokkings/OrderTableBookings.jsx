@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { OrderTableStyled } from "../../../componentsStyle/tables/OrderTableStyled";
-import { SelectFooterStyled } from "../../../componentsStyle/general/ButtonStyled";
+import { CreateButton, SelectFooterStyled } from "../../../componentsStyle/general/ButtonStyled";
+import { Link } from "react-router-dom";
 
 const OrderTableBookings = ({ setStateStatus, setSelectFooter }) => {
   return (
@@ -12,6 +13,9 @@ const OrderTableBookings = ({ setStateStatus, setSelectFooter }) => {
         <h4 onClick={() => setStateStatus("Out")}>Check out</h4>
       </div>
       <div>
+      <Link to={"/home/new-booking"}>
+        <CreateButton>+ New Booking</CreateButton>
+      </Link>
         <SelectFooterStyled onChange={(e) => setSelectFooter(e.target.value)}>
           <option disabled>Select</option>
           <option value="date">Booking date</option>

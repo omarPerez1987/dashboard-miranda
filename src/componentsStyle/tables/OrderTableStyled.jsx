@@ -8,11 +8,11 @@ export const OrderTableStyled = styled.div`
   width: 90%;
   height: 4em;
 
-  div {
+  & div {
     display: flex;
     gap: 1em;
   }
-  h4 {
+  & h4 {
     text-align: center;
     width: auto;
     font-size: 1.2rem;
@@ -20,8 +20,11 @@ export const OrderTableStyled = styled.div`
     height: 100%;
     color: #135846;
     padding: 0.5em 2em;
+    cursor: pointer;
   }
-  h4:hover {
+
+  & h4:hover {
     border-bottom: 2px solid #135846;
   }
+
 `;

@@ -31,7 +31,6 @@ const BokkingsPage = () => {
   const [stateStatus, setStateStatus] = useState("All");
   const [bookings, setBookings] = useState([]);
   const [rooms, setRooms] = useState([]);
-  // console.log(bookings)
 
   const [selectFooter, setSelectFooter] = useState("date");
   const [currentPage, setCurrentPage] = useState(1);
@@ -44,7 +43,7 @@ const BokkingsPage = () => {
       setSpinner(true);
     } else if (bookingsListStatus === "fulfilled") {
       setRooms(roomsListData);
-      switchBookingsList()
+      switchBookingsList();
       setSpinner(false);
     }
   }, [
@@ -55,7 +54,7 @@ const BokkingsPage = () => {
     bookingsListCheckOut,
     bookingsListPending,
     stateStatus,
-    rooms
+    rooms,
   ]);
 
   const bookingAndRoom = (selectList) => {
@@ -67,7 +66,10 @@ const BokkingsPage = () => {
       );
 
       if (correspondingRoom) {
-        combinedData.push({ ...booking, ...correspondingRoom });
+        combinedData.push({
+          ...booking,
+          room: correspondingRoom.room,
+        });
       }
     });
 
@@ -92,7 +94,6 @@ const BokkingsPage = () => {
         break;
     }
   };
-
 
   const orderUsers = () => {
     switch (selectFooter) {

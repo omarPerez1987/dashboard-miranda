@@ -13,7 +13,7 @@ const TableBookings = ({ bookings }) => {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [infoNotes, setInfoNotes] = useState(false);
-  
+
   return (
     <>
       <TableStyle>
@@ -31,10 +31,7 @@ const TableBookings = ({ bookings }) => {
         <tbody>
           {bookings &&
             bookings.map((data) => (
-              <TrbodyStyled
-                key={data.id}
-                onClick={() => {navigate(`/home/bookings-details/${data.id}`)}}
-              >
+              <TrbodyStyled key={data.id}>
                 <TdbodyNameStyled>
                   <img src={data.photo} alt="" />
                   <div>
@@ -89,7 +86,11 @@ const TableBookings = ({ bookings }) => {
                   )}
                 </TdbodyStyled>
                 <TdbodyStyled>
-                  <PiDotsThreeVerticalBold />
+                  <PiDotsThreeVerticalBold
+                    onClick={() => {
+                      navigate(`/home/bookings-details/${data.idRoom}`);
+                    }}
+                  />
                 </TdbodyStyled>
               </TrbodyStyled>
             ))}

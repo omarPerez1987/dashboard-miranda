@@ -13,6 +13,7 @@ import NewRoomPage from "./pages/NewRoomPage";
 import UsersEditPage from "./pages/UsersEditPage";
 import EditRoomPage from "./pages/EditRoomPage";
 import NewBookingPage from "./pages/NewBookingPage";
+import EditBookingPage from "./pages/EditBookingPage";
 
 function AppRoutes() {
   const [data, setData] = useState({});
@@ -36,6 +37,7 @@ function AppRoutes() {
                 <Route path="dashboard" element={<DashboardPage />} />
                 <Route path="bookings" element={<BokkingsPage />} />
                 <Route path="new-booking" element={<NewBookingPage />} />
+                <Route path="edit-booking/:id" element={<EditBookingPage />} />
                 <Route
                   path="bookings-details/:id"
                   element={<BookingDetailsPage />}

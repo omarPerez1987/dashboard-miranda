@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { MainStyled } from "../componentsStyle/general/MainStyled";
 import {
   BookingDetailsStyled,
@@ -17,14 +17,21 @@ import { BiMessageSquareDetail } from "react-icons/bi";
 import { SlOptionsVertical } from "react-icons/sl";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  deleteBooking,
   getBookingsData,
   getBookingsStatus,
 } from "../features/bookings/bookingsSlices";
 import { getRoomsData, getRoomsStatus } from "../features/rooms/roomsSlices";
 import { getBookingsListThunk } from "../features/bookings/bookingsThunks";
 import { getRoomsListApiThunk } from "../features/rooms/roomsThunk";
+import {
+  ButtonModalStyled,
+  ContainerModalFlexStyle,
+} from "../componentsStyle/modal/ModalStyled";
+import { toast } from "react-toastify";
 
 const BookingDetailsPage = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
   const bookingsListData = useSelector(getBookingsData);
@@ -180,6 +187,26 @@ const BookingDetailsPage = () => {
                 </DetailsImageStyled>
               </BookingDetailsStyled>
             )}
+            <ContainerModalFlexStyle>
+              <ButtonModalStyled
+                type="submit"
+                color="edit"
+                onClick={() => navigate(`/home/edit-booking/${details.id}`)}
+              >
+                Edit
+              </ButtonModalStyled>
+
+              <ButtonModalStyled
+                type="button"
+                onClick={() => {
+                  dispatch(deleteBooking(details.id)),
+                    toast.warn("Reserva eliminada con éxito");
+                  navigate("/home/bookings");
+                }}
+              >
+                Delete
+              </ButtonModalStyled>
+            </ContainerModalFlexStyle>
           </>
         )}
       </MainStyled>

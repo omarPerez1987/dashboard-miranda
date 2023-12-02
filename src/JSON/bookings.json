@@ -8,7 +8,7 @@
         "checkinTime": "11:56 PM",
         "checkout": "12-Nov-2023",
         "checkoutTime": "2:05 AM",
-        "notes": null,
+        "notes": "",
         "idRoom": "98poe",
         "check": "in"
     },
@@ -21,7 +21,7 @@
         "checkinTime": "5:57 PM",
         "checkout": "23-Aug-2023",
         "checkoutTime": "1:06 AM",
-        "notes": "Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\n\nFusce consequat. Nulla nisl. Nunc nisl.",
+        "notes": "Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\n\nFusce consequat. nulla nisl. Nunc nisl.",
         "idRoom": "9863mlk",
         "check": "pending"
     },
@@ -34,7 +34,7 @@
         "checkinTime": "1:46 PM",
         "checkout": "27-Jul-2023",
         "checkoutTime": "3:27 AM",
-        "notes": "Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.",
+        "notes": "Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. nullam molestie nibh in lectus.",
         "idRoom": "654bnme",
         "check": "in"
     },
@@ -60,7 +60,7 @@
         "checkinTime": "11:42 PM",
         "checkout": "20-Dec-2022",
         "checkoutTime": "4:12 AM",
-        "notes": null,
+        "notes": "",
         "idRoom": "98ccaa",
         "check": "out"
     },
@@ -73,7 +73,7 @@
         "checkinTime": "5:26 PM",
         "checkout": "20-Jun-2023",
         "checkoutTime": "11:06 AM",
-        "notes": null,
+        "notes": "",
         "idRoom": "1156ac",
         "check": "out"
     },
@@ -86,7 +86,7 @@
         "checkinTime": "7:57 PM",
         "checkout": "16-Feb-2023",
         "checkoutTime": "12:40 AM",
-        "notes": null,
+        "notes": "",
         "idRoom": "lope1156",
         "check": "pending"
     },
@@ -99,7 +99,7 @@
         "checkinTime": "11:33 PM",
         "checkout": "27-Feb-2023",
         "checkoutTime": "8:15 AM",
-        "notes": null,
+        "notes": "",
         "idRoom": "aybc89",
         "check": "in"
     },
@@ -138,7 +138,7 @@
         "checkinTime": "11:33 PM",
         "checkout": "27-Feb-2023",
         "checkoutTime": "8:15 AM",
-        "notes": null,
+        "notes": "",    
         "idRoom": "haaoh154",
         "check": "in"
     },

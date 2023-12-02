@@ -166,7 +166,7 @@ const BokkingsPage = () => {
   return (
     <MainStyled>
       {bookingsListError ? (
-        <h1>Hubo un error al obtener los datos de los usuarios</h1>
+        <h1>Hubo un error al obtener los datos de las reservas</h1>
       ) : (
         <>
           {spinner ? (

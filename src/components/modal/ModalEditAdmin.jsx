@@ -5,15 +5,15 @@ import {
 } from "../../componentsStyle/modal/ModalStyled";
 import { ButtonFormStyled } from "../../componentsStyle/forms/FormStyled";
 import { CiCircleRemove } from "react-icons/ci";
+import { useDispatch } from "react-redux";
+import { updateAdmin } from "../../features/admin/adminSlice";
+import { toast } from "react-toastify";
 
-
-const ModalEditClient = ({ setOpenModal }) => {
+const ModalEditAdmin = ({ setOpenModal }) => {
+  const dispatch = useDispatch();
 
   const initialStateForm = {
-    id: ``,
-    image: null,
     name: "",
-    lastName: "",
     email: "test@test.com",
     password: "9999",
   };
@@ -25,33 +25,23 @@ const ModalEditClient = ({ setOpenModal }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Datos del formulario:", formData); //al context
+    localStorage.setItem("formData", JSON.stringify(formData));
+    dispatch(updateAdmin(formData));
+    toast.success("Editado con éxito");
+    setOpenModal(false);
   };
   return (
     <ModalStyled onSubmit={handleSubmit}>
       <ModalFormStyled>
         <CiCircleRemove onClick={() => setOpenModal(false)} />
         <h1>EDIT YOURSELF</h1>
-        <div>
-          <img src="" alt="" />
-        </div>
-        <label>Photo</label>
-        <input type="file" />
-        <label>Name</label>
+
+        <label>Name and Surname</label>
         <input
           placeholder="name..."
           type="text"
           name="name"
           value={formData.name}
-          onChange={handleChange}
-          required
-        />
-        <label>Last Name</label>
-        <input
-          placeholder="lastname..."
-          type="text"
-          name="lastName"
-          value={formData.lastName}
           onChange={handleChange}
           required
         />
@@ -81,4 +71,4 @@ const ModalEditClient = ({ setOpenModal }) => {
   );
 };
 
-export default ModalEditClient;
+export default ModalEditAdmin;

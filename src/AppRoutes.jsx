@@ -10,10 +10,10 @@ import NewUserPage from "./pages/NewUserPage";
 import { useEffect, useState } from "react";
 import BookingDetailsPage from "./pages/BookingDetailsPage";
 import NewRoomPage from "./pages/NewRoomPage";
-import UsersEditPage from "./pages/UsersEditPage";
 import EditRoomPage from "./pages/EditRoomPage";
 import NewBookingPage from "./pages/NewBookingPage";
 import EditBookingPage from "./pages/EditBookingPage";
+import EditUsersPage from "./pages/EditUsersPage";
 
 function AppRoutes() {
   const [data, setData] = useState({});
@@ -22,7 +22,6 @@ function AppRoutes() {
     const savedFormData = localStorage.getItem("formData");
     if (savedFormData) {
       setData(JSON.parse(savedFormData));
-      //pasar estos datos a context
     }
   }, []);
 
@@ -47,7 +46,7 @@ function AppRoutes() {
                 <Route path="new-room" element={<NewRoomPage />} />
                 <Route path="edit-room/:id" element={<EditRoomPage />} />
                 <Route path="users" element={<UsersPage />} />
-                <Route path="edit-user/:id" element={<UsersEditPage />} />
+                <Route path="edit-user/:id" element={<EditUsersPage />} />
                 <Route path="new-user" element={<NewUserPage />} />
                 <Route path="contact" element={<ContactPage />} />
               </Route>

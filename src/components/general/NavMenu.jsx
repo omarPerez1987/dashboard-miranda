@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { MdOutlineDashboard } from "react-icons/md";
 import { TfiKey } from "react-icons/tfi";
 import { LuCalendarCheck2 } from "react-icons/lu";
@@ -6,11 +6,14 @@ import { FaUsers } from "react-icons/fa";
 import { FaComments } from "react-icons/fa6";
 import { NavMenustyled } from "../../componentsStyle/general/NavMenuStyled";
 import { NavLinkStyled } from "../../componentsStyle/general/NavMenuStyled";
-import { CardUserStyled } from "../../componentsStyle/general/CardUserStyled";
+import { CardAdminStyled } from "../../componentsStyle/general/CardAdminStyled";
 import Logo from "../../../public/navMenu/logo-dashboard.png";
-import ModalEditClient from "../modal/ModalEditClient";
+import admin from "../../../public/cardAdmin/bxs-user.svg";
+import ModalEditAdmin from "../modal/ModalEditAdmin";
 
 const NavMenu = ({ menuOpen }) => {
+  const adminData = JSON.parse(localStorage.getItem("formData"));
+
   const [openModal, setOpenModal] = useState(false);
   return (
     <>
@@ -43,18 +46,14 @@ const NavMenu = ({ menuOpen }) => {
               Users
             </NavLinkStyled>
           </div>
-          <CardUserStyled>
-            <img
-              className="card-img"
-              src="../../public/cardUser/bxs-user.svg"
-              alt=""
-            />
-            <h3 className="card-name">Omar Perez</h3>
-            <p className="card-email">test@test.com</p>
+          <CardAdminStyled>
+            <img className="card-img" src={admin} alt="" />
+            <h3 className="card-name">{adminData.name}</h3>
+            <p className="card-email">{adminData.email}</p>
             <button className="card-button" onClick={() => setOpenModal(true)}>
               Edit
             </button>
-          </CardUserStyled>
+          </CardAdminStyled>
 
           <div className="container-copyright">
             <h3 className="container-copyright__title">
@@ -69,7 +68,7 @@ const NavMenu = ({ menuOpen }) => {
           </div>
         </NavMenustyled>
       )}
-      {openModal && <ModalEditClient setOpenModal={setOpenModal} />}
+      {openModal && <ModalEditAdmin setOpenModal={setOpenModal} />}
     </>
   );
 };

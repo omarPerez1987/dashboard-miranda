@@ -16,7 +16,7 @@ import {
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 
-const UsersEditPage = () => {
+const EditUsersPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const usersListData = useSelector(getUsersData);
@@ -154,4 +154,4 @@ const UsersEditPage = () => {
   );
 };
 
-export default UsersEditPage;
+export default EditUsersPage;

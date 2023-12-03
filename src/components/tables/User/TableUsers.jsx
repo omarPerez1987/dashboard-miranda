@@ -26,10 +26,7 @@ const TableUsers = ({ users }) => {
       <tbody>
         {users &&
           users.map((user) => (
-            <TrbodyStyled
-              key={user.id}
-              onClick={() => navigate(`/home/edit-user/${user.id}`)}
-            >
+            <TrbodyStyled key={user.id}>
               <TdbodyNameStyled>
                 <img className="image-user" src={user.photo} alt="" />
                 <div>
@@ -53,9 +50,7 @@ const TableUsers = ({ users }) => {
               </TdbodyStyled>
               <TdbodyStyled>
                 {user.status === "true" ? (
-                  <ButtonVariantStyled type="true">
-                    ACTIVE
-                  </ButtonVariantStyled>
+                  <ButtonVariantStyled type="true">ACTIVE</ButtonVariantStyled>
                 ) : (
                   <ButtonVariantStyled type="false">
                     INACTIVE
@@ -63,7 +58,9 @@ const TableUsers = ({ users }) => {
                 )}
               </TdbodyStyled>
               <TdbodyStyled>
-                <PiDotsThreeVerticalBold />
+                <PiDotsThreeVerticalBold
+                  onClick={() => navigate(`/home/edit-user/${user.id}`)}
+                />
               </TdbodyStyled>
             </TrbodyStyled>
           ))}

@@ -10,12 +10,14 @@ import {
   getContactStatus,
   getContactsError,
   getContactsArchived,
+  getContactsPublish,
 } from "../features/contact/contactsSlices";
 import { getContactsListApiThunk } from "../features/contact/contactsThunk";
 
 const ContactPage = () => {
   const dispatch = useDispatch();
   const contactsListData = useSelector(getContactsData);
+  const contactsListDataPublish = useSelector(getContactsPublish)
   const contactsListArchived = useSelector(getContactsArchived);
   const contactsListStatus = useSelector(getContactStatus);
   const contactsListError = useSelector(getContactsError);
@@ -47,8 +49,22 @@ const ContactPage = () => {
     }
   };
 
-  const orderContacts = () => {
-    const orderedContacts = [...contactsListData];
+  useEffect(() => {
+    if (contactsListStatus === "fulfilled") {
+      setNewestListCard(orderContacts(contactsListDataPublish));
+    }
+
+    if (!newest && contactsListStatus === "fulfilled") {
+      switchContactList();
+    }
+
+    if (newest && contactsListStatus === "fulfilled") {
+      setContacts(orderContacts(contactsListData));
+    }
+  }, [newest, contactsListStatus, contactsListDataPublish]);
+
+  const orderContacts = (contactsList) => {
+    const orderedContacts = [...contactsList];
     orderedContacts.sort((a, b) => {
       const dateA = new Date(a.date.split(".").reverse().join("-"));
       const dateB = new Date(b.date.split(".").reverse().join("-"));
@@ -57,20 +73,6 @@ const ContactPage = () => {
     return orderedContacts;
   };
 
-  useEffect(() => {
-    if (contactsListStatus === "fulfilled") {
-      setNewestListCard(orderContacts());
-    }
-
-    if (!newest && contactsListStatus === "fulfilled") {
-      switchContactList();
-    }
-
-    if (newest && contactsListStatus === "fulfilled") {
-      setContacts(orderContacts());
-    }
-  }, [newest, contactsListStatus]);
-  
 
   const handlePageChange = (selectedPage) => {
     setCurrentPage(selectedPage);

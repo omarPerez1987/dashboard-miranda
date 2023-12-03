@@ -8,12 +8,7 @@ import { FaRegBell } from "react-icons/fa";
 import { RiLoginBoxLine } from "react-icons/ri";
 
 const TopMenu = ({ hiddenMenu, menuOpen, title }) => {
-
   const navigate = useNavigate();
-
-  const goToLogin = () => {
-    navigate("/");
-  };
 
   return (
     <TopMenuStyled>
@@ -26,7 +21,12 @@ const TopMenu = ({ hiddenMenu, menuOpen, title }) => {
       <div className="container-right">
         <HiOutlineMail />
         <FaRegBell />
-        <button onClick={goToLogin}>
+        <button
+          onClick={() => {
+            localStorage.setItem("formData", JSON.stringify({}));
+            navigate("/");
+          }}
+        >
           <RiLoginBoxLine />
         </button>
       </div>

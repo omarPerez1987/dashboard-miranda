@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CardUserStyled = styled.article`
+export const CardAdminStyled = styled.article`
   margin: 0 auto;
   padding: 1.6em 0em;
   width: 23.2em;
@@ -10,6 +10,11 @@ export const CardUserStyled = styled.article`
   display: flex;
   align-items: center;
   flex-direction: column;
+
+  & .logo-login {
+    width: 100px;
+    margin-bottom: 4em;
+  }
 
   &:hover {
     box-shadow: 0px 20px 30px #00000014;

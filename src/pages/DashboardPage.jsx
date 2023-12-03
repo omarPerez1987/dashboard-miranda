@@ -8,15 +8,15 @@ import CardReviews from "../components/cardReviews/CardReviews";
 import { DashboardMainStyled } from "../componentsStyle/general/DashboardMainStyled";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getContactsData,
   getContactStatus,
   getContactsError,
+  getContactsPublish,
 } from "../features/contact/contactsSlices";
 import { getContactsListApiThunk } from "../features/contact/contactsThunk";
 
 const DashboardPage = () => {
   const dispatch = useDispatch();
-  const contactsListData = useSelector(getContactsData);
+  const contactsListDataPublish = useSelector(getContactsPublish)
   const contactsListStatus = useSelector(getContactStatus);
   const contactsListError = useSelector(getContactsError);
   const [contacts, setContacts] = useState([]);
@@ -31,10 +31,10 @@ const DashboardPage = () => {
       setContacts(orderContacts());
       setSpinner(false);
     }
-  }, [dispatch, contactsListData, contactsListStatus]);
+  }, [dispatch, contactsListStatus, contactsListDataPublish]);
 
   const orderContacts = () => {
-    const orderedContacts = [...contactsListData];
+    const orderedContacts = [...contactsListDataPublish];
     orderedContacts.sort((a, b) => {
       const dateA = new Date(a.date.split(".").reverse().join("-"));
       const dateB = new Date(b.date.split(".").reverse().join("-"));

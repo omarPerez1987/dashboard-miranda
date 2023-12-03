@@ -50,3 +50,5 @@ export const getContactsError = (state) => state.contacts.error;
 
 export const getContactsArchived = (state) =>
   state.contacts.data.filter((contact) => contact.archived === true);
+export const getContactsPublish = (state) =>
+  state.contacts.data.filter((contact) => contact.archived === false);

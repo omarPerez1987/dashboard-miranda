@@ -5,8 +5,11 @@ import CardAdmin from "../components/general/CardAdmin";
 const LoginPage = () => {
   return (
     <LoginStyled>
-      <h4 className="text-login">Email: test@test.com</h4>
-      <h4 className="text-login">Password: 9999</h4>
+      <div className="text-login">
+        <span className="loader"></span>
+        <h4>Email: test@test.com</h4>
+        <h4>Password: 9999</h4>
+      </div>
       <CardAdmin />
     </LoginStyled>
   );

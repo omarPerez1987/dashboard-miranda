@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import { CardUserStyled } from "../../componentsStyle/general/CardUserStyled";
+import logo from "../../../public/navMenu/logo.png";
+import { CardAdminStyled } from "../../componentsStyle/general/CardAdminStyled";
 import { useNavigate } from "react-router-dom";
-import User from "../../../public/cardUser/bxs-user.svg";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { addAdmin } from "../../features/admin/adminSlice";
 
 const CardAdmin = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate();
-  const random1 = Math.floor(Math.random() * 999);
-  const random2 = Math.floor(Math.random() * 999);
-  const idUnique = `CL${random1}-${random2}`;
 
   const initialState = {
-    id: `${idUnique}`,
     name: "",
-    lastName: "",
     email: "",
     password: "",
   };
@@ -32,48 +31,42 @@ const CardAdmin = () => {
     if (formData.email === "test@test.com" && formData.password === "9999") {
       localStorage.setItem("formData", JSON.stringify(formData));
       navigate("/home/dashboard");
+      dispatch(addAdmin(formData))
     } else {
-      alert("Escribe correctamente los datos");
+      toast.error("Escribe correctamente los datos");
       setFormData(initialState);
     }
   };
 
   return (
     <>
-      <CardUserStyled>
-        <img className="card-img" src={User} alt="" />
+      <CardAdminStyled>
+        <img className="logo-login" src={logo} alt="" />
         <form onSubmit={handleSubmit}>
           <input
             type="text"
-            placeholder="name"
+            placeholder="Name..."
             name="name"
             value={formData.name}
             onChange={handleInputChange}
           />
           <input
-            type="text"
-            placeholder="last name"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleInputChange}
-          />
-          <input
             type="email"
-            placeholder="email"
+            placeholder="Email..."
             name="email"
             value={formData.email}
             onChange={handleInputChange}
           />
           <input
             type="password"
-            placeholder="password"
+            placeholder="Password..."
             name="password"
             value={formData.password}
             onChange={handleInputChange}
           />
           <button type="submit">Entrar</button>
         </form>
-      </CardUserStyled>
+      </CardAdminStyled>
     </>
   );
 };

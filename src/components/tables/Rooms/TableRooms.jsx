@@ -26,10 +26,7 @@ const TableRooms = ({ rooms }) => {
       <tbody>
         {rooms &&
           rooms.map((room) => (
-            <TrbodyStyled
-              key={room.id}
-              onClick={() => navigate(`/home/edit-room/${room.id}`)}
-            >
+            <TrbodyStyled key={room.id}>
               <TdbodyNameStyled>
                 <img className="image-room" src={room.photo} alt="" />
                 <div>
@@ -51,7 +48,9 @@ const TableRooms = ({ rooms }) => {
                 >{`${room.status}`}</ButtonVariantStyled>
               </TdbodyStyled>
               <TdbodyStyled>
-                <PiDotsThreeVerticalBold />
+                <PiDotsThreeVerticalBold
+                  onClick={() => navigate(`/home/edit-room/${room.id}`)}
+                />
               </TdbodyStyled>
             </TrbodyStyled>
           ))}

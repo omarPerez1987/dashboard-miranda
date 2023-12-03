@@ -48,7 +48,6 @@ const EditBookingPage = () => {
     setAvailableRooms(roomsListAvailable);
   }, [bookingListData, id]);
 
-
   useEffect(() => {
     setBooking((prevBooking) => ({
       ...prevBooking,
@@ -61,7 +60,6 @@ const EditBookingPage = () => {
     const { name, value } = event.target;
     setBooking((prevBooking) => ({ ...prevBooking, [name]: value }));
   };
-
 
   const handleSubmit = (event) => {
     event.preventDefault();

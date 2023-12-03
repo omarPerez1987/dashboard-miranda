@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {
   ButtonFormStyled,
-  ContainerFormImage,
+  ContainerFormImageStyled,
   FormStyled,
   InputFormStyled,
   LabelFormStyled,
@@ -56,13 +56,13 @@ const FormCreateUser = () => {
   };
   return (
     <FormStyled onSubmit={handleSubmit}>
-      <ContainerFormImage>
+      <ContainerFormImageStyled>
         {selectedImage ? (
           <img src={selectedImage} alt="" />
         ) : (
           <h1>Select an image</h1>
         )}
-      </ContainerFormImage>
+      </ContainerFormImageStyled>
 
       <LabelFormStyled>
         Image

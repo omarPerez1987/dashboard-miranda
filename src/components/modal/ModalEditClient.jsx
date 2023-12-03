@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-  ModalFormStyle,
+  ModalFormStyled,
   ModalStyled,
 } from "../../componentsStyle/modal/ModalStyled";
 import { ButtonFormStyled } from "../../componentsStyle/forms/FormStyled";
@@ -29,7 +29,7 @@ const ModalEditClient = ({ setOpenModal }) => {
   };
   return (
     <ModalStyled onSubmit={handleSubmit}>
-      <ModalFormStyle>
+      <ModalFormStyled>
         <CiCircleRemove onClick={() => setOpenModal(false)} />
         <h1>EDIT YOURSELF</h1>
         <div>
@@ -76,7 +76,7 @@ const ModalEditClient = ({ setOpenModal }) => {
           readOnly
         />
         <ButtonFormStyled type="submit">Edit</ButtonFormStyled>
-      </ModalFormStyle>
+      </ModalFormStyled>
     </ModalStyled>
   );
 };

@@ -25,7 +25,7 @@ export const EditStyled = styled.section`
   border-radius: 20px;
 `;
 
-export const ModalFormStyle = styled.form`
+export const ModalFormStyled = styled.form`
   margin: 0 auto;
   width: 90%;
   color: #135846;
@@ -76,12 +76,12 @@ export const ModalFormStyle = styled.form`
   }
 `;
 
-export const ContainerModalImageStyle = styled.div`
+export const ContainerModalImageStyled = styled.div`
   width: 30%;
   height: 30%;
 `;
 
-export const ContainerModalFlexStyle = styled.div`
+export const ContainerModalFlexStyled = styled.div`
   width: 70%;
   display: flex;
   justify-content: space-evenly;

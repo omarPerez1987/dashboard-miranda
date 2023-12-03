@@ -16,7 +16,7 @@ export const FormStyled = styled.form`
   }
 `;
 
-export const ContainerFormImage = styled.div`
+export const ContainerFormImageStyled = styled.div`
   margin: 0 auto;
   width: 60%;
   height: 10em;
@@ -87,7 +87,7 @@ export const ButtonFormStyled = styled.button`
   padding: 1em 2em;
 `;
 
-export const ContainerFacilitiesForm = styled.div`
+export const ContainerFacilitiesFormStyled = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 21m;
@@ -95,7 +95,7 @@ export const ContainerFacilitiesForm = styled.div`
   width: 100%;
 `;
 
-export const ButtonFacilityForm = styled.button`
+export const ButtonFacilityFormStyled = styled.button`
   border: 1px solid #135846;
   margin: 5px;
   padding: 5px 10px;

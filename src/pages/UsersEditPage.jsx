@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import {
   ButtonModalStyled,
-  ContainerModalFlexStyle,
-  ContainerModalImageStyle,
-  ModalFormStyle,
   EditStyled,
+  ContainerModalFlexStyled,
+  ModalFormStyled,
+  ContainerModalImageStyled,
 } from "../componentsStyle/modal/ModalStyled";
 import { CiCircleRemove } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
@@ -63,12 +63,12 @@ const UsersEditPage = () => {
 
   return (
     <EditStyled onSubmit={(event) => handleSubmit(event, user)}>
-      <ModalFormStyle>
+      <ModalFormStyled>
         <CiCircleRemove onClick={() => navigate("/home/users")} />
         <h1>EDIT USER</h1>
-        <ContainerModalImageStyle>
+        <ContainerModalImageStyled>
           <img src={user.photo} alt="" />
-        </ContainerModalImageStyle>
+        </ContainerModalImageStyled>
 
         <label>Photo</label>
         <input type="file" name="image" onChange={(e) => handleFileChange(e)} />
@@ -136,7 +136,7 @@ const UsersEditPage = () => {
           <option value="false">Inactive</option>
         </select>
 
-        <ContainerModalFlexStyle>
+        <ContainerModalFlexStyled>
           <ButtonModalStyled type="submit" color="edit">
             Edit
           </ButtonModalStyled>
@@ -148,8 +148,8 @@ const UsersEditPage = () => {
           >
             Delete
           </ButtonModalStyled>
-        </ContainerModalFlexStyle>
-      </ModalFormStyle>
+        </ContainerModalFlexStyled>
+      </ModalFormStyled>
     </EditStyled>
   );
 };

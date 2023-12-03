@@ -9,12 +9,12 @@ import {
 } from "../features/rooms/roomsSlices";
 import {
   ButtonModalStyled,
-  ContainerModalFlexStyle,
-  ContainerModalImageStyle,
+  ContainerModalFlexStyled,
+  ContainerModalImageStyled,
   EditStyled,
-  ModalFormStyle,
+  ModalFormStyled,
 } from "../componentsStyle/modal/ModalStyled";
-import { ButtonFacilityForm } from "../componentsStyle/forms/FormStyled";
+import { ButtonFacilityFormStyled } from "../componentsStyle/forms/FormStyled";
 import { toast } from "react-toastify";
 
 const EditRoomPage = () => {
@@ -80,12 +80,12 @@ const EditRoomPage = () => {
 
   return (
     <EditStyled onSubmit={(event) => handleSubmit(event, room)}>
-      <ModalFormStyle>
+      <ModalFormStyled>
         <CiCircleRemove onClick={() => navigate("/home/rooms")} />
         <h1>EDIT ROOM</h1>
-        <ContainerModalImageStyle>
+        <ContainerModalImageStyled>
           <img src={room.image} alt="" />
-        </ContainerModalImageStyle>
+        </ContainerModalImageStyled>
 
         <label>Photo</label>
         <input type="file" name="image" onChange={(e) => handleFileChange(e)} />
@@ -152,7 +152,7 @@ const EditRoomPage = () => {
           <option value="Booked">Bokked</option>
         </select>
         <label>Facilities</label>
-        <ContainerModalFlexStyle>
+        <ContainerModalFlexStyled>
           {[
             "Swimming Pool",
             "Air Conditioned",
@@ -168,7 +168,7 @@ const EditRoomPage = () => {
             "Single bed",
             "Strong Locker",
           ].map((facility) => (
-            <ButtonFacilityForm
+            <ButtonFacilityFormStyled
               key={facility}
               type="button"
               label={facility}
@@ -176,10 +176,10 @@ const EditRoomPage = () => {
               onClick={() => handleFacilityChange(facility)}
             >
               {facility}
-            </ButtonFacilityForm>
+            </ButtonFacilityFormStyled>
           ))}
-        </ContainerModalFlexStyle>
-        <ContainerModalFlexStyle>
+        </ContainerModalFlexStyled>
+        <ContainerModalFlexStyled>
           <ButtonModalStyled type="submit" color="edit">
             Edit
           </ButtonModalStyled>
@@ -191,8 +191,8 @@ const EditRoomPage = () => {
           >
             Delete
           </ButtonModalStyled>
-        </ContainerModalFlexStyle>
-      </ModalFormStyle>
+        </ContainerModalFlexStyled>
+      </ModalFormStyled>
     </EditStyled>
   );
 };

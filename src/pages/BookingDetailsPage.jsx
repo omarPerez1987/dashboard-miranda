@@ -26,7 +26,7 @@ import { getBookingsListThunk } from "../features/bookings/bookingsThunks";
 import { getRoomsListApiThunk } from "../features/rooms/roomsThunk";
 import {
   ButtonModalStyled,
-  ContainerModalFlexStyle,
+  ContainerModalFlexStyled,
 } from "../componentsStyle/modal/ModalStyled";
 import { toast } from "react-toastify";
 
@@ -187,7 +187,7 @@ const BookingDetailsPage = () => {
                 </DetailsImageStyled>
               </BookingDetailsStyled>
             )}
-            <ContainerModalFlexStyle>
+            <ContainerModalFlexStyled>
               <ButtonModalStyled
                 type="submit"
                 color="edit"
@@ -206,7 +206,7 @@ const BookingDetailsPage = () => {
               >
                 Delete
               </ButtonModalStyled>
-            </ContainerModalFlexStyle>
+            </ContainerModalFlexStyled>
           </>
         )}
       </MainStyled>

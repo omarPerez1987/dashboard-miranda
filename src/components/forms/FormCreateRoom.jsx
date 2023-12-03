@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import {
-  ButtonFacilityForm,
+  ButtonFacilityFormStyled,
   ButtonFormStyled,
-  ContainerFacilitiesForm,
-  ContainerFormImage,
+  ContainerFacilitiesFormStyled,
+  ContainerFormImageStyled,
   FormStyled,
   InputFormStyled,
   LabelFormStyled,
@@ -80,13 +80,13 @@ const FormCreateRoom = () => {
 
   return (
     <FormStyled onSubmit={handleSubmit}>
-      <ContainerFormImage>
+      <ContainerFormImageStyled>
         {selectedImage ? (
           <img src={selectedImage} alt="" />
         ) : (
           <h1>Select an images</h1>
         )}
-      </ContainerFormImage>
+      </ContainerFormImageStyled>
 
       <LabelFormStyled>Images</LabelFormStyled>
       <InputFormStyled
@@ -220,7 +220,7 @@ const FormCreateRoom = () => {
 
       <LabelFormStyled>Facilities</LabelFormStyled>
 
-      <ContainerFacilitiesForm>
+      <ContainerFacilitiesFormStyled>
         {[
           "Swimming Pool",
           "Air Conditioned",
@@ -236,7 +236,7 @@ const FormCreateRoom = () => {
           "Single bed",
           "Strong Locker",
         ].map((facility) => (
-          <ButtonFacilityForm
+          <ButtonFacilityFormStyled
             key={facility}
             type="button"
             label={facility}
@@ -244,9 +244,9 @@ const FormCreateRoom = () => {
             onClick={() => handleFacilityChange(facility)}
           >
             {facility}
-          </ButtonFacilityForm>
+          </ButtonFacilityFormStyled>
         ))}
-      </ContainerFacilitiesForm>
+      </ContainerFacilitiesFormStyled>
 
       <ButtonFormStyled type="submit">Crear</ButtonFormStyled>
     </FormStyled>

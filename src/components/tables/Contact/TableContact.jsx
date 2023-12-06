@@ -52,6 +52,7 @@ const TableContact = ({ contacts }) => {
                 <TdbodyStyled>
                   {data.archived ? (
                     <ButtonVariantStyled
+                    // data-testid="button-archived" 
                       status={"true"}
                       onClick={() => dispatch(updateArchived(data))}
                     >

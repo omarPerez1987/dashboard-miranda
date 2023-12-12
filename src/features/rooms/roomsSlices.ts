@@ -1,19 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { getRoomsListApiThunk } from "./roomsThunk";
+import { RoomsSliceInitialStateInterface } from "../interfaces/rooms/roomsSliceInterface";
+import { RoomsInterface } from "../interfaces/rooms/roomsInterface";
+
+const initialState: RoomsSliceInitialStateInterface = {
+  data: [],
+  status: "idle",
+  error: undefined,
+};
 
 export const roomsSlice = createSlice({
   name: "rooms",
-  initialState: {
-    data: [],
-    status: "idle",
-    error: null,
-  },
+  initialState: initialState,
   reducers: {
-    addRoom: (state, action) => {
+    addRoom: (state, action: PayloadAction<RoomsInterface>): void => {
       state.data = [action.payload, ...state.data];
     },
 
-    updateRoom: (state, action) => {
+    updateRoom: (state, action: PayloadAction<RoomsInterface>): void => {
       const index = state.data.findIndex(
         (room) => room.id === action.payload.id
       );
@@ -22,27 +26,27 @@ export const roomsSlice = createSlice({
       }
     },
 
-    deleteRoom: (state, action) => {
+    deleteRoom: (state, action: PayloadAction<RoomsInterface>): void => {
       state.data = state.data.filter((room) => room.id !== action.payload);
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getRoomsListApiThunk.fulfilled, (state, action) => {
+      .addCase(getRoomsListApiThunk.fulfilled, (state, action): void => {
         state.status = "fulfilled";
         state.data = action.payload;
       })
-      .addCase(getRoomsListApiThunk.rejected, (state, action) => {
+      .addCase(getRoomsListApiThunk.rejected, (state, action): void => {
         state.status = "rejected";
         state.error = action.error.message;
       })
-      .addCase(getRoomsListApiThunk.pending, (state, action) => {
+      .addCase(getRoomsListApiThunk.pending, (state, action): void => {
         state.status = "pending";
       });
   },
 });
 export const { addRoom, updateRoom, deleteRoom } = roomsSlice.actions;
-export const getRoomsData = (state) => state.rooms.data;
+export const getRoomsData = (state): RoomsInterface[] => state.rooms.data;
 export const getRoomsStatus = (state) => state.rooms.status;
 export const getRoomsError = (state) => state.rooms.error;
 export const getRoomsAvailable = (state) =>

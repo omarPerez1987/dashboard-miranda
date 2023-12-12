@@ -12,6 +12,7 @@ import {
   getUsersStatus,
 } from "../features/users/usersSlices";
 import { getUsersListApiThunk } from "../features/users/usersThunks";
+import { UsersInterfaces } from "../features/interfaces/users/usersInterfaces";
 
 const UsersPage = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const UsersPage = () => {
 
   const [stateStatus, setStateStatus] = useState("All");
   const [newest, setNewest] = useState(false);
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<UsersInterfaces[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {

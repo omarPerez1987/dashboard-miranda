@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { getUsersListApiThunk } from "./usersThunks";
 import { UsersSliceInitialStateInterface } from "../interfaces/users/userSliceInterface";
 import { UsersInterfaces } from "../interfaces/users/usersInterfaces";
@@ -13,11 +13,11 @@ export const usersSlice = createSlice({
   name: "users",
   initialState: initialState,
   reducers: {
-    addUser: (state, action: PayloadAction<UsersInterfaces>): void => {
+    addUser: (state, action): void => {
       state.data = [action.payload, ...state.data];
     },
 
-    updateUser: (state, action: PayloadAction<UsersInterfaces>): void => {
+    updateUser: (state, action): void => {
       const index = state.data.findIndex(
         (user) => user.id === action.payload.id
       );
@@ -26,7 +26,7 @@ export const usersSlice = createSlice({
       }
     },
 
-    deleteUser: (state, action: PayloadAction<UsersInterfaces>): void => {
+    deleteUser: (state, action): void => {
       state.data = state.data.filter((user) => user.id !== action.payload);
     },
   },

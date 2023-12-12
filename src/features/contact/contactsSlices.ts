@@ -1,15 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getContactsListApiThunk } from "./contactsThunk";
+import { ContactsSliceInitialStateInterface } from "../interfaces/contact/contactSliceInterface";
+import { ContactInterface } from "../interfaces/contact/contactInterface";
+
+const initialState: ContactsSliceInitialStateInterface = {
+  data: [],
+  status: "idle",
+  error: undefined,
+};
 
 export const contactsSlice = createSlice({
   name: "contacts",
-  initialState: {
-    data: [],
-    status: "idle",
-    error: null,
-  },
+  initialState: initialState,
   reducers: {
-    updateArchived: (state, action) => {
+    updateArchived: (state, action): void => {
       const contacts = state.data;
       const index = contacts.findIndex(
         (contact) => contact.id === action.payload.id
@@ -24,27 +28,25 @@ export const contactsSlice = createSlice({
         );
       }
     },
-    
-    
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getContactsListApiThunk.fulfilled, (state, action) => {
+      .addCase(getContactsListApiThunk.fulfilled, (state, action): void => {
         state.status = "fulfilled";
         state.data = action.payload;
       })
-      .addCase(getContactsListApiThunk.rejected, (state, action) => {
+      .addCase(getContactsListApiThunk.rejected, (state, action): void => {
         state.status = "rejected";
         state.error = action.error.message;
       })
-      .addCase(getContactsListApiThunk.pending, (state, action) => {
+      .addCase(getContactsListApiThunk.pending, (state, action): void => {
         state.status = "pending";
       });
   },
 });
 
 export const { updateArchived } = contactsSlice.actions;
-export const getContactsData = (state) => state.contacts.data;
+export const getContactsData = (state): ContactInterface[] => state.contacts.data;
 export const getContactStatus = (state) => state.contacts.status;
 export const getContactsError = (state) => state.contacts.error;
 

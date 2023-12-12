@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { getRoomsListApiThunk } from "./roomsThunk";
 import { RoomsSliceInitialStateInterface } from "../interfaces/rooms/roomsSliceInterface";
 import { RoomsInterface } from "../interfaces/rooms/roomsInterface";
@@ -13,11 +13,11 @@ export const roomsSlice = createSlice({
   name: "rooms",
   initialState: initialState,
   reducers: {
-    addRoom: (state, action: PayloadAction<RoomsInterface>): void => {
+    addRoom: (state, action): void => {
       state.data = [action.payload, ...state.data];
     },
 
-    updateRoom: (state, action: PayloadAction<RoomsInterface>): void => {
+    updateRoom: (state, action): void => {
       const index = state.data.findIndex(
         (room) => room.id === action.payload.id
       );
@@ -26,7 +26,7 @@ export const roomsSlice = createSlice({
       }
     },
 
-    deleteRoom: (state, action: PayloadAction<RoomsInterface>): void => {
+    deleteRoom: (state, action): void => {
       state.data = state.data.filter((room) => room.id !== action.payload);
     },
   },

@@ -6,10 +6,10 @@ export const adminSlice = createSlice({
     data: [],
   },
   reducers: {
-    addAdmin: (state, action) => {
+    addAdmin: (state, action): void => {
       state.data = [action.payload];
     },
-    updateAdmin: (state, action) => {
+    updateAdmin: (state, action): void => {
       state.data = [action.payload];
     },
   },

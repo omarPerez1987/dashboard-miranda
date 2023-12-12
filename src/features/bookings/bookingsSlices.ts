@@ -1,18 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getBookingsListThunk } from "./bookingsThunks";
+import { BookingsSliceInitialStateInterface } from "../interfaces/bookings/bookingsSliceInterface";
+import { BookingInterface } from "../interfaces/bookings/bookingsInterface";
+
+const initialState: BookingsSliceInitialStateInterface = {
+  data: [],
+  status: "idle",
+  error: undefined,
+};
 
 export const bookingsSlice = createSlice({
   name: "bookings",
-  initialState: {
-    data: [],
-    status: "idle",
-    error: null,
-  },
+  initialState: initialState,
   reducers: {
-    addBooking: (state, action) => {
+    addBooking: (state, action): void => {
       state.data = [action.payload, ...state.data];
     },
-    updateBooking: (state, action) => {
+    updateBooking: (state, action): void => {
       const index = state.data.findIndex(
         (room) => room.id === action.payload.id
       );
@@ -21,21 +25,21 @@ export const bookingsSlice = createSlice({
       }
     },
 
-    deleteBooking: (state, action) => {
+    deleteBooking: (state, action): void => {
       state.data = state.data.filter((room) => room.id !== action.payload);
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getBookingsListThunk.fulfilled, (state, action) => {
+      .addCase(getBookingsListThunk.fulfilled, (state, action): void => {
         state.status = "fulfilled";
         state.data = action.payload;
       })
-      .addCase(getBookingsListThunk.rejected, (state, action) => {
+      .addCase(getBookingsListThunk.rejected, (state, action): void => {
         state.status = "rejected";
         state.error = action.error.message;
       })
-      .addCase(getBookingsListThunk.pending, (state, action) => {
+      .addCase(getBookingsListThunk.pending, (state, action): void => {
         state.status = "pending";
       });
   },
@@ -43,7 +47,8 @@ export const bookingsSlice = createSlice({
 
 export const { addBooking, updateBooking, deleteBooking } =
   bookingsSlice.actions;
-export const getBookingsData = (state) => state.bookings.data;
+export const getBookingsData = (state): BookingInterface[] =>
+  state.bookings.data;
 export const getBookingsStatus = (state) => state.bookings.status;
 export const getBookingsError = (state) => state.bookings.error;
 

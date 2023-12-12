@@ -40,7 +40,7 @@ const TableRooms = ({ rooms }) => {
                 <p>{room.price}</p>
               </TdbodyStyled>
               <TdbodyStyled>
-                <p>{room.discount ? room.discount : "No offer"}</p>
+                <p>{room.discount ? `${room.discount}%` : "No offer"}</p>
               </TdbodyStyled>
               <TdbodyStyled>
                 <ButtonVariantStyled

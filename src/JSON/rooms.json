@@ -11,7 +11,7 @@
     ],
     "description": "a feugiat et eros vestibulum",
     "price": 200,
-    "discount": "20%",
+    "discount": 20,
     "cancel": "vivamus in felis",
     "status": "Available"
   },
@@ -27,7 +27,7 @@
     ],
     "description": "quam pharetra magna ac consequat metus sapien ut",
     "price": 200,
-    "discount": "",
+    "discount": 0,
     "cancel": "magnis dis parturient montes",
     "status": "Available"
   },
@@ -43,7 +43,7 @@
     ],
     "description": "nisi eu orci mauris lacinia sapien quis",
     "price": 200,
-    "discount": "10%",
+    "discount": 10,
     "cancel": "turpis eget elit sodales",
     "status": "Booked"
   },
@@ -59,7 +59,7 @@
     ],
     "description": "elementum ligula vehicula consequat morbi a ipsum integer a nibh",
     "price": 200,
-    "discount": "20%",
+    "discount": 15,
     "cancel": "orci vehicula condimentum",
     "status": "Available"
   },
@@ -75,7 +75,7 @@
     ],
     "description": "consectetuer adipiscing elit proin interdum mauris",
     "price": 200,
-    "discount": "20%",
+    "discount": 20,
     "cancel": "dapibus dolor vel est donec",
     "status": "Available"
   },
@@ -91,7 +91,7 @@
     ],
     "description": "nec molestie sed justo pellentesque viverra pede ac diam",
     "price": 200,
-    "discount": "20%",
+    "discount": 20,
     "cancel": "neque aenean auctor gravida",
     "status": "Available"
   },
@@ -106,7 +106,7 @@
     ],
     "description": "amet lobortis sapien sapien non mi integer ac",
     "price": 200,
-    "discount": "",
+    "discount": 0,
     "cancel": "sodales scelerisque mauris",
     "status": "Booked"
   },
@@ -122,7 +122,7 @@
     ],
     "description": "quisque erat eros viverra eget congue eget semper",
     "price": 200,
-    "discount": "20%",
+    "discount": 10,
     "cancel": "neque vestibulum eget",
     "status": "Available"
   },
@@ -138,7 +138,7 @@
     ],
     "description": "et magnis dis parturient montes nascetur ridiculus",
     "price": 200,
-    "discount": "20%",
+    "discount": 25,
     "cancel": "adipiscing elit proin risus",
     "status": "Booked"
   },
@@ -154,7 +154,7 @@
     ],
     "description": "fusce congue diam id ornare imperdiet sapien urna pretium nisl",
     "price": 200,
-    "discount": "20%",
+    "discount": 5,
     "cancel": "vestibulum ac est lacinia nisi",
     "status": "Booked"
   },
@@ -170,7 +170,7 @@
     ],
     "description": "quisque erat eros viverra eget congue eget semper",
     "price": 200,
-    "discount": "20%",
+    "discount": 10,
     "cancel": "neque vestibulum eget",
     "status": "Available"
   },
@@ -186,7 +186,7 @@
     ],
     "description": "et magnis dis parturient montes nascetur ridiculus",
     "price": 200,
-    "discount": "20%",
+    "discount": 30,
     "cancel": "adipiscing elit proin risus",
     "status": "Booked"
   },
@@ -202,7 +202,7 @@
     ],
     "description": "fusce congue diam id ornare imperdiet sapien urna pretium nisl",
     "price": 200,
-    "discount": "20%",
+    "discount": 15,
     "cancel": "vestibulum ac est lacinia nisi",
     "status": "Booked"
   }

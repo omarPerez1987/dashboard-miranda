@@ -4,6 +4,8 @@ import { roomsSlice } from "../features/rooms/roomsSlices";
 import { contactsSlice } from "../features/contact/contactsSlices";
 import { bookingsSlice } from "../features/bookings/bookingsSlices";
 import { adminSlice } from "../features/admin/adminSlice";
+import { TypedUseSelectorHook, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 
 export const store = configureStore({
@@ -16,3 +18,7 @@ export const store = configureStore({
   }
 });
 
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
+export const useAppDispatch: () => AppDispatch = useDispatch
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector

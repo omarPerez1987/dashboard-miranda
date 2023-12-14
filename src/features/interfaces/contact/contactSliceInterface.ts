@@ -1,4 +1,4 @@
-import { ContactInterface } from "./contactInterface";
+import { ContactInterface } from "./contactinterface";
 
 export const statusOptions = <const>[
   "fulfilled",
@@ -7,7 +7,7 @@ export const statusOptions = <const>[
   "pending",
 ];
 
-export interface ContactsSliceInitialStateInterface {
+export interface BookingsSliceInitialStateInterface {
   data: ContactInterface[];
   status: "idle" | "pending" | "fulfilled" | "rejected";
   error: string | undefined;

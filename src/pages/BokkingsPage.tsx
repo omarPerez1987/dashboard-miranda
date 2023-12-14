@@ -16,9 +16,12 @@ import {
 import { getBookingsListThunk } from "../features/bookings/bookingsThunks";
 import { getRoomsData } from "../features/rooms/roomsSlices";
 import { getRoomsListApiThunk } from "../features/rooms/roomsThunk";
+import { AppDispatch } from "../app/store";
+import { BookingInterface } from "../features/interfaces/bookings/bookingsInterface";
+import { RoomsInterface } from "../features/interfaces/rooms/roomsInterface";
 
 const BokkingsPage = () => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const bookingsListData = useSelector(getBookingsData);
   const bookingsListCheckIn = useSelector(getRoomsCheckIn);
   const bookingsListCheckOut = useSelector(getRoomsCheckOut);
@@ -29,8 +32,8 @@ const BokkingsPage = () => {
   const [spinner, setSpinner] = useState(true);
 
   const [stateStatus, setStateStatus] = useState("All");
-  const [bookings, setBookings] = useState([]);
-  const [rooms, setRooms] = useState([]);
+  const [bookings, setBookings] = useState<BookingInterface[]>([]);
+  const [rooms, setRooms] = useState<RoomsInterface[]>([]);
 
   const [selectFooter, setSelectFooter] = useState("date");
   const [currentPage, setCurrentPage] = useState(1);
@@ -46,16 +49,10 @@ const BokkingsPage = () => {
       switchBookingsList();
       setSpinner(false);
     }
-  }, [
-    dispatch,
-    bookingsListData,
-    bookingsListStatus,
-    stateStatus,
-    rooms,
-  ]);
+  }, [dispatch, bookingsListData, bookingsListStatus, stateStatus, rooms]);
 
-  const bookingAndRoom = (selectList) => {
-    const combinedData = [];
+  const bookingAndRoom = (selectList: BookingInterface[]) => {
+    const combinedData: Array<Object> = [];
 
     selectList.forEach((booking) => {
       const correspondingRoom = rooms.find(
@@ -76,16 +73,16 @@ const BokkingsPage = () => {
   const switchBookingsList = () => {
     switch (stateStatus) {
       case "All":
-        setBookings(bookingAndRoom(bookingsListData));
+        setBookings(bookingAndRoom(bookingsListData) as BookingInterface[]);
         break;
       case "In":
-        setBookings(bookingAndRoom(bookingsListCheckIn));
+        setBookings(bookingAndRoom(bookingsListCheckIn) as BookingInterface[]);
         break;
       case "Out":
-        setBookings(bookingAndRoom(bookingsListCheckOut));
+        setBookings(bookingAndRoom(bookingsListCheckOut) as BookingInterface[]);
         break;
       case "Pending":
-        setBookings(bookingAndRoom(bookingsListPending));
+        setBookings(bookingAndRoom(bookingsListPending) as BookingInterface[]);
         break;
       default:
         break;

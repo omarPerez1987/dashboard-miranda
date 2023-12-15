@@ -13,11 +13,13 @@ import {
   getContactsPublish,
 } from "../features/contact/contactsSlices";
 import { getContactsListApiThunk } from "../features/contact/contactsThunk";
+import { AppDispatch } from "../app/store";
+import { ContactInterface } from "../features/interfaces/contact/contactInterface";
 
 const ContactPage = () => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const contactsListData = useSelector(getContactsData);
-  const contactsListDataPublish = useSelector(getContactsPublish)
+  const contactsListDataPublish = useSelector(getContactsPublish);
   const contactsListArchived = useSelector(getContactsArchived);
   const contactsListStatus = useSelector(getContactStatus);
   const contactsListError = useSelector(getContactsError);
@@ -25,10 +27,10 @@ const ContactPage = () => {
 
   const [archived, setArchived] = useState(false);
 
-  const [newestListCard, setNewestListCard] = useState();
-  const [newest, setNewest] = useState(false);
-  const [contacts, setContacts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [newestListCard, setNewestListCard] = useState<ContactInterface[]>([]);
+  const [newest, setNewest] = useState<boolean>(false);
+  const [contacts, setContacts] = useState<ContactInterface[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
     if (contactsListStatus === "idle") {
@@ -63,18 +65,17 @@ const ContactPage = () => {
     }
   }, [newest, contactsListStatus, contactsListDataPublish]);
 
-  const orderContacts = (contactsList) => {
+  const orderContacts = (contactsList: ContactInterface[]) => {
     const orderedContacts = [...contactsList];
     orderedContacts.sort((a, b) => {
       const dateA = new Date(a.date.split(".").reverse().join("-"));
       const dateB = new Date(b.date.split(".").reverse().join("-"));
-      return dateA - dateB;
+      return dateA.getTime() - dateB.getTime();
     });
     return orderedContacts;
   };
 
-
-  const handlePageChange = (selectedPage) => {
+  const handlePageChange = (selectedPage: number) => {
     setCurrentPage(selectedPage);
   };
 

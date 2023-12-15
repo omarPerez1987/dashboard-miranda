@@ -13,13 +13,15 @@ import {
   getContactsPublish,
 } from "../features/contact/contactsSlices";
 import { getContactsListApiThunk } from "../features/contact/contactsThunk";
+import { AppDispatch } from "../app/store";
+import { ContactInterface } from "../features/interfaces/contact/contactInterface";
 
 const DashboardPage = () => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const contactsListDataPublish = useSelector(getContactsPublish)
   const contactsListStatus = useSelector(getContactStatus);
   const contactsListError = useSelector(getContactsError);
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState<ContactInterface[]>([]);
   const [spinner, setSpinner] = useState(true);
 
   useEffect(() => {
@@ -38,7 +40,7 @@ const DashboardPage = () => {
     orderedContacts.sort((a, b) => {
       const dateA = new Date(a.date.split(".").reverse().join("-"));
       const dateB = new Date(b.date.split(".").reverse().join("-"));
-      return dateA - dateB;
+      return dateA.getTime() - dateB.getTime();
     });
     return orderedContacts;
   };

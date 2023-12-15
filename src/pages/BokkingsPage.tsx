@@ -96,7 +96,7 @@ const BokkingsPage = () => {
         orderedBookingsDate.sort((a, b) => {
           const dateA = new Date(a.orderDate.split(".").reverse().join("-"));
           const dateB = new Date(b.orderDate.split(".").reverse().join("-"));
-          return dateA - dateB;
+          return dateA.getTime() - dateB.getTime();
         });
         return orderedBookingsDate;
       case "entryDate":
@@ -104,7 +104,7 @@ const BokkingsPage = () => {
         orderedBookingsCheckin.sort((a, b) => {
           const dateA = new Date(a.checkin.split(".").reverse().join("-"));
           const dateB = new Date(b.checkin.split(".").reverse().join("-"));
-          return dateA - dateB;
+          return dateA.getTime() - dateB.getTime();
         });
         return orderedBookingsCheckin;
       case "outDate":
@@ -112,7 +112,7 @@ const BokkingsPage = () => {
         orderedBookingsCheckOut.sort((a, b) => {
           const dateA = new Date(a.checkout.split(".").reverse().join("-"));
           const dateB = new Date(b.checkout.split(".").reverse().join("-"));
-          return dateA - dateB;
+          return dateA.getTime() - dateB.getTime();
         });
         return orderedBookingsCheckOut;
 

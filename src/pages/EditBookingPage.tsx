@@ -17,6 +17,7 @@ import {
 import { getRoomsAvailable } from "../features/rooms/roomsSlices";
 import { useNavigate, useParams } from "react-router-dom";
 import { MainStyled } from "../componentsStyle/general/MainStyled";
+import { BookingInterface } from "../features/interfaces/bookings/bookingsInterface";
 
 const EditBookingPage = () => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const EditBookingPage = () => {
   const { id } = useParams();
   const [availableRooms, setAvailableRooms] = useState([]);
 
-  const [booking, setBooking] = useState({
+  const [booking, setBooking] = useState<BookingInterface>({
     id: "",
     name: "",
     orderDate: "",
@@ -56,12 +57,12 @@ const EditBookingPage = () => {
     }));
   }, [bookingListData]);
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setBooking((prevBooking) => ({ ...prevBooking, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(updateBooking(booking));
     toast.success("Reserva editada exitosamente");

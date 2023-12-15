@@ -29,10 +29,15 @@ import {
   ContainerModalFlexStyled,
 } from "../componentsStyle/modal/ModalStyled";
 import { toast } from "react-toastify";
+import { AppDispatch } from "../app/store";
+import {
+  BookingDetailsInterface,
+  BookingInterface,
+} from "../features/interfaces/bookings/bookingsInterface";
 
 const BookingDetailsPage = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const { id } = useParams();
   const bookingsListData = useSelector(getBookingsData);
   const bookingsListStatus = useSelector(getBookingsStatus);
@@ -40,7 +45,9 @@ const BookingDetailsPage = () => {
   const roomsListData = useSelector(getRoomsData);
   const [spinner, setSpinner] = useState(true);
 
-  const [details, setDetails] = useState({});
+  const [details, setDetails] = useState<BookingDetailsInterface | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     const fetchData = () => {
@@ -96,117 +103,123 @@ const BookingDetailsPage = () => {
         ) : (
           <>
             {details && (
-              <BookingDetailsStyled>
-                <DetailsTextStyled>
-                  <DetailsInfoPersonStyled>
-                    <div className="container-image-info">
-                      <img src={details.photo} alt="" />
-                      <div className="container-namebutton">
-                        <h1>{details.name}</h1>
-                        <h6>{details.id}</h6>
-                        <div className="container-phone">
-                          <FaPhone />
-                          <button className="container-phone__button">
-                            <BiMessageSquareDetail className="container-phone__button__icon" />
-                            Send Message
-                          </button>
+              <>
+                <BookingDetailsStyled>
+                  <DetailsTextStyled>
+                    <DetailsInfoPersonStyled>
+                      <div className="container-image-info">
+                        <img src={details.photo} alt="" />
+                        <div className="container-namebutton">
+                          <h1>{details.name}</h1>
+                          <h6>{details.id}</h6>
+                          <div className="container-phone">
+                            <FaPhone />
+                            <button className="container-phone__button">
+                              <BiMessageSquareDetail className="container-phone__button__icon" />
+                              Send Message
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <SlOptionsVertical />
-                  </DetailsInfoPersonStyled>
-                  <DetailsCheckStyled>
-                    <div className="box-check">
-                      <h6>Check in</h6>
-                      <h3>
-                        {details.checkin} | {details.checkinTime}
-                      </h3>
-                    </div>
-                    <div className="box-check">
-                      <h6>Check out</h6>
-                      <h3>
-                        {details.checkout} | {details.checkoutTime}
-                      </h3>
-                    </div>
-                  </DetailsCheckStyled>
-                  <DetailsInfoRoomStyled>
-                    <div className="container-room">
-                      <div className="container-room__info">
-                        <h6>Room Info</h6>
-                        <h3>{details.room}</h3>
-                      </div>
-                      <div className="container-room__info">
-                        <h6>Price</h6>
+                      <SlOptionsVertical />
+                    </DetailsInfoPersonStyled>
+                    <DetailsCheckStyled>
+                      <div className="box-check">
+                        <h6>Check in</h6>
                         <h3>
-                          ${details.price}
-                          <span> /night</span>
+                          {details.checkin} | {details.checkinTime}
                         </h3>
                       </div>
-                    </div>
-                    {details.notes ? <p>{details.notes}</p> : <h1>No notes</h1>}
-                  </DetailsInfoRoomStyled>
-                  <DetailsInfoFacilitiesStyled>
-                    <h6>Facilities</h6>
-                    <div className="container-buttons">
-                      {details.facilities.map((item, index) => (
-                        <DetailsButtonfacilitiesStyled key={index}>
-                          {item}
-                        </DetailsButtonfacilitiesStyled>
-                      ))}
-                    </div>
-                  </DetailsInfoFacilitiesStyled>
-                </DetailsTextStyled>
+                      <div className="box-check">
+                        <h6>Check out</h6>
+                        <h3>
+                          {details.checkout} | {details.checkoutTime}
+                        </h3>
+                      </div>
+                    </DetailsCheckStyled>
+                    <DetailsInfoRoomStyled>
+                      <div className="container-room">
+                        <div className="container-room__info">
+                          <h6>Room Info</h6>
+                          <h3>{details.room}</h3>
+                        </div>
+                        <div className="container-room__info">
+                          <h6>Price</h6>
+                          <h3>
+                            ${details.price}
+                            <span> /night</span>
+                          </h3>
+                        </div>
+                      </div>
+                      {details.notes ? (
+                        <p>{details.notes}</p>
+                      ) : (
+                        <h1>No notes</h1>
+                      )}
+                    </DetailsInfoRoomStyled>
+                    <DetailsInfoFacilitiesStyled>
+                      <h6>Facilities</h6>
+                      <div className="container-buttons">
+                        {details.facilities.map((item, index) => (
+                          <DetailsButtonfacilitiesStyled key={index}>
+                            {item}
+                          </DetailsButtonfacilitiesStyled>
+                        ))}
+                      </div>
+                    </DetailsInfoFacilitiesStyled>
+                  </DetailsTextStyled>
 
-                <DetailsImageStyled>
-                  <div className="container-label">
-                    {details.status === "in" && (
-                      <DetailsLabelStyled type={details.status}>
-                        <p>booked</p>
-                      </DetailsLabelStyled>
-                    )}
-                    {details.status === "out" && (
-                      <DetailsLabelStyled type={details.status}>
-                        <p>free</p>
-                      </DetailsLabelStyled>
-                    )}
-                    {details.status === "pending" && (
-                      <DetailsLabelStyled type={details.status}>
-                        <p>pending</p>
-                      </DetailsLabelStyled>
-                    )}
-                  </div>
-                  <img src={details.photo} alt="" />
-                  <div className="container-text">
-                    <h1>Bed Room</h1>
-                    {details.notes ? (
-                      <p>{`${details.notes.slice(0, 100)}...`}</p>
-                    ) : (
-                      <h1>No notes</h1>
-                    )}
-                  </div>
-                </DetailsImageStyled>
-              </BookingDetailsStyled>
+                  <DetailsImageStyled>
+                    <div className="container-label">
+                      {details.status === "in" && (
+                        <DetailsLabelStyled type={details.status}>
+                          <p>booked</p>
+                        </DetailsLabelStyled>
+                      )}
+                      {details.status === "out" && (
+                        <DetailsLabelStyled type={details.status}>
+                          <p>free</p>
+                        </DetailsLabelStyled>
+                      )}
+                      {details.status === "pending" && (
+                        <DetailsLabelStyled type={details.status}>
+                          <p>pending</p>
+                        </DetailsLabelStyled>
+                      )}
+                    </div>
+                    <img src={details.photo} alt="" />
+                    <div className="container-text">
+                      <h1>Bed Room</h1>
+                      {details.notes ? (
+                        <p>{`${details.notes.slice(0, 100)}...`}</p>
+                      ) : (
+                        <h1>No notes</h1>
+                      )}
+                    </div>
+                  </DetailsImageStyled>
+                </BookingDetailsStyled>
+                <ContainerModalFlexStyled>
+                  <ButtonModalStyled
+                    type="submit"
+                    color="edit"
+                    onClick={() => navigate(`/home/edit-booking/${details.id}`)}
+                  >
+                    Edit
+                  </ButtonModalStyled>
+
+                  <ButtonModalStyled
+                    type="button"
+                    onClick={() => {
+                      dispatch(deleteBooking(details.id)),
+                        toast.warn("Reserva eliminada con éxito");
+                      navigate("/home/bookings");
+                    }}
+                  >
+                    Delete
+                  </ButtonModalStyled>
+                </ContainerModalFlexStyled>
+              </>
             )}
-            <ContainerModalFlexStyled>
-              <ButtonModalStyled
-                type="submit"
-                color="edit"
-                onClick={() => navigate(`/home/edit-booking/${details.id}`)}
-              >
-                Edit
-              </ButtonModalStyled>
-
-              <ButtonModalStyled
-                type="button"
-                onClick={() => {
-                  dispatch(deleteBooking(details.id)),
-                    toast.warn("Reserva eliminada con éxito");
-                  navigate("/home/bookings");
-                }}
-              >
-                Delete
-              </ButtonModalStyled>
-            </ContainerModalFlexStyled>
           </>
         )}
       </MainStyled>

@@ -215,7 +215,7 @@ export const DetailsImageStyled = styled.div`
     }
   }
 `;
-export const DetailsLabelStyled = styled.label`
+export const DetailsLabelStyled = styled.label<{type: string}>`
   position: relative;
   margin-top: 2.8em;
   margin-right: -4.7em;

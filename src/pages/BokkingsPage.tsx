@@ -4,7 +4,7 @@ import TableBookings from "../components/tables/Bokkings/TableBookings";
 import { MainStyled } from "../componentsStyle/general/MainStyled";
 import { SpinnerStyled } from "../componentsStyle/general/SpinnerStyled";
 import FooterTable from "../components/tables/FooterTable";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   getBookingsData,
   getBookingsError,
@@ -16,22 +16,27 @@ import {
 import { getBookingsListThunk } from "../features/bookings/bookingsThunks";
 import { getRoomsData } from "../features/rooms/roomsSlices";
 import { getRoomsListApiThunk } from "../features/rooms/roomsThunk";
-import { AppDispatch } from "../app/store";
-import { BookingInterface } from "../features/interfaces/bookings/bookingsInterface";
-import { RoomsInterface } from "../features/interfaces/rooms/roomsInterface";
+import { AppDispatch, useAppSelector } from "../app/store";
+import { BookingInterface } from "../interfaces/bookings/bookingsInterface";
+import { RoomsInterface } from "../interfaces/rooms/roomsInterface";
 
 const BokkingsPage = () => {
   const dispatch: AppDispatch = useDispatch();
-  const bookingsListData = useSelector(getBookingsData);
-  const bookingsListCheckIn = useSelector(getRoomsCheckIn);
-  const bookingsListCheckOut = useSelector(getRoomsCheckOut);
-  const bookingsListPending = useSelector(getRoomsCheckPending);
-  const bookingsListStatus = useSelector(getBookingsStatus);
-  const bookingsListError = useSelector(getBookingsError);
-  const roomsListData = useSelector(getRoomsData);
-  const [spinner, setSpinner] = useState(true);
+  const bookingsListData = useAppSelector<BookingInterface[]>(getBookingsData);
+  const bookingsListCheckIn =
+    useAppSelector<BookingInterface[]>(getRoomsCheckIn);
+  const bookingsListCheckOut =
+    useAppSelector<BookingInterface[]>(getRoomsCheckOut);
+  const bookingsListPending =
+    useAppSelector<BookingInterface[]>(getRoomsCheckPending);
+  const bookingsListStatus = useAppSelector<string>(getBookingsStatus);
+  const bookingsListError = useAppSelector<string | undefined>(
+    getBookingsError
+  );
+  const roomsListData = useAppSelector<RoomsInterface[]>(getRoomsData);
+  const [spinner, setSpinner] = useState<boolean>(true);
 
-  const [stateStatus, setStateStatus] = useState("All");
+  const [stateStatus, setStateStatus] = useState<string>("All");
   const [bookings, setBookings] = useState<BookingInterface[]>([]);
   const [rooms, setRooms] = useState<RoomsInterface[]>([]);
 

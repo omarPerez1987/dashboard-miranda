@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import bookings from "../../JSON/bookings.json";
-import { BookingInterface } from "../interfaces/bookings/bookingsInterface";
+import { BookingInterface } from "../../interfaces/bookings/bookingsInterface";
 
 export const getBookingsListThunk = createAsyncThunk(
   "bookings/getBookingsFromApi",

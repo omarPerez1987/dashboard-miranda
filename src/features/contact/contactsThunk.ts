@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import contacts from "../../JSON/contact.json";
-import { ContactInterface } from "../interfaces/contact/contactInterface";
+import { ContactInterface } from "../../interfaces/contact/contactInterface";
 
 export const getContactsListApiThunk = createAsyncThunk(
   "contact/getRoomsFromApi",

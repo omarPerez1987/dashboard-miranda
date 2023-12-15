@@ -15,7 +15,7 @@ import {
 import { FaPhone } from "react-icons/fa6";
 import { BiMessageSquareDetail } from "react-icons/bi";
 import { SlOptionsVertical } from "react-icons/sl";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   deleteBooking,
   getBookingsData,
@@ -29,25 +29,24 @@ import {
   ContainerModalFlexStyled,
 } from "../componentsStyle/modal/ModalStyled";
 import { toast } from "react-toastify";
-import { AppDispatch } from "../app/store";
+import { AppDispatch, useAppSelector } from "../app/store";
 import {
   BookingDetailsInterface,
   BookingInterface,
-} from "../features/interfaces/bookings/bookingsInterface";
+} from "../interfaces/bookings/bookingsInterface";
+import { RoomsInterface } from "../interfaces/rooms/roomsInterface";
 
 const BookingDetailsPage = () => {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const { id } = useParams();
-  const bookingsListData = useSelector(getBookingsData);
-  const bookingsListStatus = useSelector(getBookingsStatus);
-  const roomsListStatus = useSelector(getRoomsStatus);
-  const roomsListData = useSelector(getRoomsData);
-  const [spinner, setSpinner] = useState(true);
+  const bookingsListData = useAppSelector<BookingInterface[]>(getBookingsData);
+  const bookingsListStatus = useAppSelector<string>(getBookingsStatus);
+  const roomsListStatus = useAppSelector<string>(getRoomsStatus);
+  const roomsListData = useAppSelector<RoomsInterface[]>(getRoomsData);
+  const [spinner, setSpinner] = useState<boolean>(true);
 
-  const [details, setDetails] = useState<BookingDetailsInterface | undefined>(
-    undefined
-  );
+  const [details, setDetails] = useState<BookingDetailsInterface | undefined>();
 
   useEffect(() => {
     const fetchData = () => {

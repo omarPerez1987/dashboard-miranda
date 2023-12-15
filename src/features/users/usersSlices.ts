@@ -1,7 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { getUsersListApiThunk } from "./usersThunks";
-import { UsersSliceInitialStateInterface } from "../interfaces/users/userSliceInterface";
-import { UsersInterfaces } from "../interfaces/users/usersInterfaces";
+import { UsersSliceInitialStateInterface } from "../../interfaces/users/userSliceInterface";
+import { UsersInterfaces } from "../../interfaces/users/usersInterfaces";
+import { RootState } from "../../app/store";
 
 const initialState: UsersSliceInitialStateInterface = {
   data: [],
@@ -13,11 +14,11 @@ export const usersSlice = createSlice({
   name: "users",
   initialState: initialState,
   reducers: {
-    addUser: (state, action: PayloadAction<UsersInterfaces>): void => {
+    addUser: (state, action): void => {
       state.data = [action.payload, ...state.data];
     },
 
-    updateUser: (state, action: PayloadAction<UsersInterfaces>): void => {
+    updateUser: (state, action): void => {
       const index = state.data.findIndex(
         (user) => user.id === action.payload.id
       );
@@ -26,7 +27,7 @@ export const usersSlice = createSlice({
       }
     },
 
-    deleteUser: (state, action: PayloadAction<UsersInterfaces>): void => {
+    deleteUser: (state, action): void => {
       state.data = state.data.filter((user) => user.id !== action.payload);
     },
   },
@@ -46,11 +47,13 @@ export const usersSlice = createSlice({
   },
 });
 export const { addUser, updateUser, deleteUser } = usersSlice.actions;
-export const getUsersData = (state): UsersInterfaces[] => state.users.data;
-export const getUsersStatus = (state) => state.users.status;
-export const getUsersError = (state) => state.users.error;
+export const getUsersData = (state: RootState): UsersInterfaces[] =>
+  state.users.data;
+export const getUsersStatus = (state: RootState): string => state.users.status;
+export const getUsersError = (state: RootState): string | undefined =>
+  state.users.error;
 
-export const getUsersActive = (state) =>
+export const getUsersActive = (state: RootState): UsersInterfaces[] =>
   state.users.data.filter((user) => user.status === "true");
-export const getUsersInactive = (state) =>
+export const getUsersInactive = (state: RootState): UsersInterfaces[] =>
   state.users.data.filter((user) => user.status === "false");

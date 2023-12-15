@@ -14,7 +14,7 @@ import {
 } from "../features/contact/contactsSlices";
 import { getContactsListApiThunk } from "../features/contact/contactsThunk";
 import { AppDispatch } from "../app/store";
-import { ContactInterface } from "../features/interfaces/contact/contactInterface";
+import { ContactInterface } from "../interfaces/contact/contactInterface";
 
 const DashboardPage = () => {
   const dispatch: AppDispatch = useDispatch();

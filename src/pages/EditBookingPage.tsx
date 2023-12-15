@@ -18,6 +18,7 @@ import { getRoomsAvailable } from "../features/rooms/roomsSlices";
 import { useNavigate, useParams } from "react-router-dom";
 import { MainStyled } from "../componentsStyle/general/MainStyled";
 import { BookingInterface } from "../features/interfaces/bookings/bookingsInterface";
+import { RoomsInterface } from "../features/interfaces/rooms/roomsInterface";
 
 const EditBookingPage = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const EditBookingPage = () => {
   const roomsListAvailable = useSelector(getRoomsAvailable);
   const dispatch = useDispatch();
   const { id } = useParams();
-  const [availableRooms, setAvailableRooms] = useState([]);
+  const [availableRooms, setAvailableRooms] = useState<RoomsInterface[]>([]);
 
   const [booking, setBooking] = useState<BookingInterface>({
     id: "",

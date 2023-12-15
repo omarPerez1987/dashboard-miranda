@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import rooms from "../../JSON/rooms.json";
-import { RoomsInterface } from "../interfaces/rooms/roomsInterface";
+import { RoomsInterface } from "../../interfaces/rooms/roomsInterface";
 
 
 export const getRoomsListApiThunk = createAsyncThunk(

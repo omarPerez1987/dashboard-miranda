@@ -4,7 +4,7 @@ import CardReviews from "../components/cardReviews/CardReviews";
 import TableContact from "../components/tables/Contact/TableContact";
 import OrderTableContact from "../components/tables/Contact/OrderTableContact";
 import FooterTable from "../components/tables/FooterTable";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   getContactsData,
   getContactStatus,
@@ -13,19 +13,23 @@ import {
   getContactsPublish,
 } from "../features/contact/contactsSlices";
 import { getContactsListApiThunk } from "../features/contact/contactsThunk";
-import { AppDispatch } from "../app/store";
-import { ContactInterface } from "../features/interfaces/contact/contactInterface";
+import { AppDispatch, useAppSelector } from "../app/store";
+import { ContactInterface } from "../interfaces/contact/contactInterface";
 
 const ContactPage = () => {
   const dispatch: AppDispatch = useDispatch();
-  const contactsListData = useSelector(getContactsData);
-  const contactsListDataPublish = useSelector(getContactsPublish);
-  const contactsListArchived = useSelector(getContactsArchived);
-  const contactsListStatus = useSelector(getContactStatus);
-  const contactsListError = useSelector(getContactsError);
-  const [spinner, setSpinner] = useState(true);
+  const contactsListData = useAppSelector<ContactInterface[]>(getContactsData);
+  const contactsListDataPublish =
+    useAppSelector<ContactInterface[]>(getContactsPublish);
+  const contactsListArchived =
+    useAppSelector<ContactInterface[]>(getContactsArchived);
+  const contactsListStatus = useAppSelector<string>(getContactStatus);
+  const contactsListError = useAppSelector<string | undefined>(
+    getContactsError
+  );
+  const [spinner, setSpinner] = useState<boolean>(true);
 
-  const [archived, setArchived] = useState(false);
+  const [archived, setArchived] = useState<boolean>(false);
 
   const [newestListCard, setNewestListCard] = useState<ContactInterface[]>([]);
   const [newest, setNewest] = useState<boolean>(false);
@@ -43,7 +47,7 @@ const ContactPage = () => {
     }
   }, [dispatch, contactsListData, contactsListStatus, archived]);
 
-  const switchContactList = () => {
+  const switchContactList = (): void => {
     if (archived) {
       setContacts(contactsListArchived);
     } else {

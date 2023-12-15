@@ -130,12 +130,12 @@ const BokkingsPage = () => {
 
   useEffect(() => {
     const orderedBookings = orderBookings();
-    setBookings(orderedBookings);
+    setBookings(orderedBookings as BookingInterface[]);
   }, [selectFooter]);
 
   //PAGINATION***************************************
 
-  const handlePageChange = (selectedPage) => {
+  const handlePageChange = (selectedPage: number) => {
     setCurrentPage(selectedPage);
   };
 

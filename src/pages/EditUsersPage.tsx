@@ -15,11 +15,13 @@ import {
 } from "../features/users/usersSlices";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
+import { AppDispatch, useAppSelector } from "../app/store";
+import { UsersInterfaces } from "../interfaces/users/usersInterfaces";
 
 const EditUsersPage = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const usersListData = useSelector(getUsersData);
+  const dispatch: AppDispatch = useDispatch();
+  const usersListData = useAppSelector<UsersInterfaces[]>(getUsersData);
   const { id } = useParams();
 
   const [user, setUser] = useState({
@@ -35,34 +37,42 @@ const EditUsersPage = () => {
 
   useEffect(() => {
     const searchUser = usersListData.find((user) => user.id.toString() === id);
-    setUser(searchUser);
+    if (searchUser) {
+      setUser(searchUser);
+    }
   }, [usersListData]);
 
-  const handleChange = (event) => {
+  const handleChange = (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { name, value } = event.target;
     setUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
 
-  const handleSubmit = (event, user) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(updateUser(user));
     toast.success("Usuario editado con exito!");
     navigate("/home/users");
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: string) => {
     dispatch(deleteUser(id));
     toast.warn("Usuario eliminado con exito!");
     navigate("/home/users");
   };
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    setUser((prevUser) => ({ ...prevUser, image: file }));
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setUser((prevUser) => ({ ...prevUser, image: file }));
+    }
   };
 
   return (
-    <EditStyled onSubmit={(event) => handleSubmit(event, user)}>
+    <EditStyled onSubmit={handleSubmit}>
       <ModalFormStyled>
         <CiCircleRemove onClick={() => navigate("/home/users")} />
         <h1>EDIT USER</h1>
@@ -103,7 +113,6 @@ const EditUsersPage = () => {
         <label>Description</label>
         <textarea
           placeholder="..."
-          type="text"
           name="description"
           value={user.description}
           onChange={handleChange}
@@ -122,7 +131,6 @@ const EditUsersPage = () => {
         <label>Status</label>
 
         <select
-          type="text"
           name="status"
           value={user.status}
           onChange={handleChange}

@@ -17,14 +17,15 @@ import {
 import { getRoomsAvailable } from "../features/rooms/roomsSlices";
 import { useNavigate, useParams } from "react-router-dom";
 import { MainStyled } from "../componentsStyle/general/MainStyled";
-import { BookingInterface } from "../features/interfaces/bookings/bookingsInterface";
-import { RoomsInterface } from "../features/interfaces/rooms/roomsInterface";
+import { RoomsInterface } from "../interfaces/rooms/roomsInterface";
+import { BookingInterface } from "../interfaces/bookings/bookingsInterface";
+import { AppDispatch, useAppSelector } from "../app/store";
 
 const EditBookingPage = () => {
   const navigate = useNavigate();
-  const bookingListData = useSelector(getBookingsData);
-  const roomsListAvailable = useSelector(getRoomsAvailable);
-  const dispatch = useDispatch();
+  const bookingListData = useAppSelector<BookingInterface[]>(getBookingsData);
+  const roomsListAvailable = useAppSelector<RoomsInterface[]>(getRoomsAvailable);
+  const dispatch: AppDispatch = useDispatch();
   const { id } = useParams();
   const [availableRooms, setAvailableRooms] = useState<RoomsInterface[]>([]);
 
@@ -46,8 +47,11 @@ const EditBookingPage = () => {
     const searchBooking = bookingListData.find(
       (booking) => booking.id.toString() === id
     );
-    setBooking(searchBooking);
-    setAvailableRooms(roomsListAvailable);
+  
+    if (searchBooking) {
+      setBooking(searchBooking);
+      setAvailableRooms(roomsListAvailable);
+    }
   }, [bookingListData, id]);
 
   useEffect(() => {
@@ -58,7 +62,11 @@ const EditBookingPage = () => {
     }));
   }, [bookingListData]);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
     const { name, value } = event.target;
     setBooking((prevBooking) => ({ ...prevBooking, [name]: value }));
   };
@@ -149,7 +157,6 @@ const EditBookingPage = () => {
         <LabelFormStyled>Special Request</LabelFormStyled>
         <TextAreaFormStyled
           placeholder="Special Request..."
-          type="text"
           name="notes"
           value={booking.notes}
           onChange={handleChange}

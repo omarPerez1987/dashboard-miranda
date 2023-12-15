@@ -6,23 +6,26 @@ import { RiLoginBoxLine } from "react-icons/ri";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import CardReviews from "../components/cardReviews/CardReviews";
 import { DashboardMainStyled } from "../componentsStyle/general/DashboardMainStyled";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   getContactStatus,
   getContactsError,
   getContactsPublish,
 } from "../features/contact/contactsSlices";
 import { getContactsListApiThunk } from "../features/contact/contactsThunk";
-import { AppDispatch } from "../app/store";
+import { AppDispatch, useAppSelector } from "../app/store";
 import { ContactInterface } from "../interfaces/contact/contactInterface";
 
 const DashboardPage = () => {
   const dispatch: AppDispatch = useDispatch();
-  const contactsListDataPublish = useSelector(getContactsPublish)
-  const contactsListStatus = useSelector(getContactStatus);
-  const contactsListError = useSelector(getContactsError);
+  const contactsListDataPublish =
+    useAppSelector<ContactInterface[]>(getContactsPublish);
+  const contactsListStatus = useAppSelector<string>(getContactStatus);
+  const contactsListError = useAppSelector<string | undefined>(
+    getContactsError
+  );
   const [contacts, setContacts] = useState<ContactInterface[]>([]);
-  const [spinner, setSpinner] = useState(true);
+  const [spinner, setSpinner] = useState<boolean>(true);
 
   useEffect(() => {
     if (contactsListStatus === "idle") {

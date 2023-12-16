@@ -9,10 +9,12 @@ import { PiDotsThreeVerticalBold } from "react-icons/pi";
 import { ButtonVariantStyled } from "../../../componentsStyle/general/ButtonStyled";
 import ModalNotesBookings from "../../modal/ModalNotesBookings";
 
+
+
 const TableBookings = ({ bookings }) => {
   const navigate = useNavigate();
-  const [openModal, setOpenModal] = useState(false);
-  const [infoNotes, setInfoNotes] = useState(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [infoNotes, setInfoNotes] = useState<string>('');
 
   return (
     <>

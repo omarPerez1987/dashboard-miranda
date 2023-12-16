@@ -10,6 +10,7 @@ export interface BookingInterface {
   notes: string;
   idRoom: string;
   check: string;
+  photo: string;
 }
 
 export interface BookingDetailsInterface {

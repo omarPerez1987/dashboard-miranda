@@ -4,8 +4,9 @@ import {
   ModalStyled,
 } from "../../componentsStyle/modal/ModalStyled";
 import { ButtonVariantStyled } from "../../componentsStyle/general/ButtonStyled";
+import { ModalNotesBookingsProps } from "../../interfaces/propsInterface/propsInterface";
 
-const ModalNotesBookings = ({ notes, setOpenModal }) => {
+const ModalNotesBookings: React.FC<ModalNotesBookingsProps> = ({ notes, setOpenModal }) => {
   return (
     <ModalStyled>
       <CardModalStyled>

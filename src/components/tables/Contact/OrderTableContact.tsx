@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import { OrderTableStyled } from "../../../componentsStyle/tables/OrderTableStyled";
 import { NewestButton } from "../../../componentsStyle/general/ButtonStyled";
 import { IoIosArrowDown } from "react-icons/io";
+import { OrderTableContactsProps } from "../../../interfaces/propsInterface/propsInterface";
 
-const OrderTableContact = ({ setArchived, setNewest }) => {
-  const [origin, setOrigin] = useState(true);
+const OrderTableContact: React.FC<OrderTableContactsProps> = ({
+  setArchived,
+  setNewest,
+}) => {
+  const [origin, setOrigin] = useState<boolean>(true);
 
   return (
     <OrderTableStyled>

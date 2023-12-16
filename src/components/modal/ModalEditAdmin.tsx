@@ -8,9 +8,11 @@ import { CiCircleRemove } from "react-icons/ci";
 import { useDispatch } from "react-redux";
 import { updateAdmin } from "../../features/admin/adminSlice";
 import { toast } from "react-toastify";
+import { AppDispatch } from "../../app/store";
+import { ModalEditAdminProps } from "../../interfaces/propsInterface/propsInterface";
 
-const ModalEditAdmin = ({ setOpenModal }) => {
-  const dispatch = useDispatch();
+const ModalEditAdmin: React.FC<ModalEditAdminProps> = ({ setOpenModal }) => {
+  const dispatch: AppDispatch = useDispatch();
 
   const initialStateForm = {
     name: "",
@@ -18,12 +20,12 @@ const ModalEditAdmin = ({ setOpenModal }) => {
     password: "9999",
   };
   const [formData, setFormData] = useState(initialStateForm);
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     localStorage.setItem("formData", JSON.stringify(formData));
     dispatch(updateAdmin(formData));

@@ -40,8 +40,8 @@ const BokkingsPage = () => {
   const [bookings, setBookings] = useState<BookingInterface[]>([]);
   const [rooms, setRooms] = useState<RoomsInterface[]>([]);
 
-  const [selectFooter, setSelectFooter] = useState("date");
-  const [currentPage, setCurrentPage] = useState(1);
+  const [selectFooter, setSelectFooter] = useState<string>("date");
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
     if (bookingsListStatus === "idle") {

@@ -14,7 +14,7 @@ import ModalEditAdmin from "../modal/ModalEditAdmin";
 const NavMenu = ({ menuOpen }: { menuOpen: boolean }) => {
   const adminData = JSON.parse(localStorage.getItem("formData") || "null");
 
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
   return (
     <>
       {menuOpen && (

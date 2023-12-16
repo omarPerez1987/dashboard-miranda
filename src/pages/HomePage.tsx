@@ -8,7 +8,7 @@ import { ColumnStyled } from "../componentsStyle/general/ColumnStyled";
 const HomePage = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(true);
 
-  const hiddenMenu = () => {
+  const hiddenMenu = (): void => {
     setMenuOpen(!menuOpen);
   };
 

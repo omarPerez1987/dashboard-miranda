@@ -9,7 +9,7 @@ import {
   TextAreaFormStyled,
 } from "../componentsStyle/forms/FormStyled";
 import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   getBookingsData,
   updateBooking,
@@ -24,7 +24,8 @@ import { AppDispatch, useAppSelector } from "../app/store";
 const EditBookingPage = () => {
   const navigate = useNavigate();
   const bookingListData = useAppSelector<BookingInterface[]>(getBookingsData);
-  const roomsListAvailable = useAppSelector<RoomsInterface[]>(getRoomsAvailable);
+  const roomsListAvailable =
+    useAppSelector<RoomsInterface[]>(getRoomsAvailable);
   const dispatch: AppDispatch = useDispatch();
   const { id } = useParams();
   const [availableRooms, setAvailableRooms] = useState<RoomsInterface[]>([]);
@@ -41,13 +42,19 @@ const EditBookingPage = () => {
     notes: "",
     idRoom: "",
     check: "",
+    photo: "",
+    room: "",
+    price: 0,
+    description: "",
+    facilities: [],
+    status: "",
   });
 
   useEffect(() => {
     const searchBooking = bookingListData.find(
       (booking) => booking.id.toString() === id
     );
-  
+
     if (searchBooking) {
       setBooking(searchBooking);
       setAvailableRooms(roomsListAvailable);

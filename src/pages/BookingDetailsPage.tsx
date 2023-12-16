@@ -30,10 +30,7 @@ import {
 } from "../componentsStyle/modal/ModalStyled";
 import { toast } from "react-toastify";
 import { AppDispatch, useAppSelector } from "../app/store";
-import {
-  BookingDetailsInterface,
-  BookingInterface,
-} from "../interfaces/bookings/bookingsInterface";
+import { BookingInterface } from "../interfaces/bookings/bookingsInterface";
 import { RoomsInterface } from "../interfaces/rooms/roomsInterface";
 
 const BookingDetailsPage = () => {
@@ -46,7 +43,7 @@ const BookingDetailsPage = () => {
   const roomsListData = useAppSelector<RoomsInterface[]>(getRoomsData);
   const [spinner, setSpinner] = useState<boolean>(true);
 
-  const [details, setDetails] = useState<BookingDetailsInterface | undefined>();
+  const [details, setDetails] = useState<BookingInterface | undefined>();
 
   useEffect(() => {
     const fetchData = () => {
@@ -107,7 +104,7 @@ const BookingDetailsPage = () => {
                   <DetailsTextStyled>
                     <DetailsInfoPersonStyled>
                       <div className="container-image-info">
-                        <img src={details.photo} alt="" />
+                        <img src={details.photo || ""} alt="" />
                         <div className="container-namebutton">
                           <h1>{details.name}</h1>
                           <h6>{details.id}</h6>
@@ -186,7 +183,7 @@ const BookingDetailsPage = () => {
                         </DetailsLabelStyled>
                       )}
                     </div>
-                    <img src={details.photo} alt="" />
+                    <img src={details.photo || ""} alt="" />
                     <div className="container-text">
                       <h1>Bed Room</h1>
                       {details.notes ? (

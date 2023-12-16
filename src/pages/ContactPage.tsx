@@ -47,7 +47,7 @@ const ContactPage = () => {
     }
   }, [dispatch, contactsListData, contactsListStatus, archived]);
 
-  const switchContactList = (): void => {
+  const switchContactList = () => {
     if (archived) {
       setContacts(contactsListArchived);
     } else {

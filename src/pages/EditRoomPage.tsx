@@ -93,7 +93,7 @@ const EditRoomPage = () => {
         <CiCircleRemove onClick={() => navigate("/home/rooms")} />
         <h1>EDIT ROOM</h1>
         <ContainerModalImageStyled>
-          <img src={room.photo} alt="" />
+          <img src={room.photo || ''} alt="" />
         </ContainerModalImageStyled>
 
         <label>Photo</label>

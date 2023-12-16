@@ -1,4 +1,3 @@
-import { BookingInterface } from "../bookings/bookingsInterface";
 import { ContactInterface } from "../contact/contactInterface";
 import { RoomsInterface } from "../rooms/roomsInterface";
 import { UsersInterfaces } from "../users/usersInterfaces";
@@ -28,6 +27,16 @@ export interface ModalReviewsProps {
   review: string;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+export interface ButtonFacilityFormStyledProps {
+  selected: boolean;
+  onClick: () => void;
+  label: string;
+}
+
+
+
+// Tables *********************************************************
 
 export interface OrderTableBookingsProps {
   setStateStatus: (status: string) => void;

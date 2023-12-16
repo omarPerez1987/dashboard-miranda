@@ -38,7 +38,7 @@ const TableBookings: React.FC<TableBookingsProps> = ({ bookings }) => {
             bookings.map((data) => (
               <TrbodyStyled key={data.id}>
                 <TdbodyNameStyled>
-                  <img src={data.photo} alt="" />
+                  <img src={data.photo || ""} alt="" />
                   <div>
                     <span>{data.id}</span>
                     <p>{data.name}</p>

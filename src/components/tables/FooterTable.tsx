@@ -1,12 +1,16 @@
-import ReactPaginate from 'react-paginate';
+import ReactPaginate from "react-paginate";
 import { FooterTableStyled } from "../../componentsStyle/tables/FooterTableStyled";
+import { FooterTableProps } from "../../interfaces/propsInterface/propsInterface";
 
-const FooterTable = ({ currentPage, onPageChange, numberOfItems }) => {
-
+const FooterTable: React.FC<FooterTableProps> = ({
+  currentPage,
+  onPageChange,
+  numberOfItems,
+}) => {
   const itemsPerPage = 10;
   const endIndex = Math.min(currentPage * itemsPerPage, numberOfItems);
 
-  const handlePageClick = (data) => {
+  const handlePageClick = (data: { selected: number }) => {
     const selectedPage = data.selected + 1;
     onPageChange(selectedPage);
   };
@@ -14,7 +18,9 @@ const FooterTable = ({ currentPage, onPageChange, numberOfItems }) => {
   return (
     <FooterTableStyled>
       <div>
-        <p>Showing {endIndex} of {numberOfItems} Data</p>
+        <p>
+          Showing {endIndex} of {numberOfItems} Data
+        </p>
       </div>
       <div className="container-pagination">
         <ReactPaginate
@@ -22,8 +28,8 @@ const FooterTable = ({ currentPage, onPageChange, numberOfItems }) => {
           pageRangeDisplayed={4}
           marginPagesDisplayed={1}
           onPageChange={handlePageClick}
-          containerClassName={'pagination'}
-          activeClassName={'active'}
+          containerClassName={"pagination"}
+          activeClassName={"active"}
           forcePage={currentPage - 1}
         />
       </div>
@@ -32,4 +38,3 @@ const FooterTable = ({ currentPage, onPageChange, numberOfItems }) => {
 };
 
 export default FooterTable;
-

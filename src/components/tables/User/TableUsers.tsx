@@ -8,8 +8,9 @@ import { PiDotsThreeVerticalBold } from "react-icons/pi";
 import { IconTelTable } from "../../../componentsStyle/general/IconStyled";
 import { ButtonVariantStyled } from "../../../componentsStyle/general/ButtonStyled";
 import { useNavigate } from "react-router-dom";
+import { TableUsersProps } from "../../../interfaces/propsInterface/propsInterface";
 
-const TableUsers = ({ users }) => {
+const TableUsers: React.FC<TableUsersProps> = ({ users }) => {
   const navigate = useNavigate();
 
   return (

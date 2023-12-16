@@ -8,10 +8,13 @@ import { TdbodyNameStyled } from "../../../componentsStyle/tables/TdbodyNameStyl
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
 import { ButtonVariantStyled } from "../../../componentsStyle/general/ButtonStyled";
 import ModalNotesBookings from "../../modal/ModalNotesBookings";
+import { BookingInterface } from "../../../interfaces/bookings/bookingsInterface";
 
+interface TableBookingsProps {
+  bookings: BookingInterface[];
+}
 
-
-const TableBookings = ({ bookings }) => {
+const TableBookings: React.FC<TableBookingsProps> = ({ bookings }) => {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [infoNotes, setInfoNotes] = useState<string>('');

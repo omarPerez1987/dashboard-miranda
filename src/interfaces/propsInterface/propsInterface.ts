@@ -1,5 +1,7 @@
 import { BookingInterface } from "../bookings/bookingsInterface";
 import { ContactInterface } from "../contact/contactInterface";
+import { RoomsInterface } from "../rooms/roomsInterface";
+import { UsersInterfaces } from "../users/usersInterfaces";
 
 export interface TopMenuProps {
   hiddenMenu: () => void;
@@ -40,4 +42,28 @@ export interface OrderTableContactsProps {
 
 export interface TableContactProps {
   contacts: ContactInterface[]
+}
+
+
+export interface OrderTableRoomsProps {
+  setStateStatus: (status: string) => void;
+  setNewest: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface TableRoomsProps {
+  rooms: RoomsInterface[]
+}
+export interface OrderTableUsersProps {
+  setStateStatus: (status: string) => void;
+  setNewest: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface TableUsersProps {
+  users: UsersInterfaces[]
+}
+
+export interface FooterTableProps {
+  currentPage: number;
+  onPageChange: (selectedPage: number) => void;
+  numberOfItems: number;
 }

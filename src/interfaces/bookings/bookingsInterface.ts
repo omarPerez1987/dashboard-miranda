@@ -11,6 +11,7 @@ export interface BookingInterface {
   idRoom: string;
   check: string;
   photo: string;
+  room: string;
 }
 
 export interface BookingDetailsInterface {

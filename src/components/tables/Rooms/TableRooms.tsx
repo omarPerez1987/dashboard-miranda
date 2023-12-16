@@ -7,8 +7,9 @@ import { TdbodyStyled } from "../../../componentsStyle/tables/TdbodyStyled";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
 import { ButtonVariantStyled } from "../../../componentsStyle/general/ButtonStyled";
 import { useNavigate } from "react-router-dom";
+import { TableRoomsProps } from "../../../interfaces/propsInterface/propsInterface";
 
-const TableRooms = ({ rooms }) => {
+const TableRooms: React.FC<TableRoomsProps> = ({ rooms }) => {
   const navigate = useNavigate();
 
   return (
@@ -28,7 +29,11 @@ const TableRooms = ({ rooms }) => {
           rooms.map((room) => (
             <TrbodyStyled key={room.id}>
               <TdbodyNameStyled>
-                <img className="image-room" src={room.photo} alt="" />
+                <img
+                  className="image-room"
+                  src={room.photo || undefined}
+                  alt=""
+                />
                 <div>
                   <p>{room.room}</p>
                   <span>{room.id}</span>

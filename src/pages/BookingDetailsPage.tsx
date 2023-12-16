@@ -153,16 +153,20 @@ const BookingDetailsPage = () => {
                         <h1>No notes</h1>
                       )}
                     </DetailsInfoRoomStyled>
-                    <DetailsInfoFacilitiesStyled>
-                      <h6>Facilities</h6>
-                      <div className="container-buttons">
-                        {details.facilities.map((item, index) => (
-                          <DetailsButtonfacilitiesStyled key={index}>
-                            {item}
-                          </DetailsButtonfacilitiesStyled>
-                        ))}
-                      </div>
-                    </DetailsInfoFacilitiesStyled>
+                    {details.facilities && details.facilities.length > 0 ? (
+                      <DetailsInfoFacilitiesStyled>
+                        <h6>Facilities</h6>
+                        <div className="container-buttons">
+                          {details.facilities.map((item, index) => (
+                            <DetailsButtonfacilitiesStyled key={index}>
+                              {item}
+                            </DetailsButtonfacilitiesStyled>
+                          ))}
+                        </div>
+                      </DetailsInfoFacilitiesStyled>
+                    ) : (
+                      <p>No facilities available</p>
+                    )}
                   </DetailsTextStyled>
 
                   <DetailsImageStyled>

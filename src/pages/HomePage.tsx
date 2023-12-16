@@ -6,14 +6,14 @@ import TopMenu from "../components/general/TopMenu";
 import { ColumnStyled } from "../componentsStyle/general/ColumnStyled";
 
 const HomePage = () => {
-  const [menuOpen, setMenuOpen] = useState(true);
+  const [menuOpen, setMenuOpen] = useState<boolean>(true);
 
   const hiddenMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
   const location = useLocation();
-  const [title, setTitle] = useState("Dashboard");
+  const [title, setTitle] = useState<string>("Dashboard");
 
   useEffect(() => {
     switch (location.pathname) {

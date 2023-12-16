@@ -69,7 +69,7 @@ const DashboardPage = () => {
               </h3>
               <div className="container-reviews__box-card">
                 {contacts.slice(0, 3).map((contact) => (
-                  <CardReviews key={contact.id} contact={contact} />
+                  <CardReviews key={contact.id} {...contact} />
                 ))}
               </div>
             </section>

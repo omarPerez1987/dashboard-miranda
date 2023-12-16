@@ -3,7 +3,7 @@ import { MainStyled } from "../componentsStyle/general/MainStyled";
 import FooterTable from "../components/tables/FooterTable";
 import OrderTableRooms from "../components/tables/Rooms/OrderTableRooms";
 import TableRooms from "../components/tables/Rooms/TableRooms";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   getRoomsAvailable,
   getRoomsBooked,
@@ -12,20 +12,23 @@ import {
   getRoomsStatus,
 } from "../features/rooms/roomsSlices";
 import { getRoomsListApiThunk } from "../features/rooms/roomsThunk";
+import { AppDispatch, useAppSelector } from "../app/store";
+import { RoomsInterface } from "../interfaces/rooms/roomsInterface";
 
 const RoomsPage = () => {
-  const dispatch = useDispatch();
-  const roomsListData = useSelector(getRoomsData);
-  const roomsListAvailable = useSelector(getRoomsAvailable);
-  const roomsListBooked = useSelector(getRoomsBooked);
-  const roomsListStatus = useSelector(getRoomsStatus);
-  const roomsListError = useSelector(getRoomsError);
-  const [spinner, setSpinner] = useState(true);
+  const dispatch: AppDispatch = useDispatch();
+  const roomsListData = useAppSelector<RoomsInterface[]>(getRoomsData);
+  const roomsListAvailable =
+    useAppSelector<RoomsInterface[]>(getRoomsAvailable);
+  const roomsListBooked = useAppSelector<RoomsInterface[]>(getRoomsBooked);
+  const roomsListStatus = useAppSelector<string>(getRoomsStatus);
+  const roomsListError = useAppSelector<string | undefined>(getRoomsError);
+  const [spinner, setSpinner] = useState<boolean>(true);
 
-  const [stateStatus, setStateStatus] = useState("All");
-  const [newest, setNewest] = useState(false);
-  const [rooms, setRooms] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [stateStatus, setStateStatus] = useState<string>("All");
+  const [newest, setNewest] = useState<boolean>(false);
+  const [rooms, setRooms] = useState<RoomsInterface[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
     if (roomsListStatus === "idle") {
@@ -82,7 +85,7 @@ const RoomsPage = () => {
 
   //PAGINATION***************************************
 
-  const handlePageChange = (selectedPage) => {
+  const handlePageChange = (selectedPage: number) => {
     setCurrentPage(selectedPage);
   };
 

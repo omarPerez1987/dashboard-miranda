@@ -1,9 +1,9 @@
 export interface RoomsInterface {
-  photo: string;
+  photo: string | null;
   id: string;
   room: string;
   bed: string;
-  facilities: Array<string>;
+  facilities: string[];
   description: string;
   price: number;
   discount: number;

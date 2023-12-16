@@ -116,7 +116,7 @@ const ContactPage = () => {
             <>
               <section className="container-reviews">
                 {newestListCard.slice(0, 3).map((contact) => (
-                  <CardReviews key={contact.id} contact={contact} />
+                  <CardReviews key={contact.id} {...contact} />
                 ))}
               </section>
               <OrderTableContact

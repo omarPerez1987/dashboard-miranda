@@ -9,7 +9,7 @@ import {
   TextAreaFormStyled,
 } from "../../componentsStyle/forms/FormStyled";
 import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getRoomsListApiThunk } from "../../features/rooms/roomsThunk";
 import { addBooking } from "../../features/bookings/bookingsSlices";
 import {
@@ -18,18 +18,21 @@ import {
   getRoomsStatus,
 } from "../../features/rooms/roomsSlices";
 import { SpinnerStyled } from "../../componentsStyle/general/SpinnerStyled";
+import { AppDispatch, useAppSelector } from "../../app/store";
+import { RoomsInterface } from "../../interfaces/rooms/roomsInterface";
 
 const FormCreateBooking = () => {
   const random1 = Math.floor(Math.random() * 999);
   const random2 = Math.floor(Math.random() * 999);
   const idUnique = `BOOK${random1}-${random2}`;
 
-  const dispatch = useDispatch();
-  const roomsListStatus = useSelector(getRoomsStatus);
-  const roomsListDataAvailable = useSelector(getRoomsAvailable);
-  const roomslistError = useSelector(getRoomsError);
-  const [spinner, setSpinner] = useState(true);
-  const [availableRooms, setAvailableRooms] = useState([]);
+  const dispatch: AppDispatch = useDispatch();
+  const roomsListDataAvailable =
+    useAppSelector<RoomsInterface[]>(getRoomsAvailable);
+  const roomsListStatus = useAppSelector<string>(getRoomsStatus);
+  const roomslistError = useAppSelector<string | undefined>(getRoomsError);
+  const [spinner, setSpinner] = useState<boolean>(true);
+  const [availableRooms, setAvailableRooms] = useState<RoomsInterface[]>([]);
 
   useEffect(() => {
     const fetchData = () => {
@@ -61,12 +64,16 @@ const FormCreateBooking = () => {
   };
   const [formData, setFormData] = useState(initialStateForm);
 
-  const handleChange = (event) => {
+  const handleChange = (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(addBooking(formData));
     toast.success("Creado exitosamente");
@@ -175,7 +182,6 @@ const FormCreateBooking = () => {
               <LabelFormStyled>Special Request</LabelFormStyled>
               <TextAreaFormStyled
                 placeholder="Special Request..."
-                type="text"
                 name="notes"
                 value={formData.notes}
                 onChange={handleChange}

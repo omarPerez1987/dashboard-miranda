@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-import { CardReviewsStyled } from "../../componentsStyle/cardReviews/CardreviewsStyled";
 import { CiCircleRemove } from "react-icons/ci";
 import ModalReviews from "../modal/ModalReviews";
 import { useDispatch } from "react-redux";
 import { updateArchived } from "../../features/contact/contactsSlices";
+import { CardReviewsStyled } from "../../componentsStyle/cardReviews/CardReviewsStyled";
+import { ContactInterface } from "../../interfaces/contact/contactInterface";
+import { AppDispatch } from "../../app/store";
 
-const CardReviews = ({ contact }) => {
-  const dispatch = useDispatch();
-  const [openModal, setOpenModal] = useState(false);
+const CardReviews = (props: ContactInterface) => {
+  const dispatch: AppDispatch = useDispatch();
+  const [openModal, setOpenModal] = useState<boolean>(false);
   return (
     <>
       <CardReviewsStyled>
-        <p onClick={() => setOpenModal(true)}>{`${contact.review.substring(
+        <p onClick={() => setOpenModal(true)}>{`${props.review.substring(
           0,
           150
         )} ...`}</p>
@@ -20,23 +22,23 @@ const CardReviews = ({ contact }) => {
             <img src="#" alt="" />
             <div className="name-user">
               <h5>
-                {contact.name} {contact.last_name}
+                {props.name} {props.last_name}
               </h5>
-              <span>{contact.hour}</span>
+              <span>{props.hour}</span>
             </div>
           </div>
           <div className="container-icons">
             <CiCircleRemove
               className="icon-red"
               onClick={() => {
-                dispatch(updateArchived(contact));
+                dispatch(updateArchived(props));
               }}
             />
           </div>
         </div>
       </CardReviewsStyled>
       {openModal && (
-        <ModalReviews review={contact.review} setOpenModal={setOpenModal} />
+        <ModalReviews review={props.review} setOpenModal={setOpenModal} />
       )}
     </>
   );

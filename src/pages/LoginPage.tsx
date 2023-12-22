@@ -1,6 +1,6 @@
 import React from "react";
 import { LoginStyled } from "../componentsStyle/general/LoginStyled";
-import CardAdmin from "../components/general/CardAdmin";
+import CardAdmin from "../components/general/CardAdmin.jsx";
 
 const LoginPage = () => {
   return (

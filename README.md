@@ -10,7 +10,7 @@ Sigue estos pasos para instalar y ejecutar el proyecto localmente:
 1. Clona este repositorio: `git clone https://github.com/omarPerez1987/dashboard-miranda.git`
 2. Ingresa al directorio del proyecto: `cd dashboard-miranda`
 3. Instala las dependencias: `npm install`
-4. Inicia la aplicación: `npm start`
+4. Inicia la aplicación: `npm run dev`
 
 ## Contribución
 

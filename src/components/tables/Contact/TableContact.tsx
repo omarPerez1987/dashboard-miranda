@@ -4,15 +4,17 @@ import { TheadStyled } from "../../../componentsStyle/tables/TheadStyled";
 import { TrbodyStyled } from "../../../componentsStyle/tables/TrbodyStyled";
 import { TdbodyStyled } from "../../../componentsStyle/tables/TdbodyStyled";
 import { TdbodyNameStyled } from "../../../componentsStyle/tables/TdbodyNameStyled";
-import { ButtonVariantStyled } from "../../../componentsStyle/general/ButtonStyled";
+import { ButtonVariantContactStyled } from "../../../componentsStyle/general/ButtonStyled";
 import ModalReviews from "../../modal/ModalReviews";
 import { useDispatch } from "react-redux";
 import { updateArchived } from "../../../features/contact/contactsSlices";
+import { TableContactProps } from "../../../interfaces/propsInterface/propsInterface";
+import { AppDispatch } from "../../../app/store";
 
-const TableContact = ({ contacts }) => {
-  const [openModal, setOpenModal] = useState(false);
-  const [dataReview, setDataReview] = useState({});
-  const dispatch = useDispatch();
+const TableContact: React.FC<TableContactProps> = ({ contacts }) => {
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [dataReview, setDataReview] = useState<string>("");
+  const dispatch: AppDispatch = useDispatch();
 
   return (
     <>
@@ -51,19 +53,19 @@ const TableContact = ({ contacts }) => {
                 >{`${data.review.substring(0, 150)} ...`}</TdbodyStyled>
                 <TdbodyStyled>
                   {data.archived ? (
-                    <ButtonVariantStyled
+                    <ButtonVariantContactStyled
                       status={"true"}
                       onClick={() => dispatch(updateArchived(data))}
                     >
                       ARCHIVED
-                    </ButtonVariantStyled>
+                    </ButtonVariantContactStyled>
                   ) : (
-                    <ButtonVariantStyled
+                    <ButtonVariantContactStyled
                       status={"false"}
                       onClick={() => dispatch(updateArchived(data))}
                     >
                       PUBLISH
-                    </ButtonVariantStyled>
+                    </ButtonVariantContactStyled>
                   )}
                 </TdbodyStyled>
               </TrbodyStyled>

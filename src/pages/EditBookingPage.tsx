@@ -9,7 +9,7 @@ import {
   TextAreaFormStyled,
 } from "../componentsStyle/forms/FormStyled";
 import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   getBookingsData,
   updateBooking,
@@ -17,16 +17,20 @@ import {
 import { getRoomsAvailable } from "../features/rooms/roomsSlices";
 import { useNavigate, useParams } from "react-router-dom";
 import { MainStyled } from "../componentsStyle/general/MainStyled";
+import { RoomsInterface } from "../interfaces/rooms/roomsInterface";
+import { BookingInterface } from "../interfaces/bookings/bookingsInterface";
+import { AppDispatch, useAppSelector } from "../app/store";
 
 const EditBookingPage = () => {
   const navigate = useNavigate();
-  const bookingListData = useSelector(getBookingsData);
-  const roomsListAvailable = useSelector(getRoomsAvailable);
-  const dispatch = useDispatch();
+  const bookingListData = useAppSelector<BookingInterface[]>(getBookingsData);
+  const roomsListAvailable =
+    useAppSelector<RoomsInterface[]>(getRoomsAvailable);
+  const dispatch: AppDispatch = useDispatch();
   const { id } = useParams();
-  const [availableRooms, setAvailableRooms] = useState([]);
+  const [availableRooms, setAvailableRooms] = useState<RoomsInterface[]>([]);
 
-  const [booking, setBooking] = useState({
+  const [booking, setBooking] = useState<BookingInterface>({
     id: "",
     name: "",
     orderDate: "",
@@ -38,14 +42,23 @@ const EditBookingPage = () => {
     notes: "",
     idRoom: "",
     check: "",
+    photo: "",
+    room: "",
+    price: 0,
+    description: "",
+    facilities: [],
+    status: "",
   });
 
   useEffect(() => {
     const searchBooking = bookingListData.find(
       (booking) => booking.id.toString() === id
     );
-    setBooking(searchBooking);
-    setAvailableRooms(roomsListAvailable);
+
+    if (searchBooking) {
+      setBooking(searchBooking);
+      setAvailableRooms(roomsListAvailable);
+    }
   }, [bookingListData, id]);
 
   useEffect(() => {
@@ -56,12 +69,16 @@ const EditBookingPage = () => {
     }));
   }, [bookingListData]);
 
-  const handleChange = (event) => {
+  const handleChange = (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
     const { name, value } = event.target;
     setBooking((prevBooking) => ({ ...prevBooking, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(updateBooking(booking));
     toast.success("Reserva editada exitosamente");
@@ -147,7 +164,6 @@ const EditBookingPage = () => {
         <LabelFormStyled>Special Request</LabelFormStyled>
         <TextAreaFormStyled
           placeholder="Special Request..."
-          type="text"
           name="notes"
           value={booking.notes}
           onChange={handleChange}

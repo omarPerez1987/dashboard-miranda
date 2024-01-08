@@ -4,7 +4,7 @@ import TableBookings from "../components/tables/Bokkings/TableBookings";
 import { MainStyled } from "../componentsStyle/general/MainStyled";
 import { SpinnerStyled } from "../componentsStyle/general/SpinnerStyled";
 import FooterTable from "../components/tables/FooterTable";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   getBookingsData,
   getBookingsError,
@@ -16,24 +16,32 @@ import {
 import { getBookingsListThunk } from "../features/bookings/bookingsThunks";
 import { getRoomsData } from "../features/rooms/roomsSlices";
 import { getRoomsListApiThunk } from "../features/rooms/roomsThunk";
+import { AppDispatch, useAppSelector } from "../app/store";
+import { BookingInterface } from "../interfaces/bookings/bookingsInterface";
+import { RoomsInterface } from "../interfaces/rooms/roomsInterface";
 
 const BokkingsPage = () => {
-  const dispatch = useDispatch();
-  const bookingsListData = useSelector(getBookingsData);
-  const bookingsListCheckIn = useSelector(getRoomsCheckIn);
-  const bookingsListCheckOut = useSelector(getRoomsCheckOut);
-  const bookingsListPending = useSelector(getRoomsCheckPending);
-  const bookingsListStatus = useSelector(getBookingsStatus);
-  const bookingsListError = useSelector(getBookingsError);
-  const roomsListData = useSelector(getRoomsData);
-  const [spinner, setSpinner] = useState(true);
+  const dispatch: AppDispatch = useDispatch();
+  const bookingsListData = useAppSelector<BookingInterface[]>(getBookingsData);
+  const bookingsListCheckIn =
+    useAppSelector<BookingInterface[]>(getRoomsCheckIn);
+  const bookingsListCheckOut =
+    useAppSelector<BookingInterface[]>(getRoomsCheckOut);
+  const bookingsListPending =
+    useAppSelector<BookingInterface[]>(getRoomsCheckPending);
+  const bookingsListStatus = useAppSelector<string>(getBookingsStatus);
+  const bookingsListError = useAppSelector<string | undefined>(
+    getBookingsError
+  );
+  const roomsListData = useAppSelector<RoomsInterface[]>(getRoomsData);
+  const [spinner, setSpinner] = useState<boolean>(true);
 
-  const [stateStatus, setStateStatus] = useState("All");
-  const [bookings, setBookings] = useState([]);
-  const [rooms, setRooms] = useState([]);
+  const [stateStatus, setStateStatus] = useState<string>("All");
+  const [bookings, setBookings] = useState<BookingInterface[]>([]);
+  const [rooms, setRooms] = useState<RoomsInterface[]>([]);
 
-  const [selectFooter, setSelectFooter] = useState("date");
-  const [currentPage, setCurrentPage] = useState(1);
+  const [selectFooter, setSelectFooter] = useState<string>("date");
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
     if (bookingsListStatus === "idle") {
@@ -46,16 +54,10 @@ const BokkingsPage = () => {
       switchBookingsList();
       setSpinner(false);
     }
-  }, [
-    dispatch,
-    bookingsListData,
-    bookingsListStatus,
-    stateStatus,
-    rooms,
-  ]);
+  }, [dispatch, bookingsListData, bookingsListStatus, stateStatus, rooms]);
 
-  const bookingAndRoom = (selectList) => {
-    const combinedData = [];
+  const bookingAndRoom = (selectList: BookingInterface[]) => {
+    const combinedData: Array<Object> = [];
 
     selectList.forEach((booking) => {
       const correspondingRoom = rooms.find(
@@ -76,16 +78,16 @@ const BokkingsPage = () => {
   const switchBookingsList = () => {
     switch (stateStatus) {
       case "All":
-        setBookings(bookingAndRoom(bookingsListData));
+        setBookings(bookingAndRoom(bookingsListData) as BookingInterface[]);
         break;
       case "In":
-        setBookings(bookingAndRoom(bookingsListCheckIn));
+        setBookings(bookingAndRoom(bookingsListCheckIn) as BookingInterface[]);
         break;
       case "Out":
-        setBookings(bookingAndRoom(bookingsListCheckOut));
+        setBookings(bookingAndRoom(bookingsListCheckOut) as BookingInterface[]);
         break;
       case "Pending":
-        setBookings(bookingAndRoom(bookingsListPending));
+        setBookings(bookingAndRoom(bookingsListPending) as BookingInterface[]);
         break;
       default:
         break;
@@ -99,7 +101,7 @@ const BokkingsPage = () => {
         orderedBookingsDate.sort((a, b) => {
           const dateA = new Date(a.orderDate.split(".").reverse().join("-"));
           const dateB = new Date(b.orderDate.split(".").reverse().join("-"));
-          return dateA - dateB;
+          return dateA.getTime() - dateB.getTime();
         });
         return orderedBookingsDate;
       case "entryDate":
@@ -107,7 +109,7 @@ const BokkingsPage = () => {
         orderedBookingsCheckin.sort((a, b) => {
           const dateA = new Date(a.checkin.split(".").reverse().join("-"));
           const dateB = new Date(b.checkin.split(".").reverse().join("-"));
-          return dateA - dateB;
+          return dateA.getTime() - dateB.getTime();
         });
         return orderedBookingsCheckin;
       case "outDate":
@@ -115,7 +117,7 @@ const BokkingsPage = () => {
         orderedBookingsCheckOut.sort((a, b) => {
           const dateA = new Date(a.checkout.split(".").reverse().join("-"));
           const dateB = new Date(b.checkout.split(".").reverse().join("-"));
-          return dateA - dateB;
+          return dateA.getTime() - dateB.getTime();
         });
         return orderedBookingsCheckOut;
 
@@ -133,12 +135,12 @@ const BokkingsPage = () => {
 
   useEffect(() => {
     const orderedBookings = orderBookings();
-    setBookings(orderedBookings);
+    setBookings(orderedBookings as BookingInterface[]);
   }, [selectFooter]);
 
   //PAGINATION***************************************
 
-  const handlePageChange = (selectedPage) => {
+  const handlePageChange = (selectedPage: number) => {
     setCurrentPage(selectedPage);
   };
 

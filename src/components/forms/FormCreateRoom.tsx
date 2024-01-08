@@ -13,12 +13,15 @@ import {
 import { addRoom } from "../../features/rooms/roomsSlices";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../app/store";
+import { RoomFormInterface } from "../../interfaces/rooms/roomFormInterface";
 
 const FormCreateRoom = () => {
-  const dispatch = useDispatch();
-  const random1 = Math.floor(Math.random() * 999);
-  const random2 = Math.floor(Math.random() * 999);
+  const dispatch: AppDispatch = useDispatch();
+  const random1: number = Math.floor(Math.random() * 999);
+  const random2: number = Math.floor(Math.random() * 999);
   const idUnique = `ROOM${random1}-${random2}`;
+
   const initialStateForm = {
     image1: null,
     image2: null,
@@ -30,20 +33,25 @@ const FormCreateRoom = () => {
     roomNumber: "",
     description: "",
     offer: "",
-    price: "",
-    discount: "",
+    price: 0,
+    discount: 0,
     cancellation: "",
     facilities: [],
   };
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [formData, setFormData] = useState(initialStateForm);
 
-  const handleChange = (event) => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [formData, setFormData] = useState<RoomFormInterface>(initialStateForm);
+
+  const handleChange = (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(addRoom(formData));
     toast.success("Creado exitosamente");
@@ -51,8 +59,11 @@ const FormCreateRoom = () => {
     setFormData(initialStateForm);
   };
 
-  const handleImageChange = (event, imageKey) => {
-    const file = event.target.files[0];
+  const handleImageChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    imageKey: string
+  ) => {
+    const file = event.target.files?.[0];
 
     if (file) {
       const imageUrl = URL.createObjectURL(file);
@@ -64,7 +75,7 @@ const FormCreateRoom = () => {
     }
   };
 
-  const handleFacilityChange = (facility) => {
+  const handleFacilityChange = (facility: string) => {
     setFormData((prevFormData) => {
       const facilities = [...prevFormData.facilities];
 
@@ -161,7 +172,6 @@ const FormCreateRoom = () => {
       <LabelFormStyled>Description</LabelFormStyled>
       <TextAreaFormStyled
         placeholder="Room description..."
-        type="text"
         name="description"
         value={formData.description}
         onChange={handleChange}
@@ -211,7 +221,6 @@ const FormCreateRoom = () => {
       <LabelFormStyled>Cancellation</LabelFormStyled>
       <TextAreaFormStyled
         placeholder="Cancellation policy..."
-        type="text"
         name="cancellation"
         value={formData.cancellation}
         onChange={handleChange}

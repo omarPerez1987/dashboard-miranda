@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { MdOutlineDashboard } from "react-icons/md";
 import { TfiKey } from "react-icons/tfi";
 import { LuCalendarCheck2 } from "react-icons/lu";
@@ -11,10 +11,10 @@ import Logo from "../../../public/navMenu/logo-dashboard.png";
 import admin from "../../../public/cardAdmin/bxs-user.svg";
 import ModalEditAdmin from "../modal/ModalEditAdmin";
 
-const NavMenu = ({ menuOpen }) => {
-  const adminData = JSON.parse(localStorage.getItem("formData"));
+const NavMenu = ({ menuOpen }: { menuOpen: boolean }) => {
+  const adminData = JSON.parse(localStorage.getItem("formData") || "null");
 
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
   return (
     <>
       {menuOpen && (

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ButtonFacilityFormStyledProps } from "../../interfaces/propsInterface/propsInterface";
 
 export const FormStyled = styled.form`
   margin-top: 2em;
@@ -95,7 +96,7 @@ export const ContainerFacilitiesFormStyled = styled.div`
   width: 100%;
 `;
 
-export const ButtonFacilityFormStyled = styled.button`
+export const ButtonFacilityFormStyled = styled.button<ButtonFacilityFormStyledProps>`
   border: 1px solid #135846;
   margin: 5px;
   padding: 5px 10px;

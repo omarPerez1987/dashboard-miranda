@@ -3,7 +3,7 @@ import { MainStyled } from "../componentsStyle/general/MainStyled";
 import FooterTable from "../components/tables/FooterTable";
 import OrderTableUsers from "../components/tables/User/OrderTableUsers";
 import TableUsers from "../components/tables/User/TableUsers";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   getUsersActive,
   getUsersData,
@@ -12,22 +12,23 @@ import {
   getUsersStatus,
 } from "../features/users/usersSlices";
 import { getUsersListApiThunk } from "../features/users/usersThunks";
-import { UsersInterfaces } from "../features/interfaces/users/usersInterfaces";
+import { UsersInterfaces } from "../interfaces/users/usersInterfaces";
+import { AppDispatch, useAppSelector } from "../app/store";
 
 const UsersPage = () => {
-  const dispatch = useDispatch();
-  const usersListData = useSelector(getUsersData);
-  const usersListActive = useSelector(getUsersActive);
-  const usersListInactive = useSelector(getUsersInactive);
+  const dispatch: AppDispatch = useDispatch();
+  const usersListData = useAppSelector<UsersInterfaces[]>(getUsersData);
+  const usersListActive = useAppSelector<UsersInterfaces[]>(getUsersActive);
+  const usersListInactive = useAppSelector<UsersInterfaces[]>(getUsersInactive);
 
-  const usersListStatus = useSelector(getUsersStatus);
-  const usersListError = useSelector(getUsersError);
-  const [spinner, setSpinner] = useState(true);
+  const usersListStatus = useAppSelector<string>(getUsersStatus);
+  const usersListError = useAppSelector<string | undefined>(getUsersError);
+  const [spinner, setSpinner] = useState<boolean>(true);
 
-  const [stateStatus, setStateStatus] = useState("All");
-  const [newest, setNewest] = useState(false);
+  const [stateStatus, setStateStatus] = useState<string>("All");
+  const [newest, setNewest] = useState<boolean>(false);
   const [users, setUsers] = useState<UsersInterfaces[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
     if (usersListStatus === "idle") {
@@ -68,7 +69,7 @@ const UsersPage = () => {
     orderedUsers.sort((a, b) => {
       const dateA = new Date(a.startDate.split(".").reverse().join("-"));
       const dateB = new Date(b.startDate.split(".").reverse().join("-"));
-      return dateA - dateB;
+      return dateA.getTime() - dateB.getTime();
     });
     return orderedUsers;
   };
@@ -84,7 +85,7 @@ const UsersPage = () => {
 
   //PAGINATION***************************************
 
-  const handlePageChange = (selectedPage) => {
+  const handlePageChange = (selectedPage: number) => {
     setCurrentPage(selectedPage);
   };
 

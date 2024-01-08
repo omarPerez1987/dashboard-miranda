@@ -4,8 +4,12 @@ import {
   ModalStyled,
 } from "../../componentsStyle/modal/ModalStyled";
 import { ButtonVariantStyled } from "../../componentsStyle/general/ButtonStyled";
+import { ModalReviewsProps } from "../../interfaces/propsInterface/propsInterface";
 
-const ModalReviews = ({ review, setOpenModal }) => {
+const ModalReviews: React.FC<ModalReviewsProps> = ({
+  review,
+  setOpenModal,
+}) => {
   return (
     <ModalStyled>
       <CardModalStyled>

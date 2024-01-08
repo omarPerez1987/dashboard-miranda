@@ -36,7 +36,7 @@ export const SelectFooterStyled = styled.select`
   text-align: center;
 `;
 
-export const ButtonVariantStyled = styled.button`
+export const ButtonVariantStyled = styled.button<{ type: string }>`
   text-decoration: none;
   padding: 0.5em 1em;
   height: auto;
@@ -46,23 +46,6 @@ export const ButtonVariantStyled = styled.button`
   font-weight: 500;
   background-color: transparent;
   cursor: pointer;
-
-  ${(props) => {
-    switch (props.status) {
-      case "true":
-        return css`
-          width: 9rem;
-          background-color: #e23428;
-          color: #ffffff;
-        `;
-      case "false":
-        return css`
-          width: 9rem;
-          background-color: #5ad07a;
-          color: #ffffff;
-        `;
-    }
-  }}
 
   ${(props) => {
     switch (props.type) {
@@ -134,6 +117,35 @@ export const ButtonVariantStyled = styled.button`
           color: #ffffff;
         `;
       case "publish":
+        return css`
+          width: 9rem;
+          background-color: #5ad07a;
+          color: #ffffff;
+        `;
+    }
+  }}
+`;
+
+export const ButtonVariantContactStyled = styled.button<{ status: string }>`
+  text-decoration: none;
+  padding: 0.5em 1em;
+  height: auto;
+  font-size: 1.2rem;
+  border-radius: 12px;
+  border: none;
+  font-weight: 500;
+  background-color: transparent;
+  cursor: pointer;
+
+  ${(props) => {
+    switch (props.status) {
+      case "true":
+        return css`
+          width: 9rem;
+          background-color: #e23428;
+          color: #ffffff;
+        `;
+      case "false":
         return css`
           width: 9rem;
           background-color: #5ad07a;

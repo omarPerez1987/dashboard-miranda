@@ -6,8 +6,9 @@ import { FaArrowRight } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { FaRegBell } from "react-icons/fa";
 import { RiLoginBoxLine } from "react-icons/ri";
+import { TopMenuProps } from "../../interfaces/propsInterface/propsInterface";
 
-const TopMenu = ({ hiddenMenu, menuOpen, title }) => {
+const TopMenu: React.FC<TopMenuProps> = ({ hiddenMenu, menuOpen, title }) => {
   const navigate = useNavigate();
 
   return (

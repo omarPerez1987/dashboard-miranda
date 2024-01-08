@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import { OrderTableStyled } from "../../../componentsStyle/tables/OrderTableStyled";
-import { CreateButton, SelectFooterStyled } from "../../../componentsStyle/general/ButtonStyled";
+import {
+  CreateButton,
+  SelectFooterStyled,
+} from "../../../componentsStyle/general/ButtonStyled";
 import { Link } from "react-router-dom";
+import { OrderTableBookingsProps } from "../../../interfaces/propsInterface/propsInterface";
 
-const OrderTableBookings = ({ setStateStatus, setSelectFooter }) => {
+const OrderTableBookings: React.FC<OrderTableBookingsProps> = ({
+  setStateStatus,
+  setSelectFooter,
+}) => {
   return (
     <OrderTableStyled>
       <div>
@@ -13,9 +20,9 @@ const OrderTableBookings = ({ setStateStatus, setSelectFooter }) => {
         <h4 onClick={() => setStateStatus("Out")}>Check out</h4>
       </div>
       <div>
-      <Link to={"/home/new-booking"}>
-        <CreateButton>+ New Booking</CreateButton>
-      </Link>
+        <Link to={"/home/new-booking"}>
+          <CreateButton>+ New Booking</CreateButton>
+        </Link>
         <SelectFooterStyled onChange={(e) => setSelectFooter(e.target.value)}>
           <option disabled>Select</option>
           <option value="date">Booking date</option>

@@ -11,14 +11,17 @@ import {
 import { addUser } from "../../features/users/usersSlices";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { AppDispatch } from "../../app/store";
+import { UsersInterfaces } from "../../interfaces/users/usersInterfaces";
 
 const FormCreateUser = () => {
-  const dispatch = useDispatch();
-  const random1 = Math.floor(Math.random() * 999);
-  const random2 = Math.floor(Math.random() * 999);
+  const dispatch: AppDispatch = useDispatch();
+  const random1: number = Math.floor(Math.random() * 999);
+  const random2: number = Math.floor(Math.random() * 999);
   const idUnique = `EMPL${random1}-${random2}`;
+
   const initialStateForm = {
-    image: null,
+    image: "",
     name: "",
     id: `${idUnique}`,
     lastName: "",
@@ -30,23 +33,27 @@ const FormCreateUser = () => {
     status: "",
     password: "",
   };
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [formData, setFormData] = useState(initialStateForm);
 
-  const handleChange = (event) => {
+  const handleChange = (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(addUser(formData))
-    toast.success('Creado exitosamente')
-    setFormData(initialStateForm)
+    dispatch(addUser(formData));
+    toast.success("Creado exitosamente");
+    setFormData(initialStateForm);
   };
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
 
     if (file) {
       const imageUrl = URL.createObjectURL(file);
@@ -54,6 +61,7 @@ const FormCreateUser = () => {
       setFormData((prevFormData) => ({ ...prevFormData, image: imageUrl }));
     }
   };
+
   return (
     <FormStyled onSubmit={handleSubmit}>
       <ContainerFormImageStyled>
@@ -164,7 +172,6 @@ const FormCreateUser = () => {
 
       <LabelFormStyled>Functions description</LabelFormStyled>
       <TextAreaFormStyled
-        type="text"
         name="description"
         value={formData.description}
         onChange={handleChange}
@@ -175,7 +182,6 @@ const FormCreateUser = () => {
         Status
         <SelectFormStyled
           name="status"
-          //   defaultValue='true'
           value={formData.status}
           onChange={handleChange}
           required
@@ -183,8 +189,8 @@ const FormCreateUser = () => {
           <option value="" disabled>
             Select a status
           </option>
-          <option value={true}>ACTIVE</option>
-          <option value={false}>INACTIVE</option>
+          <option value={"true"}>ACTIVE</option>
+          <option value={"false"}>INACTIVE</option>
         </SelectFormStyled>
       </LabelFormStyled>
 

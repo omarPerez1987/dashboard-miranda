@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { addAdmin } from "../../features/admin/adminSlice";
 
 const CardAdmin = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const initialState = {
@@ -18,20 +18,20 @@ const CardAdmin = () => {
 
   const [formData, setFormData] = useState(initialState);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
     setFormData({
       ...formData,
       [name]: value,
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     if (formData.email === "test@test.com" && formData.password === "9999") {
       localStorage.setItem("formData", JSON.stringify(formData));
       navigate("/home/dashboard");
-      dispatch(addAdmin(formData))
+      dispatch(addAdmin(formData));
     } else {
       toast.error("Escribe correctamente los datos");
       setFormData(initialState);

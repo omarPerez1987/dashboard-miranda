@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CiCircleRemove } from "react-icons/ci";
 import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   deleteRoom,
   getRoomsData,
@@ -16,55 +16,64 @@ import {
 } from "../componentsStyle/modal/ModalStyled";
 import { ButtonFacilityFormStyled } from "../componentsStyle/forms/FormStyled";
 import { toast } from "react-toastify";
+import { AppDispatch, useAppSelector } from "../app/store";
+import { RoomsInterface } from "../interfaces/rooms/roomsInterface";
 
 const EditRoomPage = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const roomsListData = useSelector(getRoomsData);
+  const dispatch: AppDispatch = useDispatch();
+  const roomsListData = useAppSelector<RoomsInterface[]>(getRoomsData);
   const { id } = useParams();
 
-  const [room, setRoom] = useState({
+  const [room, setRoom] = useState<RoomsInterface>({
     bed: "",
     cancel: "",
     description: "",
-    discount: "",
-    facilities: "",
+    discount: 0,
+    facilities: [],
     id: "",
     photo: "",
-    price: "",
+    price: 0,
     room: "",
     status: "",
   });
 
   useEffect(() => {
     const searchRoom = roomsListData.find((room) => room.id.toString() === id);
-    setRoom(searchRoom);
-  }, [roomsListData]);
+    if (searchRoom) {
+      setRoom(searchRoom);
+    }
+  }, [roomsListData, id]);
 
-  const handleChange = (event) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = event.target;
     setRoom((prevRoomData) => ({ ...prevRoomData, [name]: value }));
   };
 
-  const handleSubmit = (event, room) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(updateRoom(room));
-    toast.success("Habitación editada con exito!");
+    toast.success("Habitación editada con éxito");
     navigate("/home/rooms");
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: string) => {
     dispatch(deleteRoom(id));
     toast.warn("Habitación eliminada con exito!");
     navigate("/home/rooms");
   };
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    setRoom((prevRoomData) => ({ ...prevRoomData, image: file }));
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const fileInput = event.target;
+    if (fileInput.files && fileInput.files.length > 0) {
+      const file = fileInput.files[0];
+      setRoom((prevRoomData) => ({ ...prevRoomData, image: file }));
+    }
   };
 
-  const handleFacilityChange = (facility) => {
+  const handleFacilityChange = (facility: string) => {
     setRoom((prevRoomData) => {
       const facilities = [...prevRoomData.facilities];
 
@@ -79,12 +88,12 @@ const EditRoomPage = () => {
   };
 
   return (
-    <EditStyled onSubmit={(event) => handleSubmit(event, room)}>
+    <EditStyled onSubmit={handleSubmit}>
       <ModalFormStyled>
         <CiCircleRemove onClick={() => navigate("/home/rooms")} />
         <h1>EDIT ROOM</h1>
         <ContainerModalImageStyled>
-          <img src={room.image} alt="" />
+          <img src={room.photo || ''} alt="" />
         </ContainerModalImageStyled>
 
         <label>Photo</label>
@@ -103,7 +112,6 @@ const EditRoomPage = () => {
 
         <select
           placeholder="bed type..."
-          type="text"
           name="bed"
           value={room.bed}
           onChange={handleChange}
@@ -139,7 +147,6 @@ const EditRoomPage = () => {
         <label>Status</label>
         <select
           placeholder="status..."
-          type="text"
           name="status"
           value={room.status}
           onChange={handleChange}

@@ -6,18 +6,22 @@ import {
   CreateButton,
   NewestButton,
 } from "../../../componentsStyle/general/ButtonStyled";
+import { OrderTableUsersProps } from "../../../interfaces/propsInterface/propsInterface";
 
-const OrderTableUsers = ({setStateStatus, setNewest}) => {
+const OrderTableUsers: React.FC<OrderTableUsersProps> = ({
+  setStateStatus,
+  setNewest,
+}) => {
   const [origin, setOrigin] = useState(true);
   return (
     <OrderTableStyled>
       <div>
-        <h4 onClick={() => setStateStatus('All')} >All Employee</h4>
-        <h4 onClick={() => setStateStatus('Active')} >Active Employee</h4>
-        <h4 onClick={() => setStateStatus('Inactive')} >Inactive Employee</h4>
+        <h4 onClick={() => setStateStatus("All")}>All Employee</h4>
+        <h4 onClick={() => setStateStatus("Active")}>Active Employee</h4>
+        <h4 onClick={() => setStateStatus("Inactive")}>Inactive Employee</h4>
       </div>
       <div>
-        <Link to={'/home/new-user'}>
+        <Link to={"/home/new-user"}>
           <CreateButton>+ New Employee</CreateButton>
         </Link>
         {origin ? (

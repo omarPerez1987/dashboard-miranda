@@ -8,11 +8,16 @@ import { TdbodyNameStyled } from "../../../componentsStyle/tables/TdbodyNameStyl
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
 import { ButtonVariantStyled } from "../../../componentsStyle/general/ButtonStyled";
 import ModalNotesBookings from "../../modal/ModalNotesBookings";
+import { BookingInterface } from "../../../interfaces/bookings/bookingsInterface";
 
-const TableBookings = ({ bookings }) => {
+interface TableBookingsProps {
+  bookings: BookingInterface[];
+}
+
+const TableBookings: React.FC<TableBookingsProps> = ({ bookings }) => {
   const navigate = useNavigate();
-  const [openModal, setOpenModal] = useState(false);
-  const [infoNotes, setInfoNotes] = useState(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [infoNotes, setInfoNotes] = useState<string>('');
 
   return (
     <>
@@ -33,7 +38,7 @@ const TableBookings = ({ bookings }) => {
             bookings.map((data) => (
               <TrbodyStyled key={data.id}>
                 <TdbodyNameStyled>
-                  <img src={data.photo} alt="" />
+                  <img src={data.photo || ""} alt="" />
                   <div>
                     <span>{data.id}</span>
                     <p>{data.name}</p>

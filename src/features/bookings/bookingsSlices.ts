@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getBookingsListThunk } from "./bookingsThunks";
-import { BookingsSliceInitialStateInterface } from "../interfaces/bookings/bookingsSliceInterface";
-import { BookingInterface } from "../interfaces/bookings/bookingsInterface";
+import { BookingsSliceInitialStateInterface } from "../../interfaces/bookings/bookingsSliceInterface";
+import { BookingInterface } from "../../interfaces/bookings/bookingsInterface";
+import { RootState } from "../../app/store";
 
 const initialState: BookingsSliceInitialStateInterface = {
   data: [],
@@ -47,16 +48,18 @@ export const bookingsSlice = createSlice({
 
 export const { addBooking, updateBooking, deleteBooking } =
   bookingsSlice.actions;
-export const getBookingsData = (state): BookingInterface[] =>
+export const getBookingsData = (state: RootState): BookingInterface[] =>
   state.bookings.data;
-export const getBookingsStatus = (state) => state.bookings.status;
-export const getBookingsError = (state) => state.bookings.error;
+export const getBookingsStatus = (state: RootState): string =>
+  state.bookings.status;
+export const getBookingsError = (state: RootState): string | undefined =>
+  state.bookings.error;
 
-export const getRoomsCheckIn = (state) =>
+export const getRoomsCheckIn = (state: RootState): BookingInterface[] =>
   state.bookings.data.filter((booking) => booking.check === "in");
 
-export const getRoomsCheckOut = (state) =>
+export const getRoomsCheckOut = (state: RootState): BookingInterface[] =>
   state.bookings.data.filter((booking) => booking.check === "out");
 
-export const getRoomsCheckPending = (state) =>
+export const getRoomsCheckPending = (state: RootState): BookingInterface[] =>
   state.bookings.data.filter((booking) => booking.check === "pending");

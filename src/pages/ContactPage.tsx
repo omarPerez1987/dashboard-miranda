@@ -4,7 +4,7 @@ import CardReviews from "../components/cardReviews/CardReviews";
 import TableContact from "../components/tables/Contact/TableContact";
 import OrderTableContact from "../components/tables/Contact/OrderTableContact";
 import FooterTable from "../components/tables/FooterTable";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   getContactsData,
   getContactStatus,
@@ -13,22 +13,28 @@ import {
   getContactsPublish,
 } from "../features/contact/contactsSlices";
 import { getContactsListApiThunk } from "../features/contact/contactsThunk";
+import { AppDispatch, useAppSelector } from "../app/store";
+import { ContactInterface } from "../interfaces/contact/contactInterface";
 
 const ContactPage = () => {
-  const dispatch = useDispatch();
-  const contactsListData = useSelector(getContactsData);
-  const contactsListDataPublish = useSelector(getContactsPublish)
-  const contactsListArchived = useSelector(getContactsArchived);
-  const contactsListStatus = useSelector(getContactStatus);
-  const contactsListError = useSelector(getContactsError);
-  const [spinner, setSpinner] = useState(true);
+  const dispatch: AppDispatch = useDispatch();
+  const contactsListData = useAppSelector<ContactInterface[]>(getContactsData);
+  const contactsListDataPublish =
+    useAppSelector<ContactInterface[]>(getContactsPublish);
+  const contactsListArchived =
+    useAppSelector<ContactInterface[]>(getContactsArchived);
+  const contactsListStatus = useAppSelector<string>(getContactStatus);
+  const contactsListError = useAppSelector<string | undefined>(
+    getContactsError
+  );
+  const [spinner, setSpinner] = useState<boolean>(true);
 
-  const [archived, setArchived] = useState(false);
+  const [archived, setArchived] = useState<boolean>(false);
 
-  const [newestListCard, setNewestListCard] = useState();
-  const [newest, setNewest] = useState(false);
-  const [contacts, setContacts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [newestListCard, setNewestListCard] = useState<ContactInterface[]>([]);
+  const [newest, setNewest] = useState<boolean>(false);
+  const [contacts, setContacts] = useState<ContactInterface[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
     if (contactsListStatus === "idle") {
@@ -63,18 +69,17 @@ const ContactPage = () => {
     }
   }, [newest, contactsListStatus, contactsListDataPublish]);
 
-  const orderContacts = (contactsList) => {
+  const orderContacts = (contactsList: ContactInterface[]) => {
     const orderedContacts = [...contactsList];
     orderedContacts.sort((a, b) => {
       const dateA = new Date(a.date.split(".").reverse().join("-"));
       const dateB = new Date(b.date.split(".").reverse().join("-"));
-      return dateA - dateB;
+      return dateA.getTime() - dateB.getTime();
     });
     return orderedContacts;
   };
 
-
-  const handlePageChange = (selectedPage) => {
+  const handlePageChange = (selectedPage: number) => {
     setCurrentPage(selectedPage);
   };
 
@@ -111,7 +116,7 @@ const ContactPage = () => {
             <>
               <section className="container-reviews">
                 {newestListCard.slice(0, 3).map((contact) => (
-                  <CardReviews key={contact.id} contact={contact} />
+                  <CardReviews key={contact.id} {...contact} />
                 ))}
               </section>
               <OrderTableContact

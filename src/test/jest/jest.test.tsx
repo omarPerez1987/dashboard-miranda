@@ -6,6 +6,7 @@ import { ButtonVariantStyled } from "../../componentsStyle/general/ButtonStyled"
 describe("ButtonVariantStyled Component", () => {
   it('presenta ButtonVariantStyled con el color correcto para el status "true"', () => {
     const props = {
+      type: "button",
       status: "true",
     };
 

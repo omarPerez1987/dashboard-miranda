@@ -6,16 +6,20 @@ import {
   CreateButton,
   NewestButton,
 } from "../../../componentsStyle/general/ButtonStyled";
+import { OrderTableRoomsProps } from "../../../interfaces/propsInterface/propsInterface";
 
-const OrderTableRooms = ({setStateStatus, setNewest}) => {
-  const [origin, setOrigin] = useState(true);
+const OrderTableRooms: React.FC<OrderTableRoomsProps> = ({
+  setStateStatus,
+  setNewest,
+}) => {
+  const [origin, setOrigin] = useState<boolean>(true);
 
   return (
     <OrderTableStyled>
       <div>
-        <h4 onClick={() => setStateStatus('All')}>All Rooms</h4>
-        <h4 onClick={() => setStateStatus('Available')}>Available Rooms</h4>
-        <h4 onClick={() => setStateStatus('Booked')}>Booked Rooms</h4>
+        <h4 onClick={() => setStateStatus("All")}>All Rooms</h4>
+        <h4 onClick={() => setStateStatus("Available")}>Available Rooms</h4>
+        <h4 onClick={() => setStateStatus("Booked")}>Booked Rooms</h4>
       </div>
       <div>
         <Link to={"/home/new-room"}>

@@ -6,21 +6,26 @@ import { RiLoginBoxLine } from "react-icons/ri";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import CardReviews from "../components/cardReviews/CardReviews";
 import { DashboardMainStyled } from "../componentsStyle/general/DashboardMainStyled";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   getContactStatus,
   getContactsError,
   getContactsPublish,
 } from "../features/contact/contactsSlices";
 import { getContactsListApiThunk } from "../features/contact/contactsThunk";
+import { AppDispatch, useAppSelector } from "../app/store";
+import { ContactInterface } from "../interfaces/contact/contactInterface";
 
 const DashboardPage = () => {
-  const dispatch = useDispatch();
-  const contactsListDataPublish = useSelector(getContactsPublish)
-  const contactsListStatus = useSelector(getContactStatus);
-  const contactsListError = useSelector(getContactsError);
-  const [contacts, setContacts] = useState([]);
-  const [spinner, setSpinner] = useState(true);
+  const dispatch: AppDispatch = useDispatch();
+  const contactsListDataPublish =
+    useAppSelector<ContactInterface[]>(getContactsPublish);
+  const contactsListStatus = useAppSelector<string>(getContactStatus);
+  const contactsListError = useAppSelector<string | undefined>(
+    getContactsError
+  );
+  const [contacts, setContacts] = useState<ContactInterface[]>([]);
+  const [spinner, setSpinner] = useState<boolean>(true);
 
   useEffect(() => {
     if (contactsListStatus === "idle") {
@@ -38,7 +43,7 @@ const DashboardPage = () => {
     orderedContacts.sort((a, b) => {
       const dateA = new Date(a.date.split(".").reverse().join("-"));
       const dateB = new Date(b.date.split(".").reverse().join("-"));
-      return dateA - dateB;
+      return dateA.getTime() - dateB.getTime();
     });
     return orderedContacts;
   };
@@ -64,7 +69,7 @@ const DashboardPage = () => {
               </h3>
               <div className="container-reviews__box-card">
                 {contacts.slice(0, 3).map((contact) => (
-                  <CardReviews key={contact.id} contact={contact} />
+                  <CardReviews key={contact.id} {...contact} />
                 ))}
               </div>
             </section>

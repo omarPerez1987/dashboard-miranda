@@ -17,15 +17,17 @@ import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppDispatch, useAppSelector } from "../app/store";
 import { UsersInterfaces } from "../interfaces/users/usersInterfaces";
+import { getUsersListApiThunk } from "../features/users/usersThunks";
 
 const EditUsersPage = () => {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const usersListData = useAppSelector<UsersInterfaces[]>(getUsersData);
   const { id } = useParams();
+  const token = localStorage.getItem("adminToken") || undefined;
 
   const [user, setUser] = useState({
-    id: "",
+    _id: "",
     photo: "",
     name: "",
     email: "",
@@ -36,11 +38,13 @@ const EditUsersPage = () => {
   });
 
   useEffect(() => {
-    const searchUser = usersListData.find((user) => user.id.toString() === id);
-    if (searchUser) {
-      setUser(searchUser);
+    if (Array.isArray(usersListData) && id) {
+      const searchUser = usersListData.find((user) => user._id === id);
+      if (searchUser) {
+        setUser(searchUser);
+      }
     }
-  }, [usersListData]);
+  }, [usersListData, id]);
 
   const handleChange = (
     event: React.ChangeEvent<
@@ -51,11 +55,18 @@ const EditUsersPage = () => {
     setUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(updateUser(user));
-    toast.success("Usuario editado con exito!");
-    navigate("/home/users");
+
+    try {
+      await dispatch(
+        getUsersListApiThunk({ method: "PUT", body: user, token })
+      );
+      toast.success("Usuario editado con éxito!");
+      navigate("/home/users");
+    } catch (error) {
+      toast.error("Error al editar el usuario");
+    }
   };
 
   const handleDelete = (id: string) => {
@@ -151,7 +162,7 @@ const EditUsersPage = () => {
           <ButtonModalStyled
             type="button"
             onClick={() => {
-              handleDelete(user.id);
+              handleDelete(user._id);
             }}
           >
             Delete

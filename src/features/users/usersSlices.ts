@@ -19,8 +19,9 @@ export const usersSlice = createSlice({
     },
 
     updateUser: (state, action): void => {
+      console.log(action.payload._id)
       const index = state.data.findIndex(
-        (user) => user._id === action.payload.id
+        (user) => user._id === action.payload._id
       );
       if (index !== -1) {
         state.data[index] = action.payload;

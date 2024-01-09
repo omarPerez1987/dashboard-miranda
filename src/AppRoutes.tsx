@@ -16,12 +16,12 @@ import EditBookingPage from "./pages/EditBookingPage";
 import EditUsersPage from "./pages/EditUsersPage";
 
 function AppRoutes() {
-  const [data, setData] = useState({});
+  const [data, setData] = useState<string | undefined>();
 
   useEffect(() => {
-    const savedFormData = localStorage.getItem("formData");
-    if (savedFormData) {
-      setData(JSON.parse(savedFormData));
+    const saveToken = localStorage.getItem("adminToken");
+    if (saveToken) {
+      setData(saveToken);
     }
   }, []);
 

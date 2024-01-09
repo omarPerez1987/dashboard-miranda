@@ -27,12 +27,12 @@ const TableUsers: React.FC<TableUsersProps> = ({ users }) => {
       <tbody>
         {users &&
           users.map((user) => (
-            <TrbodyStyled key={user.id}>
+            <TrbodyStyled key={user._id}>
               <TdbodyNameStyled>
                 <img className="image-user" src={user.photo} alt="" />
                 <div>
                   <p>{user.name}</p>
-                  <span>{user.id}</span>
+                  <span>{user._id}</span>
                   <span>{user.email}</span>
                 </div>
               </TdbodyNameStyled>
@@ -50,7 +50,7 @@ const TableUsers: React.FC<TableUsersProps> = ({ users }) => {
                 </p>
               </TdbodyStyled>
               <TdbodyStyled>
-                {user.status === "true" ? (
+                {user.status === "active" ? (
                   <ButtonVariantStyled type="true">ACTIVE</ButtonVariantStyled>
                 ) : (
                   <ButtonVariantStyled type="false">
@@ -60,7 +60,7 @@ const TableUsers: React.FC<TableUsersProps> = ({ users }) => {
               </TdbodyStyled>
               <TdbodyStyled>
                 <PiDotsThreeVerticalBold
-                  onClick={() => navigate(`/home/edit-user/${user.id}`)}
+                  onClick={() => navigate(`/home/edit-user/${user._id}`)}
                 />
               </TdbodyStyled>
             </TrbodyStyled>

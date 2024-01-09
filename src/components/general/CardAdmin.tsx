@@ -4,11 +4,16 @@ import { CardAdminStyled } from "../../componentsStyle/general/CardAdminStyled";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { addAdmin } from "../../features/admin/adminSlice";
+import { addAdmin, getToken } from "../../features/admin/adminSlice";
+import { getAdminTokenThunk } from "../../features/admin/adminThunk";
+import { AppDispatch, useAppSelector } from "../../app/store";
 
 const CardAdmin = () => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
+  const token = useAppSelector<string | undefined>(getToken);
   const navigate = useNavigate();
+
+  console.log(token);
 
   const initialState = {
     name: "",
@@ -26,15 +31,28 @@ const CardAdmin = () => {
     });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (formData.email === "test@test.com" && formData.password === "9999") {
-      localStorage.setItem("formData", JSON.stringify(formData));
-      navigate("/home/dashboard");
-      dispatch(addAdmin(formData));
-    } else {
-      toast.error("Escribe correctamente los datos");
-      setFormData(initialState);
+
+    const { email, password } = formData;
+
+    try {
+      if (!token) {
+        await dispatch(
+          getAdminTokenThunk({
+            method: "POST",
+            body: { email, password },
+          })
+        );
+      } else {
+        localStorage.setItem("adminToken", token);
+        localStorage.setItem("formData", JSON.stringify(formData));
+        navigate("/home/dashboard");
+        dispatch(addAdmin(formData));
+      }
+    } catch (error) {
+      console.error("Error al obtener el token:", error);
+      toast.error("Error al obtener el token");
     }
   };
 

@@ -20,7 +20,7 @@ export const usersSlice = createSlice({
 
     updateUser: (state, action): void => {
       const index = state.data.findIndex(
-        (user) => user.id === action.payload.id
+        (user) => user._id === action.payload.id
       );
       if (index !== -1) {
         state.data[index] = action.payload;
@@ -28,7 +28,7 @@ export const usersSlice = createSlice({
     },
 
     deleteUser: (state, action): void => {
-      state.data = state.data.filter((user) => user.id !== action.payload);
+      state.data = state.data.filter((user) => user._id !== action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -54,6 +54,6 @@ export const getUsersError = (state: RootState): string | undefined =>
   state.users.error;
 
 export const getUsersActive = (state: RootState): UsersInterfaces[] =>
-  state.users.data.filter((user) => user.status === "true");
+  state.users.data.filter((user) => user.status === "active");
 export const getUsersInactive = (state: RootState): UsersInterfaces[] =>
-  state.users.data.filter((user) => user.status === "false");
+  state.users.data.filter((user) => user.status === "inactive");

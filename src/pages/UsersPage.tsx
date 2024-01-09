@@ -29,10 +29,12 @@ const UsersPage = () => {
   const [newest, setNewest] = useState<boolean>(false);
   const [users, setUsers] = useState<UsersInterfaces[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const token = localStorage.getItem("adminToken") || undefined
+  
 
   useEffect(() => {
     if (usersListStatus === "idle") {
-      dispatch(getUsersListApiThunk());
+      dispatch(getUsersListApiThunk({method: "GET", token}));
     } else if (usersListStatus === "pending") {
       setSpinner(true);
     } else if (usersListStatus === "fulfilled") {
@@ -46,6 +48,7 @@ const UsersPage = () => {
     stateStatus,
     usersListActive,
     usersListInactive,
+    token
   ]);
 
   const switchUsersList = () => {

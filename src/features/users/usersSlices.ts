@@ -1,8 +1,16 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { getUsersListApiThunk } from "./usersThunks";
+
 import { UsersSliceInitialStateInterface } from "../../interfaces/users/userSliceInterface";
 import { UsersInterfaces } from "../../interfaces/users/usersInterfaces";
 import { RootState } from "../../app/store";
+import {
+  createUserApiThunk,
+  deleteUserApiThunk,
+  getAllUsersApiThunk,
+  getOneUserApiThunk,
+  updateUserApiThunk,
+} from "./usersThunks";
+import { isArray } from "cypress/types/lodash";
 
 const initialState: UsersSliceInitialStateInterface = {
   data: [],
@@ -13,41 +21,74 @@ const initialState: UsersSliceInitialStateInterface = {
 export const usersSlice = createSlice({
   name: "users",
   initialState: initialState,
-  reducers: {
-    addUser: (state, action): void => {
-      state.data = [action.payload, ...state.data];
-    },
-
-    updateUser: (state, action): void => {
-      console.log(action.payload._id)
-      const index = state.data.findIndex(
-        (user) => user._id === action.payload._id
-      );
-      if (index !== -1) {
-        state.data[index] = action.payload;
-      }
-    },
-
-    deleteUser: (state, action): void => {
-      state.data = state.data.filter((user) => user._id !== action.payload);
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getUsersListApiThunk.fulfilled, (state, action): void => {
+      .addCase(getAllUsersApiThunk.pending, (state) => {
+        state.status = "pending";
+      })
+      .addCase(getAllUsersApiThunk.fulfilled, (state, action) => {
         state.status = "fulfilled";
         state.data = action.payload;
       })
-      .addCase(getUsersListApiThunk.rejected, (state, action): void => {
+      .addCase(getAllUsersApiThunk.rejected, (state, action) => {
         state.status = "rejected";
         state.error = action.error.message;
       })
-      .addCase(getUsersListApiThunk.pending, (state, action): void => {
+
+      .addCase(getOneUserApiThunk.pending, (state) => {
         state.status = "pending";
+      })
+      .addCase(getOneUserApiThunk.fulfilled, (state, action) => {
+        state.status = "fulfilled";
+        state.data = action.payload;
+      })
+      .addCase(getOneUserApiThunk.rejected, (state, action) => {
+        state.status = "rejected";
+        state.error = action.error.message;
+      })
+
+      .addCase(createUserApiThunk.pending, (state) => {
+        state.status = "pending";
+      })
+      .addCase(createUserApiThunk.fulfilled, (state, action) => {
+        state.status = "fulfilled";
+        state.data = [action.payload, ...state.data]
+      })
+      .addCase(createUserApiThunk.rejected, (state, action) => {
+        state.status = "rejected";
+        state.error = action.error.message;
+      })
+
+      .addCase(updateUserApiThunk.pending, (state) => {
+        state.status = "pending";
+      })
+      .addCase(updateUserApiThunk.fulfilled, (state, action) => {
+        state.status = "fulfilled";
+        state.data = state.data.map((element) =>
+          element._id === action.payload._id ? action.payload : element
+        );
+      })
+      .addCase(updateUserApiThunk.rejected, (state, action) => {
+        state.status = "rejected";
+        state.error = action.error.message;
+      })
+
+      .addCase(deleteUserApiThunk.pending, (state) => {
+        state.status = "pending";
+      })
+      .addCase(deleteUserApiThunk.fulfilled, (state, action) => {
+        state.status = "fulfilled";
+        const { _id } = action.payload;
+        state.data = state.data.filter((element) => element._id !== _id);
+      })
+      .addCase(deleteUserApiThunk.rejected, (state, action) => {
+        state.status = "rejected";
+        state.error = action.error.message;
       });
   },
 });
-export const { addUser, updateUser, deleteUser } = usersSlice.actions;
+
 export const getUsersData = (state: RootState): UsersInterfaces[] =>
   state.users.data;
 export const getUsersStatus = (state: RootState): string => state.users.status;

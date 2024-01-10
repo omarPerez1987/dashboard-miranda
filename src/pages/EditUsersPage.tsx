@@ -8,16 +8,15 @@ import {
 } from "../componentsStyle/modal/ModalStyled";
 import { CiCircleRemove } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteUser,
-  getUsersData,
-  updateUser,
-} from "../features/users/usersSlices";
+import { getUsersData } from "../features/users/usersSlices";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppDispatch, useAppSelector } from "../app/store";
 import { UsersInterfaces } from "../interfaces/users/usersInterfaces";
-import { getUsersListApiThunk } from "../features/users/usersThunks";
+import {
+  deleteUserApiThunk,
+  updateUserApiThunk,
+} from "../features/users/usersThunks";
 
 const EditUsersPage = () => {
   const navigate = useNavigate();
@@ -59,9 +58,7 @@ const EditUsersPage = () => {
     event.preventDefault();
 
     try {
-      await dispatch(
-        getUsersListApiThunk({ method: "PUT", body: user, token })
-      );
+      await dispatch(updateUserApiThunk({ body: user, token }));
       toast.success("Usuario editado con éxito!");
       navigate("/home/users");
     } catch (error) {
@@ -69,10 +66,14 @@ const EditUsersPage = () => {
     }
   };
 
-  const handleDelete = (id: string) => {
-    dispatch(deleteUser(id));
-    toast.warn("Usuario eliminado con exito!");
-    navigate("/home/users");
+  const handleDelete = async (_id: string) => {
+    try {
+      await dispatch(deleteUserApiThunk({ _id, token }));
+      toast.warn("Usuario eliminado con éxito!");
+      navigate("/home/users");
+    } catch (error) {
+      toast.error("Error al eliminar el usuario");
+    }
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {

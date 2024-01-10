@@ -11,9 +11,9 @@ import {
   getUsersInactive,
   getUsersStatus,
 } from "../features/users/usersSlices";
-import { getUsersListApiThunk } from "../features/users/usersThunks";
 import { UsersInterfaces } from "../interfaces/users/usersInterfaces";
 import { AppDispatch, useAppSelector } from "../app/store";
+import { getAllUsersApiThunk } from "../features/users/usersThunks";
 
 const UsersPage = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -29,12 +29,11 @@ const UsersPage = () => {
   const [newest, setNewest] = useState<boolean>(false);
   const [users, setUsers] = useState<UsersInterfaces[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const token = localStorage.getItem("adminToken") || undefined
+  const token = localStorage.getItem("adminToken") || undefined;
   
-
   useEffect(() => {
     if (usersListStatus === "idle") {
-      dispatch(getUsersListApiThunk({method: "GET", token}));
+      dispatch(getAllUsersApiThunk({ token }));
     } else if (usersListStatus === "pending") {
       setSpinner(true);
     } else if (usersListStatus === "fulfilled") {
@@ -48,7 +47,7 @@ const UsersPage = () => {
     stateStatus,
     usersListActive,
     usersListInactive,
-    token
+    token,
   ]);
 
   const switchUsersList = () => {

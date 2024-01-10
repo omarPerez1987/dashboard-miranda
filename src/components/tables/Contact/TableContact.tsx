@@ -30,12 +30,12 @@ const TableContact: React.FC<TableContactProps> = ({ contacts }) => {
         <tbody>
           {contacts &&
             contacts.map((data) => (
-              <TrbodyStyled key={data.id}>
+              <TrbodyStyled key={data._id}>
                 <TdbodyNameStyled>
                   <div>
                     <p>{data.date}</p>
                     <p>{data.hour}</p>
-                    <span>#{data.id}</span>
+                    <span>#{data._id}</span>
                   </div>
                 </TdbodyNameStyled>
                 <TdbodyStyled>

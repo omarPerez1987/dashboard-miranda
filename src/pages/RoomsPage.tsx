@@ -11,7 +11,7 @@ import {
   getRoomsError,
   getRoomsStatus,
 } from "../features/rooms/roomsSlices";
-import { getRoomsListApiThunk } from "../features/rooms/roomsThunk";
+import { getAllRoomsApiThunk } from "../features/rooms/roomsThunk";
 import { AppDispatch, useAppSelector } from "../app/store";
 import { RoomsInterface } from "../interfaces/rooms/roomsInterface";
 
@@ -32,7 +32,7 @@ const RoomsPage = () => {
 
   useEffect(() => {
     if (roomsListStatus === "idle") {
-      dispatch(getRoomsListApiThunk());
+      dispatch(getAllRoomsApiThunk());
     } else if (roomsListStatus === "pending") {
       setSpinner(true);
     } else if (roomsListStatus === "fulfilled") {

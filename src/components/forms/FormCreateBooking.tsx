@@ -10,7 +10,7 @@ import {
 } from "../../componentsStyle/forms/FormStyled";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { getRoomsListApiThunk } from "../../features/rooms/roomsThunk";
+import { getAllRoomsApiThunk } from "../../features/rooms/roomsThunk";
 import { addBooking } from "../../features/bookings/bookingsSlices";
 import {
   getRoomsAvailable,
@@ -37,7 +37,7 @@ const FormCreateBooking = () => {
   useEffect(() => {
     const fetchData = () => {
       if (roomsListStatus === "idle") {
-        dispatch(getRoomsListApiThunk());
+        dispatch(getAllRoomsApiThunk());
       } else if (roomsListStatus === "pending") {
         setSpinner(true);
       } else if (roomsListStatus === "fulfilled") {
@@ -200,7 +200,7 @@ const FormCreateBooking = () => {
                   </option>
                   {availableRooms &&
                     availableRooms.map((rooms) => (
-                      <option value={rooms.id} key={rooms.id}>
+                      <option value={rooms._id} key={rooms._id}>
                         {rooms.room}, ({rooms.bed})
                       </option>
                     ))}

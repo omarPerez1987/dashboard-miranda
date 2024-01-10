@@ -1,18 +1,19 @@
-import { createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 interface ApiRequest {
-  body?: Record<string, unknown>;
+  body?: Record<string, any>;
   token?: string;
   _id?: string;
 }
 
 const BASE_URL = "http://localhost:3001/api";
 // "https://m4lpn4lgy2.execute-api.eu-west-3.amazonaws.com/dev/api";
+const token = localStorage.getItem("adminToken") || undefined;
 
 // Thunk para obtener la lista de usuarios
 export const getAllUsersApiThunk = createAsyncThunk(
   "users/getUsersListApiThunk",
-  async ({ body, token }: ApiRequest, { rejectWithValue }) => {
+  async () => {
     try {
       const response = await fetch(`${BASE_URL}/users`, {
         method: "GET",
@@ -20,7 +21,6 @@ export const getAllUsersApiThunk = createAsyncThunk(
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(body),
       });
 
       if (!response.ok) {
@@ -30,7 +30,7 @@ export const getAllUsersApiThunk = createAsyncThunk(
       const responseData = await response.json();
       return responseData.data;
     } catch (error: any) {
-      return rejectWithValue({ message: error.message });
+      return { message: error.message };
     }
   }
 );
@@ -38,7 +38,7 @@ export const getAllUsersApiThunk = createAsyncThunk(
 // Thunk para obtener un solo usuario
 export const getOneUserApiThunk = createAsyncThunk(
   "users/getOneUserApiThunk",
-  async ({ body, token, _id }: ApiRequest, { rejectWithValue }) => {
+  async ({ body, _id }: ApiRequest, { rejectWithValue }) => {
     try {
       const response = await fetch(`${BASE_URL}/users/${_id}`, {
         method: "GET",
@@ -64,8 +64,7 @@ export const getOneUserApiThunk = createAsyncThunk(
 // Thunk para crear un usuario
 export const createUserApiThunk = createAsyncThunk(
   "users/createUserApiThunk",
-  async ({ body, token }: ApiRequest, { rejectWithValue }) => {
-    console.log(body)
+  async ({ body }: ApiRequest, { rejectWithValue }) => {
     try {
       const response = await fetch(`${BASE_URL}/users`, {
         method: "POST",
@@ -91,7 +90,7 @@ export const createUserApiThunk = createAsyncThunk(
 // Thunk para actualizar un usuario
 export const updateUserApiThunk = createAsyncThunk(
   "users/updateUserApiThunk",
-  async ({ body, token }: ApiRequest, { rejectWithValue }) => {
+  async ({ body }: ApiRequest, { rejectWithValue }) => {
     try {
       const response = await fetch(`${BASE_URL}/users`, {
         method: "PUT",
@@ -117,7 +116,7 @@ export const updateUserApiThunk = createAsyncThunk(
 // Thunk para eliminar un usuario
 export const deleteUserApiThunk = createAsyncThunk(
   "users/deleteUserApiThunk",
-  async ({ _id, token }: ApiRequest, { rejectWithValue }) => {
+  async ({ _id }: ApiRequest, { rejectWithValue }) => {
     try {
       const response = await fetch(`${BASE_URL}/users/${_id}`, {
         method: "DELETE",

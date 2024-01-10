@@ -27,20 +27,21 @@ const TableRooms: React.FC<TableRoomsProps> = ({ rooms }) => {
       <tbody>
         {rooms &&
           rooms.map((room) => (
-            <TrbodyStyled key={room.id}>
+            <TrbodyStyled key={room._id}>
               <TdbodyNameStyled>
                 <img
                   className="image-room"
                   src={room.photo || undefined}
+                  style={{ width: 150, height: 77 }}
                   alt=""
                 />
                 <div>
                   <p>{room.room}</p>
-                  <span>{room.id}</span>
+                  <span>{room._id}</span>
                 </div>
               </TdbodyNameStyled>
               <TdbodyStyled>{room.bed}</TdbodyStyled>
-              <TdbodyStyled>{room.facilities}</TdbodyStyled>
+              <TdbodyStyled>{room.facilities.join(", ")}</TdbodyStyled>
               <TdbodyStyled>
                 <p>{room.price}</p>
               </TdbodyStyled>
@@ -49,12 +50,12 @@ const TableRooms: React.FC<TableRoomsProps> = ({ rooms }) => {
               </TdbodyStyled>
               <TdbodyStyled>
                 <ButtonVariantStyled
-                  type={room.status === "Available" ? "available" : "booked"}
+                  type={room.status === "available" ? "available" : "booked"}
                 >{`${room.status}`}</ButtonVariantStyled>
               </TdbodyStyled>
               <TdbodyStyled>
                 <PiDotsThreeVerticalBold
-                  onClick={() => navigate(`/home/edit-room/${room.id}`)}
+                  onClick={() => navigate(`/home/edit-room/${room._id}`)}
                 />
               </TdbodyStyled>
             </TrbodyStyled>

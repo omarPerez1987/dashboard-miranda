@@ -10,33 +10,31 @@ import {
   SelectFormStyled,
   TextAreaFormStyled,
 } from "../../componentsStyle/forms/FormStyled";
-import { addRoom } from "../../features/rooms/roomsSlices";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../app/store";
 import { RoomFormInterface } from "../../interfaces/rooms/roomFormInterface";
+import { createRoomApiThunk } from "../../features/rooms/roomsThunk";
+import { useNavigate } from "react-router-dom";
 
 const FormCreateRoom = () => {
+  const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
-  const random1: number = Math.floor(Math.random() * 999);
-  const random2: number = Math.floor(Math.random() * 999);
-  const idUnique = `ROOM${random1}-${random2}`;
 
   const initialStateForm = {
-    image1: null,
-    image2: null,
-    image3: null,
-    image4: null,
-    image5: null,
-    id: `${idUnique}`,
-    roomType: "",
-    roomNumber: "",
+    photo: null,
+    // image2: null,
+    // image3: null,
+    // image4: null,
+    // image5: null,
+    room: "",
+    bed: "",
+    facilities: [],
     description: "",
-    offer: "",
     price: 0,
     discount: 0,
-    cancellation: "",
-    facilities: [],
+    cancel: "",
+    status: "",
   };
 
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -51,12 +49,15 @@ const FormCreateRoom = () => {
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(addRoom(formData));
-    toast.success("Creado exitosamente");
-
-    setFormData(initialStateForm);
+    try {
+      await dispatch(createRoomApiThunk({ body: formData }));
+      toast.success("Creado exitosamente");
+      navigate("/home/rooms");
+    } catch (error) {
+      toast.error("Error al crear la habitación");
+    }
   };
 
   const handleImageChange = (
@@ -93,7 +94,7 @@ const FormCreateRoom = () => {
     <FormStyled onSubmit={handleSubmit}>
       <ContainerFormImageStyled>
         {selectedImage ? (
-          <img src={selectedImage} alt="" />
+          <img src={selectedImage} alt=""/>
         ) : (
           <h1>Select an images</h1>
         )}
@@ -103,10 +104,10 @@ const FormCreateRoom = () => {
       <InputFormStyled
         type="file"
         accept="image/*"
-        onChange={(e) => handleImageChange(e, "image1")}
+        onChange={(e) => handleImageChange(e, "photo")}
         required
       />
-      <InputFormStyled
+      {/* <InputFormStyled
         type="file"
         accept="image/*"
         onChange={(e) => handleImageChange(e, "image2")}
@@ -127,23 +128,13 @@ const FormCreateRoom = () => {
         type="file"
         accept="image/*"
         onChange={(e) => handleImageChange(e, "image5")}
-      />
-      <LabelFormStyled>
-        Id
-        <InputFormStyled
-          type="text"
-          name="id"
-          value={formData.id}
-          onChange={handleChange}
-          readOnly
-        />
-      </LabelFormStyled>
+      /> */}
 
       <LabelFormStyled>
         Room Type
         <SelectFormStyled
-          name="roomType"
-          value={formData.roomType}
+          name="room"
+          value={formData.room}
           onChange={handleChange}
           required
         >
@@ -160,10 +151,10 @@ const FormCreateRoom = () => {
       <LabelFormStyled>
         Room Number
         <InputFormStyled
-          placeholder="Room Number..."
+          placeholder="Example: E-15"
           type="text"
-          name="roomNumber"
-          value={formData.roomNumber}
+          name="bed"
+          value={formData.bed}
           onChange={handleChange}
           required
         />
@@ -179,21 +170,16 @@ const FormCreateRoom = () => {
       />
 
       <LabelFormStyled>
-        Offer
-        <SelectFormStyled
-          name="offer"
-          value={formData.offer}
+        Discount
+        <InputFormStyled
+          placeholder="discount..."
+          type="number"
+          name="discount"
+          value={formData.discount}
           onChange={handleChange}
           required
-        >
-          <option value="" disabled>
-            Select an offer
-          </option>
-          <option value="YES">YES</option>
-          <option value="NO">NO</option>
-        </SelectFormStyled>
+        />
       </LabelFormStyled>
-
       <LabelFormStyled>
         Price
         <InputFormStyled
@@ -206,23 +192,11 @@ const FormCreateRoom = () => {
         />
       </LabelFormStyled>
 
-      <LabelFormStyled>
-        Discount
-        <InputFormStyled
-          placeholder="Discount percentage..."
-          type="number"
-          name="discount"
-          value={formData.discount}
-          onChange={handleChange}
-          required
-        />
-      </LabelFormStyled>
-
       <LabelFormStyled>Cancellation</LabelFormStyled>
       <TextAreaFormStyled
         placeholder="Cancellation policy..."
-        name="cancellation"
-        value={formData.cancellation}
+        name="cancel"
+        value={formData.cancel}
         onChange={handleChange}
         required
       />
@@ -246,17 +220,32 @@ const FormCreateRoom = () => {
           "Strong Locker",
         ].map((facility) => (
           <ButtonFacilityFormStyled
-            key={facility}
-            type="button"
-            label={facility}
-            selected={formData.facilities.includes(facility)}
-            onClick={() => handleFacilityChange(facility)}
+          key={facility}
+          type="button"
+          label={facility}
+          selected={formData.facilities.includes(facility)}
+          onClick={() => handleFacilityChange(facility)}
           >
             {facility}
           </ButtonFacilityFormStyled>
         ))}
       </ContainerFacilitiesFormStyled>
 
+          <LabelFormStyled>
+            Status
+            <SelectFormStyled
+              name="status"
+              value={formData.status}
+              onChange={handleChange}
+              required
+            >
+              <option value="" disabled>
+                Select a status
+              </option>
+              <option value={"available"}>AVAILABLE</option>
+              <option value={"booked"}>BOOKED</option>
+            </SelectFormStyled>
+          </LabelFormStyled>
       <ButtonFormStyled type="submit">Crear</ButtonFormStyled>
     </FormStyled>
   );

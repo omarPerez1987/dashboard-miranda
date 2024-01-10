@@ -23,7 +23,6 @@ const EditUsersPage = () => {
   const dispatch: AppDispatch = useDispatch();
   const usersListData = useAppSelector<UsersInterfaces[]>(getUsersData);
   const { id } = useParams();
-  const token = localStorage.getItem("adminToken") || undefined;
 
   const [user, setUser] = useState({
     _id: "",
@@ -58,7 +57,7 @@ const EditUsersPage = () => {
     event.preventDefault();
 
     try {
-      await dispatch(updateUserApiThunk({ body: user, token }));
+      await dispatch(updateUserApiThunk({ body: user }));
       toast.success("Usuario editado con éxito!");
       navigate("/home/users");
     } catch (error) {
@@ -68,7 +67,7 @@ const EditUsersPage = () => {
 
   const handleDelete = async (_id: string) => {
     try {
-      await dispatch(deleteUserApiThunk({ _id, token }));
+      await dispatch(deleteUserApiThunk({ _id }));
       toast.warn("Usuario eliminado con éxito!");
       navigate("/home/users");
     } catch (error) {

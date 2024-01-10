@@ -33,7 +33,7 @@ const UsersPage = () => {
   
   useEffect(() => {
     if (usersListStatus === "idle") {
-      dispatch(getAllUsersApiThunk({ token }));
+      dispatch(getAllUsersApiThunk());
     } else if (usersListStatus === "pending") {
       setSpinner(true);
     } else if (usersListStatus === "fulfilled") {

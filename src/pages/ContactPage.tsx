@@ -12,7 +12,7 @@ import {
   getContactsArchived,
   getContactsPublish,
 } from "../features/contact/contactsSlices";
-import { getContactsListApiThunk } from "../features/contact/contactsThunk";
+import { getAllContactsApiThunk } from "../features/contact/contactsThunk";
 import { AppDispatch, useAppSelector } from "../app/store";
 import { ContactInterface } from "../interfaces/contact/contactInterface";
 
@@ -35,10 +35,11 @@ const ContactPage = () => {
   const [newest, setNewest] = useState<boolean>(false);
   const [contacts, setContacts] = useState<ContactInterface[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const token = localStorage.getItem("adminToken") || undefined;
 
   useEffect(() => {
     if (contactsListStatus === "idle") {
-      dispatch(getContactsListApiThunk());
+      dispatch(getAllContactsApiThunk({ token }));
     } else if (contactsListStatus === "pending") {
       setSpinner(true);
     } else if (contactsListStatus === "fulfilled") {
@@ -116,7 +117,7 @@ const ContactPage = () => {
             <>
               <section className="container-reviews">
                 {newestListCard.slice(0, 3).map((contact) => (
-                  <CardReviews key={contact.id} {...contact} />
+                  <CardReviews key={contact._id} {...contact} />
                 ))}
               </section>
               <OrderTableContact

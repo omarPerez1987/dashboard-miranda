@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CiCircleRemove } from "react-icons/ci";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {
-  deleteRoom,
-  getRoomsData,
-  updateRoom,
-} from "../features/rooms/roomsSlices";
+import { getRoomsData } from "../features/rooms/roomsSlices";
 import {
   ButtonModalStyled,
   ContainerModalFlexStyled,
@@ -18,6 +14,10 @@ import { ButtonFacilityFormStyled } from "../componentsStyle/forms/FormStyled";
 import { toast } from "react-toastify";
 import { AppDispatch, useAppSelector } from "../app/store";
 import { RoomsInterface } from "../interfaces/rooms/roomsInterface";
+import {
+  deleteRoomApiThunk,
+  updateRoomApiThunk,
+} from "../features/rooms/roomsThunk";
 
 const EditRoomPage = () => {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const EditRoomPage = () => {
     description: "",
     discount: 0,
     facilities: [],
-    id: "",
+    _id: "",
     photo: "",
     price: 0,
     room: "",
@@ -39,7 +39,7 @@ const EditRoomPage = () => {
   });
 
   useEffect(() => {
-    const searchRoom = roomsListData.find((room) => room.id.toString() === id);
+    const searchRoom = roomsListData.find((room) => room._id.toString() === id);
     if (searchRoom) {
       setRoom(searchRoom);
     }
@@ -52,17 +52,26 @@ const EditRoomPage = () => {
     setRoom((prevRoomData) => ({ ...prevRoomData, [name]: value }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(updateRoom(room));
-    toast.success("Habitación editada con éxito");
-    navigate("/home/rooms");
+
+    try {
+      await dispatch(updateRoomApiThunk({ body: room }));
+      toast.success("Habitación editada con éxito");
+      navigate("/home/rooms");
+    } catch (error) {
+      toast.error("Error al editar la habitación");
+    }
   };
 
-  const handleDelete = (id: string) => {
-    dispatch(deleteRoom(id));
-    toast.warn("Habitación eliminada con exito!");
-    navigate("/home/rooms");
+  const handleDelete = async (_id: string) => {
+    try {
+      await dispatch(deleteRoomApiThunk({ _id }));
+      toast.warn("Habitación eliminada con éxito!");
+      navigate("/home/rooms");
+    } catch (error) {
+      toast.error("Error al eliminar la habitación");
+    }
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,7 +102,7 @@ const EditRoomPage = () => {
         <CiCircleRemove onClick={() => navigate("/home/rooms")} />
         <h1>EDIT ROOM</h1>
         <ContainerModalImageStyled>
-          <img src={room.photo || ''} alt="" />
+          <img src={room.photo || ""} alt="" />
         </ContainerModalImageStyled>
 
         <label>Photo</label>
@@ -193,7 +202,7 @@ const EditRoomPage = () => {
           <ButtonModalStyled
             type="button"
             onClick={() => {
-              handleDelete(room.id);
+              handleDelete(room._id);
             }}
           >
             Delete

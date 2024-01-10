@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getContactsListApiThunk } from "./contactsThunk";
+import { getAllContactsApiThunk, updateContactsApiThunk } from "./contactsThunk";
 import { RootState } from "../../app/store";
 import { ContactsSliceInitialStateInterface } from "../../interfaces/contact/contactSliceInterface";
 import { ContactInterface } from "../../interfaces/contact/contactInterface";
@@ -17,7 +17,7 @@ export const contactsSlice = createSlice({
     updateArchived: (state, action): void => {
       const contacts = state.data;
       const index = contacts.findIndex(
-        (contact) => contact.id === action.payload.id
+        (contact) => contact._id === action.payload.id
       );
       if (index !== -1) {
         const updatedContact = {
@@ -32,21 +32,38 @@ export const contactsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getContactsListApiThunk.fulfilled, (state, action): void => {
-        state.status = "fulfilled";
-        state.data = action.payload;
-      })
-      .addCase(getContactsListApiThunk.rejected, (state, action): void => {
-        state.status = "rejected";
-        state.error = action.error.message;
-      })
-      .addCase(getContactsListApiThunk.pending, (state, action): void => {
-        state.status = "pending";
-      });
+    .addCase(getAllContactsApiThunk.pending, (state) => {
+      state.status = "pending";
+    })
+    .addCase(getAllContactsApiThunk.fulfilled, (state, action) => {
+      state.status = "fulfilled";
+      state.data = action.payload;
+    })
+    .addCase(getAllContactsApiThunk.rejected, (state, action) => {
+      state.status = "rejected";
+      state.error = action.error.message;
+    })
+
+    
+    .addCase(updateContactsApiThunk.pending, (state) => {
+      state.status = "pending";
+    })
+    .addCase(updateContactsApiThunk.fulfilled, (state, action) => {
+      state.status = "fulfilled";
+      state.data = state.data.map((element) =>
+        element._id === action.payload._id ? action.payload : element
+      );
+    })
+    .addCase(updateContactsApiThunk.rejected, (state, action) => {
+      state.status = "rejected";
+      state.error = action.error.message;
+    })
   },
 });
 
 export const { updateArchived } = contactsSlice.actions;
+
+
 export const getContactsData = (state: RootState): ContactInterface[] =>
   state.contacts.data;
 export const getContactStatus = (state: RootState): string =>

@@ -23,7 +23,7 @@ import {
 } from "../features/bookings/bookingsSlices";
 import { getRoomsData, getRoomsStatus } from "../features/rooms/roomsSlices";
 import { getBookingsListThunk } from "../features/bookings/bookingsThunks";
-import { getRoomsListApiThunk } from "../features/rooms/roomsThunk";
+import { getAllRoomsApiThunk } from "../features/rooms/roomsThunk";
 import {
   ButtonModalStyled,
   ContainerModalFlexStyled,
@@ -49,7 +49,7 @@ const BookingDetailsPage = () => {
     const fetchData = () => {
       if (bookingsListStatus === "idle") {
         dispatch(getBookingsListThunk());
-        dispatch(getRoomsListApiThunk());
+        dispatch(getAllRoomsApiThunk());
       } else if (bookingsListStatus && roomsListStatus === "pending") {
         setSpinner(true);
       } else if (bookingsListStatus && roomsListStatus === "fulfilled") {
@@ -74,7 +74,7 @@ const BookingDetailsPage = () => {
     );
     if (matchedBooking) {
       const correspondingRoom = roomsListData.find(
-        (room) => room.id === matchedBooking.idRoom
+        (room) => room._id === matchedBooking.idRoom
       );
 
       if (correspondingRoom) {

@@ -12,7 +12,7 @@ import {
   getContactsError,
   getContactsPublish,
 } from "../features/contact/contactsSlices";
-import { getContactsListApiThunk } from "../features/contact/contactsThunk";
+import { getAllContactsApiThunk } from "../features/contact/contactsThunk";
 import { AppDispatch, useAppSelector } from "../app/store";
 import { ContactInterface } from "../interfaces/contact/contactInterface";
 
@@ -26,10 +26,11 @@ const DashboardPage = () => {
   );
   const [contacts, setContacts] = useState<ContactInterface[]>([]);
   const [spinner, setSpinner] = useState<boolean>(true);
+  const token = localStorage.getItem("adminToken") || undefined;
 
   useEffect(() => {
     if (contactsListStatus === "idle") {
-      dispatch(getContactsListApiThunk());
+      dispatch(getAllContactsApiThunk({ token }));
     } else if (contactsListStatus === "pending") {
       setSpinner(true);
     } else if (contactsListStatus === "fulfilled") {
@@ -69,7 +70,7 @@ const DashboardPage = () => {
               </h3>
               <div className="container-reviews__box-card">
                 {contacts.slice(0, 3).map((contact) => (
-                  <CardReviews key={contact.id} {...contact} />
+                  <CardReviews key={contact._id} {...contact} />
                 ))}
               </div>
             </section>

@@ -18,7 +18,6 @@ import { useNavigate } from "react-router-dom";
 const FormCreateUser = () => {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
-  const token = localStorage.getItem("adminToken") || undefined;
 
   const initialStateForm = {
     photo: "",
@@ -46,7 +45,7 @@ const FormCreateUser = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await dispatch(createUserApiThunk({ body: formData, token }));
+      await dispatch(createUserApiThunk({ body: formData }));
       toast.success("Creado exitosamente");
       navigate("/home/users");
     } catch (error) {

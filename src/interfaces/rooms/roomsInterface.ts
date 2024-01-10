@@ -1,6 +1,6 @@
 export interface RoomsInterface {
   photo: string | null;
-  id: string;
+  _id: string;
   room: string;
   bed: string;
   facilities: string[];

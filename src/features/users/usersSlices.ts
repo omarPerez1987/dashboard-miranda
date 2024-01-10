@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 import { UsersSliceInitialStateInterface } from "../../interfaces/users/userSliceInterface";
 import { UsersInterfaces } from "../../interfaces/users/usersInterfaces";
@@ -10,7 +10,6 @@ import {
   getOneUserApiThunk,
   updateUserApiThunk,
 } from "./usersThunks";
-import { isArray } from "cypress/types/lodash";
 
 const initialState: UsersSliceInitialStateInterface = {
   data: [],
@@ -36,6 +35,8 @@ export const usersSlice = createSlice({
         state.error = action.error.message;
       })
 
+
+
       .addCase(getOneUserApiThunk.pending, (state) => {
         state.status = "pending";
       })
@@ -48,6 +49,8 @@ export const usersSlice = createSlice({
         state.error = action.error.message;
       })
 
+
+
       .addCase(createUserApiThunk.pending, (state) => {
         state.status = "pending";
       })
@@ -59,6 +62,8 @@ export const usersSlice = createSlice({
         state.status = "rejected";
         state.error = action.error.message;
       })
+
+
 
       .addCase(updateUserApiThunk.pending, (state) => {
         state.status = "pending";
@@ -74,6 +79,8 @@ export const usersSlice = createSlice({
         state.error = action.error.message;
       })
 
+
+      
       .addCase(deleteUserApiThunk.pending, (state) => {
         state.status = "pending";
       })

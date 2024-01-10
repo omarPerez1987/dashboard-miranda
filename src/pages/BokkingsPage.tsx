@@ -15,7 +15,7 @@ import {
 } from "../features/bookings/bookingsSlices";
 import { getBookingsListThunk } from "../features/bookings/bookingsThunks";
 import { getRoomsData } from "../features/rooms/roomsSlices";
-import { getRoomsListApiThunk } from "../features/rooms/roomsThunk";
+import { getAllRoomsApiThunk } from "../features/rooms/roomsThunk";
 import { AppDispatch, useAppSelector } from "../app/store";
 import { BookingInterface } from "../interfaces/bookings/bookingsInterface";
 import { RoomsInterface } from "../interfaces/rooms/roomsInterface";
@@ -46,7 +46,7 @@ const BokkingsPage = () => {
   useEffect(() => {
     if (bookingsListStatus === "idle") {
       dispatch(getBookingsListThunk());
-      dispatch(getRoomsListApiThunk());
+      dispatch(getAllRoomsApiThunk());
     } else if (bookingsListStatus === "pending") {
       setSpinner(true);
     } else if (bookingsListStatus === "fulfilled") {
@@ -61,7 +61,7 @@ const BokkingsPage = () => {
 
     selectList.forEach((booking) => {
       const correspondingRoom = rooms.find(
-        (room) => room.id === booking.idRoom
+        (room) => room._id === booking.idRoom
       );
 
       if (correspondingRoom) {

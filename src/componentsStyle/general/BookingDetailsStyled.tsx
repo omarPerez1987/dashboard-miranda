@@ -11,7 +11,7 @@ export const BookingDetailsStyled = styled.section`
 
 export const DetailsTextStyled = styled.div`
   width: 50%;
-  height: 100%;
+  height: auto;
   padding: 3em;
   display: flex;
   flex-direction: column;
@@ -143,22 +143,23 @@ export const DetailsInfoRoomStyled = styled.div`
 export const DetailsInfoFacilitiesStyled = styled.div`
   margin-top: 1em;
   width: 100%;
-  height: 30%;
+  height: auto;
   padding: 0em 3em 2em 0em;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
-
+  
   & h6 {
     color: #6e6e6e;
     font-size: 1.2em;
     font-weight: 500;
     margin-bottom: 1em;
   }
-
+  
   & .container-buttons {
     display: flex;
-    gap: 3em;
+    flex-wrap: wrap;
+    gap: 1em;
   }
 `;
 
@@ -229,11 +230,11 @@ export const DetailsLabelStyled = styled.label<{type: string}>`
 
   ${(props) => {
     switch (props.type) {
-      case "in":
+      case "booked":
         return css`
           background-color: red;
         `;
-      case "out":
+      case "available":
         return css`
           background-color: #5ad07a;
         `;

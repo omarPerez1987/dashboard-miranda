@@ -20,12 +20,12 @@ import {
 import { SpinnerStyled } from "../../componentsStyle/general/SpinnerStyled";
 import { AppDispatch, useAppSelector } from "../../app/store";
 import { RoomsInterface } from "../../interfaces/rooms/roomsInterface";
+import { createBookingApiThunk } from "../../features/bookings/bookingsThunks";
+import { useNavigate } from "react-router-dom";
 
 const FormCreateBooking = () => {
-  const random1 = Math.floor(Math.random() * 999);
-  const random2 = Math.floor(Math.random() * 999);
-  const idUnique = `BOOK${random1}-${random2}`;
 
+  const navigate = useNavigate()
   const dispatch: AppDispatch = useDispatch();
   const roomsListDataAvailable =
     useAppSelector<RoomsInterface[]>(getRoomsAvailable);
@@ -50,7 +50,6 @@ const FormCreateBooking = () => {
   }, [dispatch, roomsListStatus]);
 
   const initialStateForm = {
-    id: `${idUnique}`,
     name: "",
     orderDate: `${format(new Date(), "dd-MMM-yyyy")}`,
     orderTime: `${format(new Date(), "hh:mm aa")}`,
@@ -73,11 +72,15 @@ const FormCreateBooking = () => {
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(addBooking(formData));
-    toast.success("Creado exitosamente");
-    setFormData(initialStateForm);
+    try {
+      await dispatch(createBookingApiThunk({ body: formData }));
+      toast.success("Creado exitosamente");
+      navigate("/home/bookings");
+    } catch (error) {
+      toast.error("Error al crear la reserva");
+    }
   };
 
   return (
@@ -92,17 +95,6 @@ const FormCreateBooking = () => {
             <SpinnerStyled />
           ) : (
             <FormStyled onSubmit={handleSubmit}>
-              <LabelFormStyled>
-                Id
-                <InputFormStyled
-                  type="text"
-                  name="id"
-                  value={formData.id}
-                  onChange={handleChange}
-                  readOnly
-                />
-              </LabelFormStyled>
-
               <LabelFormStyled>
                 Name and Surname
                 <InputFormStyled

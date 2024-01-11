@@ -19,11 +19,7 @@ import { useDispatch } from "react-redux";
 import {
   deleteBooking,
   getBookingsData,
-  getBookingsStatus,
 } from "../features/bookings/bookingsSlices";
-import { getRoomsData, getRoomsStatus } from "../features/rooms/roomsSlices";
-import { getBookingsListThunk } from "../features/bookings/bookingsThunks";
-import { getAllRoomsApiThunk } from "../features/rooms/roomsThunk";
 import {
   ButtonModalStyled,
   ContainerModalFlexStyled,
@@ -31,195 +27,168 @@ import {
 import { toast } from "react-toastify";
 import { AppDispatch, useAppSelector } from "../app/store";
 import { BookingInterface } from "../interfaces/bookings/bookingsInterface";
-import { RoomsInterface } from "../interfaces/rooms/roomsInterface";
+import { deleteBookingApiThunk } from "../features/bookings/bookingsThunks";
 
 const BookingDetailsPage = () => {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const { id } = useParams();
   const bookingsListData = useAppSelector<BookingInterface[]>(getBookingsData);
-  const bookingsListStatus = useAppSelector<string>(getBookingsStatus);
-  const roomsListStatus = useAppSelector<string>(getRoomsStatus);
-  const roomsListData = useAppSelector<RoomsInterface[]>(getRoomsData);
-  const [spinner, setSpinner] = useState<boolean>(true);
 
-  const [details, setDetails] = useState<BookingInterface | undefined>();
+  const [details, setDetails] = useState<BookingInterface>();
+
+  // useEffect(() => {
+  //   const fetchData = () => {
+  //     if (bookingsListStatus === "idle") {
+  //       dispatch(getOneBookingApiThunk({ _id: id }));
+  //     } else if (bookingsListStatus === "pending") {
+  //       setSpinner(true);
+  //     } else if (bookingsListStatus === "fulfilled") {
+  //       setSpinner(false);
+  //       searchBooking();
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [dispatch, bookingsListData, bookingsListStatus, id]);
 
   useEffect(() => {
-    const fetchData = () => {
-      if (bookingsListStatus === "idle") {
-        dispatch(getBookingsListThunk());
-        dispatch(getAllRoomsApiThunk());
-      } else if (bookingsListStatus && roomsListStatus === "pending") {
-        setSpinner(true);
-      } else if (bookingsListStatus && roomsListStatus === "fulfilled") {
-        setSpinner(false);
-        findMatchingBookingAndRoom();
-      }
-    };
+    searchBooking();
+  }, [id]);
 
-    fetchData();
-  }, [
-    dispatch,
-    bookingsListData,
-    roomsListData,
-    bookingsListStatus,
-    roomsListStatus,
-    id,
-  ]);
+  const searchBooking = () => {
+    if (id) {
+      const result = bookingsListData.find((element) => element._id === id);
+      setDetails(result);
+    }
+  };
 
-  const findMatchingBookingAndRoom = () => {
-    const matchedBooking = bookingsListData.find(
-      (booking) => booking.idRoom === id
-    );
-    if (matchedBooking) {
-      const correspondingRoom = roomsListData.find(
-        (room) => room._id === matchedBooking.idRoom
-      );
-
-      if (correspondingRoom) {
-        setDetails({
-          ...matchedBooking,
-          room: correspondingRoom.room,
-          price: correspondingRoom.price,
-          description: correspondingRoom.description,
-          facilities: correspondingRoom.facilities,
-          photo: correspondingRoom.photo,
-          status: correspondingRoom.status,
-        });
-      }
+  const handleDelete = async (_id: string) => {
+    try {
+      await dispatch(deleteBookingApiThunk({ _id }));
+      toast.warn("Reserva eliminada con éxito!");
+      navigate("/home/bookings");
+    } catch (error) {
+      toast.error("Error al eliminar la reserva");
     }
   };
 
   return (
     <>
       <MainStyled>
-        {spinner ? (
-          <h1>Loading...</h1>
-        ) : (
+        {details && (
           <>
-            {details && (
-              <>
-                <BookingDetailsStyled>
-                  <DetailsTextStyled>
-                    <DetailsInfoPersonStyled>
-                      <div className="container-image-info">
-                        <img src={details.photo || ""} alt="" />
-                        <div className="container-namebutton">
-                          <h1>{details.name}</h1>
-                          <h6>{details.id}</h6>
-                          <div className="container-phone">
-                            <FaPhone />
-                            <button className="container-phone__button">
-                              <BiMessageSquareDetail className="container-phone__button__icon" />
-                              Send Message
-                            </button>
-                          </div>
-                        </div>
+            <BookingDetailsStyled>
+              <DetailsTextStyled>
+                <DetailsInfoPersonStyled>
+                  <div className="container-image-info">
+                    <img src={details.dataRoom.photo || ""} alt="" />
+                    <div className="container-namebutton">
+                      <h1>{details.name}</h1>
+                      <h6>{details._id}</h6>
+                      <div className="container-phone">
+                        <FaPhone />
+                        <button className="container-phone__button">
+                          <BiMessageSquareDetail className="container-phone__button__icon" />
+                          Send Message
+                        </button>
                       </div>
-                      <SlOptionsVertical />
-                    </DetailsInfoPersonStyled>
-                    <DetailsCheckStyled>
-                      <div className="box-check">
-                        <h6>Check in</h6>
-                        <h3>
-                          {details.checkin} | {details.checkinTime}
-                        </h3>
-                      </div>
-                      <div className="box-check">
-                        <h6>Check out</h6>
-                        <h3>
-                          {details.checkout} | {details.checkoutTime}
-                        </h3>
-                      </div>
-                    </DetailsCheckStyled>
-                    <DetailsInfoRoomStyled>
-                      <div className="container-room">
-                        <div className="container-room__info">
-                          <h6>Room Info</h6>
-                          <h3>{details.room}</h3>
-                        </div>
-                        <div className="container-room__info">
-                          <h6>Price</h6>
-                          <h3>
-                            ${details.price}
-                            <span> /night</span>
-                          </h3>
-                        </div>
-                      </div>
-                      {details.notes ? (
-                        <p>{details.notes}</p>
-                      ) : (
-                        <h1>No notes</h1>
-                      )}
-                    </DetailsInfoRoomStyled>
-                    {details.facilities && details.facilities.length > 0 ? (
-                      <DetailsInfoFacilitiesStyled>
-                        <h6>Facilities</h6>
-                        <div className="container-buttons">
-                          {details.facilities.map((item, index) => (
-                            <DetailsButtonfacilitiesStyled key={index}>
-                              {item}
-                            </DetailsButtonfacilitiesStyled>
-                          ))}
-                        </div>
-                      </DetailsInfoFacilitiesStyled>
-                    ) : (
-                      <p>No facilities available</p>
-                    )}
-                  </DetailsTextStyled>
-
-                  <DetailsImageStyled>
-                    <div className="container-label">
-                      {details.status === "in" && (
-                        <DetailsLabelStyled type={details.status}>
-                          <p>booked</p>
-                        </DetailsLabelStyled>
-                      )}
-                      {details.status === "out" && (
-                        <DetailsLabelStyled type={details.status}>
-                          <p>free</p>
-                        </DetailsLabelStyled>
-                      )}
-                      {details.status === "pending" && (
-                        <DetailsLabelStyled type={details.status}>
-                          <p>pending</p>
-                        </DetailsLabelStyled>
-                      )}
                     </div>
-                    <img src={details.photo || ""} alt="" />
-                    <div className="container-text">
-                      <h1>Bed Room</h1>
-                      {details.notes ? (
-                        <p>{`${details.notes.slice(0, 100)}...`}</p>
-                      ) : (
-                        <h1>No notes</h1>
-                      )}
+                  </div>
+                  <SlOptionsVertical />
+                </DetailsInfoPersonStyled>
+                <DetailsCheckStyled>
+                  <div className="box-check">
+                    <h6>Check in</h6>
+                    <h3>
+                      {details.checkin} | {details.checkinTime}
+                    </h3>
+                  </div>
+                  <div className="box-check">
+                    <h6>Check out</h6>
+                    <h3>
+                      {details.checkout} | {details.checkoutTime}
+                    </h3>
+                  </div>
+                </DetailsCheckStyled>
+                <DetailsInfoRoomStyled>
+                  <div className="container-room">
+                    <div className="container-room__info">
+                      <h6>Room Info</h6>
+                      <h3>{details.dataRoom.room}</h3>
                     </div>
-                  </DetailsImageStyled>
-                </BookingDetailsStyled>
-                <ContainerModalFlexStyled>
-                  <ButtonModalStyled
-                    type="submit"
-                    color="edit"
-                    onClick={() => navigate(`/home/edit-booking/${details.id}`)}
-                  >
-                    Edit
-                  </ButtonModalStyled>
+                    <div className="container-room__info">
+                      <h6>Price</h6>
+                      <h3>
+                        ${details.dataRoom.price}
+                        <span> /night</span>
+                      </h3>
+                    </div>
+                  </div>
+                  {details.notes ? <p>{details.notes}</p> : <h1>No notes</h1>}
+                </DetailsInfoRoomStyled>
+                {details.dataRoom.facilities &&
+                details.dataRoom.facilities.length > 0 ? (
+                  <DetailsInfoFacilitiesStyled>
+                    <h6>Facilities</h6>
+                    <div className="container-buttons">
+                      {details.dataRoom.facilities.map((item, index) => (
+                        <DetailsButtonfacilitiesStyled key={index}>
+                          {item}
+                        </DetailsButtonfacilitiesStyled>
+                      ))}
+                    </div>
+                  </DetailsInfoFacilitiesStyled>
+                ) : (
+                  <p>No facilities available</p>
+                )}
+              </DetailsTextStyled>
 
-                  <ButtonModalStyled
-                    type="button"
-                    onClick={() => {
-                      dispatch(deleteBooking(details.id)),
-                        toast.warn("Reserva eliminada con éxito");
-                      navigate("/home/bookings");
-                    }}
-                  >
-                    Delete
-                  </ButtonModalStyled>
-                </ContainerModalFlexStyled>
-              </>
-            )}
+              <DetailsImageStyled>
+                <div className="container-label">
+                  {details.dataRoom.status === "booked" && (
+                    <DetailsLabelStyled type={details.dataRoom.status}>
+                      <p>booked</p>
+                    </DetailsLabelStyled>
+                  )}
+                  {details.dataRoom.status === "available" && (
+                    <DetailsLabelStyled type={details.dataRoom.status}>
+                      <p>free</p>
+                    </DetailsLabelStyled>
+                  )}
+                  {details.dataRoom.status === "pending" && (
+                    <DetailsLabelStyled type={details.dataRoom.status}>
+                      <p>pending</p>
+                    </DetailsLabelStyled>
+                  )}
+                </div>
+                <img src={details.dataRoom.photo || ""} alt="" />
+                <div className="container-text">
+                  <h1>Bed Room</h1>
+                  {details.notes ? (
+                    <p>{`${details.notes.slice(0, 100)}...`}</p>
+                  ) : (
+                    <h1>No notes</h1>
+                  )}
+                </div>
+              </DetailsImageStyled>
+            </BookingDetailsStyled>
+            <ContainerModalFlexStyled>
+              <ButtonModalStyled
+                type="submit"
+                color="edit"
+                onClick={() => navigate(`/home/edit-booking/${details._id}`)}
+              >
+                Edit
+              </ButtonModalStyled>
+
+              <ButtonModalStyled
+                type="button"
+                onClick={() => handleDelete(details._id)}
+              >
+                Delete
+              </ButtonModalStyled>
+            </ContainerModalFlexStyled>
           </>
         )}
       </MainStyled>

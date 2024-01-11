@@ -1,12 +1,137 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import bookings from "../../JSON/bookings.json";
-import { BookingInterface } from "../../interfaces/bookings/bookingsInterface";
 
-export const getBookingsListThunk = createAsyncThunk(
-  "bookings/getBookingsFromApi",
-  async (): Promise<BookingInterface[]> => {
-    fetch('https://m4lpn4lgy2.execute-api.eu-west-3.amazonaws.com/dev/api/bookings')
-    return bookings;
-    //  throw new Error("Error al obtener los datos de los usuarios");
+interface ApiRequest {
+  body?: Record<string, any>;
+  token?: string;
+  _id?: string;
+}
+
+const BASE_URL = "http://localhost:3001/api";
+// "https://m4lpn4lgy2.execute-api.eu-west-3.amazonaws.com/dev/api";
+const token = localStorage.getItem("adminToken") || undefined;
+
+// Thunk para obtener la lista de bookings
+export const getAllBookingsApiThunk = createAsyncThunk(
+  "bookings/getAllBookingsApiThunk",
+  async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/bookings`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error en la solicitud: ${response.statusText}`);
+      }
+
+      const responseData = await response.json();
+      return responseData.data;
+    } catch (error: any) {
+      return { message: error.message };
+    }
+  }
+);
+
+// Thunk para obtener una sola reserva
+export const getOneBookingApiThunk = createAsyncThunk(
+  "bookings/getOneBookingApiThunk",
+  async ({_id }: ApiRequest, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`${BASE_URL}/bookings/${_id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error en la solicitud: ${response.statusText}`);
+      }
+
+      const responseData = await response.json();
+      return responseData.data;
+    } catch (error: any) {
+      return rejectWithValue({ message: error.message });
+    }
+  }
+);
+
+// Thunk para crear una booking
+export const createBookingApiThunk = createAsyncThunk(
+  "bookings/createBookingApiThunk",
+  async ({ body }: ApiRequest, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`${BASE_URL}/bookings`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(body),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error en la solicitud: ${response.statusText}`);
+      }
+
+      const responseData = await response.json();
+      return responseData.data;
+    } catch (error: any) {
+      return rejectWithValue({ message: error.message });
+    }
+  }
+);
+
+// Thunk para actualizar una booking
+export const updateBookingApiThunk = createAsyncThunk(
+  "bookings/updateBookingApiThunk",
+  async ({ body }: ApiRequest, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`${BASE_URL}/bookings`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(body),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error en la solicitud: ${response.statusText}`);
+      }
+
+      const responseData = await response.json();
+      return responseData.data;
+    } catch (error: any) {
+      return rejectWithValue({ message: error.message });
+    }
+  }
+);
+
+// Thunk para eliminar una booking
+export const deleteBookingApiThunk = createAsyncThunk(
+  "bookings/deleteBookingApiThunk",
+  async ({ _id }: ApiRequest, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`${BASE_URL}/bookings/${_id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error en la solicitud: ${response.statusText}`);
+      }
+
+      const responseData = await response.json();
+      return responseData.data;
+    } catch (error: any) {
+      return rejectWithValue({ message: error.message });
+    }
   }
 );

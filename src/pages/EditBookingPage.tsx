@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import {
   getBookingsData,
+  getBookingsStatus,
   updateBooking,
 } from "../features/bookings/bookingsSlices";
 import { getRoomsAvailable } from "../features/rooms/roomsSlices";
@@ -20,18 +21,25 @@ import { MainStyled } from "../componentsStyle/general/MainStyled";
 import { RoomsInterface } from "../interfaces/rooms/roomsInterface";
 import { BookingInterface } from "../interfaces/bookings/bookingsInterface";
 import { AppDispatch, useAppSelector } from "../app/store";
+import { getAllBookingsApiThunk, updateBookingApiThunk } from "../features/bookings/bookingsThunks";
+import { getAllRoomsApiThunk } from "../features/rooms/roomsThunk";
+
 
 const EditBookingPage = () => {
   const navigate = useNavigate();
+  const dispatch: AppDispatch = useDispatch();
+  const bookingsListData = useAppSelector<BookingInterface[]>(getBookingsData);
+  const bookingsListStatus = useAppSelector<string>(getBookingsStatus);
+
+  const [spinner, setSpinner] = useState<boolean>(true);
   const bookingListData = useAppSelector<BookingInterface[]>(getBookingsData);
   const roomsListAvailable =
     useAppSelector<RoomsInterface[]>(getRoomsAvailable);
-  const dispatch: AppDispatch = useDispatch();
   const { id } = useParams();
   const [availableRooms, setAvailableRooms] = useState<RoomsInterface[]>([]);
 
   const [booking, setBooking] = useState<BookingInterface>({
-    id: "",
+    _id: "",
     name: "",
     orderDate: "",
     orderTime: "",
@@ -42,17 +50,39 @@ const EditBookingPage = () => {
     notes: "",
     idRoom: "",
     check: "",
-    photo: "",
-    room: "",
-    price: 0,
-    description: "",
-    facilities: [],
-    status: "",
+    dataRoom: {
+      _id: "",
+      photo: "",
+      room: "",
+      bed: "",
+      facilities: [],
+      description: "",
+      price: 0,
+      discount: 0,
+      cancel: "",
+      status: "",
+    },
   });
 
   useEffect(() => {
+    if (bookingsListStatus === "idle") {
+      dispatch(getAllBookingsApiThunk());
+      dispatch(getAllRoomsApiThunk());
+    } else if (bookingsListStatus === "pending") {
+      setSpinner(true);
+    } else if (bookingsListStatus === "fulfilled") {
+      setSpinner(false);
+    }
+  }, [
+    dispatch,
+    bookingsListData,
+    bookingsListStatus,
+    spinner
+  ]);
+
+  useEffect(() => {
     const searchBooking = bookingListData.find(
-      (booking) => booking.id.toString() === id
+      (booking) => booking._id.toString() === id
     );
 
     if (searchBooking) {
@@ -78,25 +108,22 @@ const EditBookingPage = () => {
     setBooking((prevBooking) => ({ ...prevBooking, [name]: value }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(updateBooking(booking));
-    toast.success("Reserva editada exitosamente");
-    navigate("/home/bookings");
+
+    try {
+      await dispatch(updateBookingApiThunk({ body: booking }));
+      toast.success("Reserva editada con éxito");
+      navigate("/home/bookings");
+    } catch (error) {
+      toast.error("Error al editar la reserva");
+    }
   };
 
   return (
     <MainStyled>
       <FormStyled onSubmit={handleSubmit}>
-        <LabelFormStyled>Id</LabelFormStyled>
-        <InputFormStyled
-          type="text"
-          name="id"
-          value={booking.id}
-          onChange={handleChange}
-          readOnly
-        />
-
+  
         <LabelFormStyled>Name and Surname</LabelFormStyled>
         <InputFormStyled
           type="text"
@@ -181,7 +208,7 @@ const EditBookingPage = () => {
           </option>
           {availableRooms &&
             availableRooms.map((rooms) => (
-              <option value={rooms.id} key={rooms.id}>
+              <option value={rooms._id} key={rooms._id}>
                 {rooms.room}, ({rooms.bed})
               </option>
             ))}

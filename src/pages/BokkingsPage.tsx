@@ -13,12 +13,9 @@ import {
   getRoomsCheckOut,
   getRoomsCheckPending,
 } from "../features/bookings/bookingsSlices";
-import { getBookingsListThunk } from "../features/bookings/bookingsThunks";
-import { getRoomsData } from "../features/rooms/roomsSlices";
-import { getAllRoomsApiThunk } from "../features/rooms/roomsThunk";
+import { getAllBookingsApiThunk } from "../features/bookings/bookingsThunks";
 import { AppDispatch, useAppSelector } from "../app/store";
 import { BookingInterface } from "../interfaces/bookings/bookingsInterface";
-import { RoomsInterface } from "../interfaces/rooms/roomsInterface";
 
 const BokkingsPage = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -33,61 +30,45 @@ const BokkingsPage = () => {
   const bookingsListError = useAppSelector<string | undefined>(
     getBookingsError
   );
-  const roomsListData = useAppSelector<RoomsInterface[]>(getRoomsData);
   const [spinner, setSpinner] = useState<boolean>(true);
 
   const [stateStatus, setStateStatus] = useState<string>("All");
   const [bookings, setBookings] = useState<BookingInterface[]>([]);
-  const [rooms, setRooms] = useState<RoomsInterface[]>([]);
 
   const [selectFooter, setSelectFooter] = useState<string>("date");
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
     if (bookingsListStatus === "idle") {
-      dispatch(getBookingsListThunk());
-      dispatch(getAllRoomsApiThunk());
+      dispatch(getAllBookingsApiThunk());
     } else if (bookingsListStatus === "pending") {
       setSpinner(true);
     } else if (bookingsListStatus === "fulfilled") {
-      setRooms(roomsListData);
+      setBookings(bookingsListData);
       switchBookingsList();
       setSpinner(false);
     }
-  }, [dispatch, bookingsListData, bookingsListStatus, stateStatus, rooms]);
-
-  const bookingAndRoom = (selectList: BookingInterface[]) => {
-    const combinedData: Array<Object> = [];
-
-    selectList.forEach((booking) => {
-      const correspondingRoom = rooms.find(
-        (room) => room._id === booking.idRoom
-      );
-
-      if (correspondingRoom) {
-        combinedData.push({
-          ...booking,
-          room: correspondingRoom.room,
-        });
-      }
-    });
-
-    return combinedData;
-  };
+  }, [
+    dispatch,
+    bookingsListData,
+    bookingsListStatus,
+    stateStatus,
+    spinner
+  ]);
 
   const switchBookingsList = () => {
     switch (stateStatus) {
       case "All":
-        setBookings(bookingAndRoom(bookingsListData) as BookingInterface[]);
+        setBookings(bookingsListData);
         break;
       case "In":
-        setBookings(bookingAndRoom(bookingsListCheckIn) as BookingInterface[]);
+        setBookings(bookingsListCheckIn);
         break;
       case "Out":
-        setBookings(bookingAndRoom(bookingsListCheckOut) as BookingInterface[]);
+        setBookings(bookingsListCheckOut);
         break;
       case "Pending":
-        setBookings(bookingAndRoom(bookingsListPending) as BookingInterface[]);
+        setBookings(bookingsListPending);
         break;
       default:
         break;

@@ -1,6 +1,8 @@
+import { RoomsInterface } from "../rooms/roomsInterface";
+
 export interface BookingInterface {
+  _id: string;
   name: string;
-  id: string;
   orderDate: string;
   orderTime: string;
   checkin: string;
@@ -8,12 +10,7 @@ export interface BookingInterface {
   checkout: string;
   checkoutTime: string;
   notes: string;
+  dataRoom: RoomsInterface
   idRoom: string;
   check: string;
-  room?: string;
-  price?: number;
-  description?: string;
-  facilities?: Array<string> ;
-  photo?: string | null;
-  status?: string;
 }

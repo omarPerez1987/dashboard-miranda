@@ -17,7 +17,7 @@ interface TableBookingsProps {
 const TableBookings: React.FC<TableBookingsProps> = ({ bookings }) => {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [infoNotes, setInfoNotes] = useState<string>('');
+  const [infoNotes, setInfoNotes] = useState<string>("");
 
   return (
     <>
@@ -36,11 +36,11 @@ const TableBookings: React.FC<TableBookingsProps> = ({ bookings }) => {
         <tbody>
           {bookings &&
             bookings.map((data) => (
-              <TrbodyStyled key={data.id}>
+              <TrbodyStyled key={data._id}>
                 <TdbodyNameStyled>
-                  <img src={data.photo || ""} alt="" />
+                  <img src={data.dataRoom.photo || ""} alt="" />
                   <div>
-                    <span>{data.id}</span>
+                    <span>{data._id}</span>
                     <p>{data.name}</p>
                   </div>
                 </TdbodyNameStyled>
@@ -71,15 +71,15 @@ const TableBookings: React.FC<TableBookingsProps> = ({ bookings }) => {
                   )}
                 </TdbodyStyled>
                 <TdbodyStyled>
-                  <p>{data.room}</p>
+                  <p>{data.dataRoom.room}</p>
                 </TdbodyStyled>
                 <TdbodyStyled>
-                  {data.check === "in" && (
+                  {data.check === "checked-in" && (
                     <ButtonVariantStyled type="in">
                       Check in
                     </ButtonVariantStyled>
                   )}
-                  {data.check === "out" && (
+                  {data.check === "checked-out" && (
                     <ButtonVariantStyled type="out">
                       Check out
                     </ButtonVariantStyled>
@@ -93,7 +93,7 @@ const TableBookings: React.FC<TableBookingsProps> = ({ bookings }) => {
                 <TdbodyStyled>
                   <PiDotsThreeVerticalBold
                     onClick={() => {
-                      navigate(`/home/bookings-details/${data.idRoom}`);
+                      navigate(`/home/bookings-details/${data._id}`);
                     }}
                   />
                 </TdbodyStyled>

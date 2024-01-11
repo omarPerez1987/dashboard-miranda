@@ -10,11 +10,13 @@ import { updateAdmin } from "../../features/admin/adminSlice";
 import { toast } from "react-toastify";
 import { AppDispatch } from "../../app/store";
 import { ModalEditAdminProps } from "../../interfaces/propsInterface/propsInterface";
+import { faker } from "@faker-js/faker";
 
 const ModalEditAdmin: React.FC<ModalEditAdminProps> = ({ setOpenModal }) => {
   const dispatch: AppDispatch = useDispatch();
 
   const initialStateForm = {
+    photo: faker.image.avatarLegacy(),
     name: "",
     email: "test@test.com",
     password: "9999",
@@ -27,7 +29,7 @@ const ModalEditAdmin: React.FC<ModalEditAdminProps> = ({ setOpenModal }) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    localStorage.setItem("formData", JSON.stringify(formData));
+    localStorage.setItem("dataAdmin", JSON.stringify(formData));
     dispatch(updateAdmin(formData));
     toast.success("Editado con éxito");
     setOpenModal(false);

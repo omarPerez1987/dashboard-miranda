@@ -19,7 +19,7 @@ function AppRoutes() {
   const [data, setData] = useState<string | undefined>();
 
   useEffect(() => {
-    const saveToken = localStorage.getItem("adminToken");
+    const saveToken = localStorage.getItem("token");
     if (saveToken) {
       setData(saveToken);
     }

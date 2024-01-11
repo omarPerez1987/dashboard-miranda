@@ -24,7 +24,8 @@ const TopMenu: React.FC<TopMenuProps> = ({ hiddenMenu, menuOpen, title }) => {
         <FaRegBell />
         <button
           onClick={() => {
-            localStorage.setItem("formData", JSON.stringify({}));
+            localStorage.removeItem("dataAdmin");
+            localStorage.removeItem("token");
             navigate("/");
           }}
         >

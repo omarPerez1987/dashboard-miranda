@@ -1,17 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { AdminInterface } from "../../interfaces/admin/adminInterface";
 import { getAdminTokenThunk } from "./adminThunk";
 
 interface AdminData {
-  data: AdminInterface[];
+  data: AdminInterface | null;
   status: "idle" | "pending" | "fulfilled" | "rejected";
   error: string | undefined;
   token: string | undefined;
 }
 
 const initialState: AdminData = {
-  data: [],
+  data: null,
   status: "idle",
   error: undefined,
   token: undefined,
@@ -21,11 +21,11 @@ export const adminSlice = createSlice({
   name: "admin",
   initialState: initialState,
   reducers: {
-    addAdmin: (state, action): void => {
-      state.data = [action.payload];
+    addAdmin: (state, action: PayloadAction<AdminInterface>): void => {
+      state.data = action.payload;
     },
-    updateAdmin: (state, action): void => {
-      state.data = [action.payload];
+    updateAdmin: (state, action: PayloadAction<AdminInterface>): void => {
+      state.data = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -46,7 +46,7 @@ export const adminSlice = createSlice({
 });
 
 export const { updateAdmin, addAdmin } = adminSlice.actions;
-export const getTokenData = (state: RootState): AdminInterface[] =>
+export const getAdminData = (state: RootState): AdminInterface | null =>
   state.admin.data;
 export const getTokenStatus = (state: RootState): string =>
   state.admin.status;
@@ -54,7 +54,3 @@ export const getTokenError = (state: RootState): string | undefined =>
   state.admin.error;
 export const getToken = (state: RootState): string | undefined =>
   state.admin.token;
-
-export const getAdminData = (state: RootState): AdminInterface[] =>
-  state.admin.data;
-

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MdOutlineDashboard } from "react-icons/md";
 import { TfiKey } from "react-icons/tfi";
 import { LuCalendarCheck2 } from "react-icons/lu";
@@ -8,13 +8,13 @@ import { NavMenustyled } from "../../componentsStyle/general/NavMenuStyled";
 import { NavLinkStyled } from "../../componentsStyle/general/NavMenuStyled";
 import { CardAdminStyled } from "../../componentsStyle/general/CardAdminStyled";
 import Logo from "../../../public/navMenu/logo-dashboard.png";
-import admin from "../../../public/cardAdmin/bxs-user.svg";
 import ModalEditAdmin from "../modal/ModalEditAdmin";
 
 const NavMenu = ({ menuOpen }: { menuOpen: boolean }) => {
-  const adminData = JSON.parse(localStorage.getItem("formData") || "null");
+  const dataAdmin = JSON.parse(localStorage.getItem("dataAdmin") || "{}");
 
   const [openModal, setOpenModal] = useState<boolean>(false);
+
   return (
     <>
       {menuOpen && (
@@ -47,9 +47,9 @@ const NavMenu = ({ menuOpen }: { menuOpen: boolean }) => {
             </NavLinkStyled>
           </div>
           <CardAdminStyled>
-            <img className="card-img" src={admin} alt="" />
-            <h3 className="card-name">{adminData.name}</h3>
-            <p className="card-email">{adminData.email}</p>
+            <img className="card-img" src={dataAdmin.photo || ""} alt="" />
+            <h3 className="card-name">{dataAdmin.name}</h3>
+            <p className="card-email">{dataAdmin.email}</p>
             <button className="card-button" onClick={() => setOpenModal(true)}>
               Edit
             </button>

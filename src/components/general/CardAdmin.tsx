@@ -7,15 +7,15 @@ import { useDispatch } from "react-redux";
 import { addAdmin, getToken } from "../../features/admin/adminSlice";
 import { getAdminTokenThunk } from "../../features/admin/adminThunk";
 import { AppDispatch, useAppSelector } from "../../app/store";
+import { faker } from "@faker-js/faker";
 
 const CardAdmin = () => {
   const dispatch: AppDispatch = useDispatch();
   const token = useAppSelector<string | undefined>(getToken);
   const navigate = useNavigate();
 
-  console.log(token);
-
   const initialState = {
+    photo: faker.image.avatarLegacy(),
     name: "",
     email: "",
     password: "",
@@ -34,25 +34,24 @@ const CardAdmin = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const { email, password } = formData;
+    const { photo, name, email, password } = formData;
 
     try {
-      if (!token) {
+      if (token) {
+        localStorage.setItem("dataAdmin", JSON.stringify(formData));
+        navigate("/home/dashboard");
+      } else {
         await dispatch(
           getAdminTokenThunk({
-            method: "POST",
             body: { email, password },
           })
         );
-      } else {
-        localStorage.setItem("adminToken", token);
-        localStorage.setItem("formData", JSON.stringify(formData));
         navigate("/home/dashboard");
-        dispatch(addAdmin(formData));
+        localStorage.setItem("dataAdmin", JSON.stringify(formData));
       }
     } catch (error) {
-      console.error("Error al obtener el token:", error);
-      toast.error("Error al obtener el token");
+      console.error("Error:", error);
+      toast.error("Error al procesar la solicitud");
     }
   };
 

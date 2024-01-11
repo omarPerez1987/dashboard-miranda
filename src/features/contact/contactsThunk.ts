@@ -6,7 +6,7 @@ interface ApiRequest {
   _id?: string;
 }
 
-const token = localStorage.getItem("adminToken") || undefined;
+const token = localStorage.getItem("token") || undefined;
 const BASE_URL = "http://localhost:3001/api";
 // "https://m4lpn4lgy2.execute-api.eu-west-3.amazonaws.com/dev/api";
 

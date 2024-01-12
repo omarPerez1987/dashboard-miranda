@@ -29,6 +29,7 @@ export const getAllBookingsApiThunk = createAsyncThunk(
       }
 
       const responseData = await response.json();
+      console.log(responseData)
       return responseData.data;
     } catch (error: any) {
       return { message: error.message };

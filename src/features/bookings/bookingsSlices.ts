@@ -114,10 +114,10 @@ export const getBookingsError = (state: RootState): string | undefined =>
   state.bookings.error;
 
 export const getRoomsCheckIn = (state: RootState): BookingInterface[] =>
-  state.bookings.data.filter((booking) => booking.check === "in");
+  state.bookings.data.filter((booking) => booking.check === "checked-in");
 
 export const getRoomsCheckOut = (state: RootState): BookingInterface[] =>
-  state.bookings.data.filter((booking) => booking.check === "out");
+  state.bookings.data.filter((booking) => booking.check === "checked-out");
 
 export const getRoomsCheckPending = (state: RootState): BookingInterface[] =>
   state.bookings.data.filter((booking) => booking.check === "pending");

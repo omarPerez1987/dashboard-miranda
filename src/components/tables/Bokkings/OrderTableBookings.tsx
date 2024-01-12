@@ -14,10 +14,10 @@ const OrderTableBookings: React.FC<OrderTableBookingsProps> = ({
   return (
     <OrderTableStyled>
       <div>
-        <h4 onClick={() => setStateStatus("All")}>All Guest</h4>
-        <h4 onClick={() => setStateStatus("Pending")}>Pending</h4>
-        <h4 onClick={() => setStateStatus("In")}>Check in</h4>
-        <h4 onClick={() => setStateStatus("Out")}>Check out</h4>
+        <h4 onClick={() => setStateStatus("all")}>All Guest</h4>
+        <h4 onClick={() => setStateStatus("pending")}>Pending</h4>
+        <h4 onClick={() => setStateStatus("check-in")}>Check in</h4>
+        <h4 onClick={() => setStateStatus("check-out")}>Check out</h4>
       </div>
       <div>
         <Link to={"/home/new-booking"}>

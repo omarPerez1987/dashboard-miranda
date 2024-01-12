@@ -58,16 +58,16 @@ const BokkingsPage = () => {
 
   const switchBookingsList = () => {
     switch (stateStatus) {
-      case "All":
+      case "all":
         setBookings(bookingsListData);
         break;
-      case "In":
+      case "check-in":
         setBookings(bookingsListCheckIn);
         break;
-      case "Out":
+      case "check-out":
         setBookings(bookingsListCheckOut);
         break;
-      case "Pending":
+      case "pending":
         setBookings(bookingsListPending);
         break;
       default:

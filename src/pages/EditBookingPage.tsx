@@ -77,6 +77,7 @@ const EditBookingPage = () => {
     dispatch,
     bookingsListData,
     bookingsListStatus,
+    roomsListAvailable,
     spinner
   ]);
 
@@ -94,7 +95,7 @@ const EditBookingPage = () => {
   useEffect(() => {
     setBooking((prevBooking) => ({
       ...prevBooking,
-      orderDate: format(new Date(), "dd-MMM-yyyy"),
+      orderDate: format(new Date(), "dd/MM/yyyy"),
       orderTime: format(new Date(), "hh:mm aa"),
     }));
   }, [bookingListData]);
@@ -137,7 +138,7 @@ const EditBookingPage = () => {
         <InputFormStyled
           type="text"
           name="orderDate"
-          value={`${format(new Date(), "dd-MMM-yyyy")}`}
+          value={`${format(new Date(), "dd/MM/yyyy")}`}
           onChange={handleChange}
           readOnly
         />

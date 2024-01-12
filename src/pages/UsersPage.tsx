@@ -69,8 +69,8 @@ const UsersPage = () => {
   const orderUsers = () => {
     const orderedUsers = [...users];
     orderedUsers.sort((a, b) => {
-      const dateA = new Date(a.startDate.split(".").reverse().join("-"));
-      const dateB = new Date(b.startDate.split(".").reverse().join("-"));
+      const dateA = new Date(a.startDate.split(".").reverse().join("/"));
+      const dateB = new Date(b.startDate.split(".").reverse().join("/"));
       return dateA.getTime() - dateB.getTime();
     });
     return orderedUsers;

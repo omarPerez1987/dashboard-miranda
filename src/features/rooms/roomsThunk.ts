@@ -1,12 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-// import { BASE_URL } from "../../mode/debugMode";
+import { getBaseUrl } from "../../mode/debugMode";
 
 interface ApiRequest {
   body?: Record<string, any>;
   token?: string;
   _id?: string;
 }
-const BASE_URL = 'http://localhost:3001/api';
+
+const BASE_URL = getBaseUrl()
 
 const token = localStorage.getItem("token") || undefined;
 

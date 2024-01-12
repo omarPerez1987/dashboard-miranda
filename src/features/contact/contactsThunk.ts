@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-// import { getBaseUrl } from "../../mode/debugMode";
+import { getBaseUrl } from "../../mode/debugMode";
 
 
 interface ApiRequest {
@@ -7,7 +7,8 @@ interface ApiRequest {
   token?: string;
   _id?: string;
 }
-const BASE_URL = 'http://localhost:3001/api';
+
+const BASE_URL = getBaseUrl()
 const token = localStorage.getItem("token") || undefined;
 
 // Thunk para obtener la lista de contactos

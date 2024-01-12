@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+// import { getBaseUrl } from "../../mode/debugMode";
 
 interface ApiRequest {
   body?: Record<string, any>;
@@ -6,8 +7,7 @@ interface ApiRequest {
   _id?: string;
 }
 
-const BASE_URL = "http://localhost:3001/api";
-// "https://m4lpn4lgy2.execute-api.eu-west-3.amazonaws.com/dev/api";
+const BASE_URL = 'http://localhost:3001/api';
 const token = localStorage.getItem("token") || undefined;
 
 // Thunk para obtener la lista de bookings

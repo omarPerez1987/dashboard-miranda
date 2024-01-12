@@ -9,5 +9,8 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./src/test/jest/jest.test.jsx']
-  }
+  },
+  define: {
+    'process.env': process.env,
+  },
 })

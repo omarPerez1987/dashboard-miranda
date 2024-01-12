@@ -21,7 +21,7 @@ const CardReviews = (props: ContactInterface) => {
         )} ...`}</p>
         <div>
           <div>
-            <img src="#" alt="" />
+            <img src={props.photo} alt="" />
             <div className="name-user">
               <h5>
                 {props.name} {props.last_name}

@@ -1,12 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+// import { getBaseUrl } from "../../mode/debugMode";
 
 interface RequestConfig {
   body?: Record<string, unknown>;
 }
 
-const BASE_URL =
-  // "https://m4lpn4lgy2.execute-api.eu-west-3.amazonaws.com/dev/api";
- "http://localhost:3001/api";
+const BASE_URL = 'http://localhost:3001/api';
 
 export const getAdminTokenThunk = createAsyncThunk(
   "admin/postTokenFromApi",

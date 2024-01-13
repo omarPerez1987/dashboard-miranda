@@ -32,7 +32,6 @@ const TableRooms: React.FC<TableRoomsProps> = ({ rooms }) => {
                 <img
                   className="image-room"
                   src={room.photo || undefined}
-                  style={{ width: 150, height: 77 }}
                   alt=""
                 />
                 <div>

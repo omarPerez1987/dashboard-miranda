@@ -45,8 +45,8 @@ const TableBookings: React.FC<TableBookingsProps> = ({ bookings }) => {
                   </div>
                 </TdbodyNameStyled>
                 <TdbodyStyled>
-                  {data.orderDate} <br />
-                  {data.checkinTime}
+                  <p>{data.orderDate}</p>
+                  <span>{data.checkinTime}</span>
                 </TdbodyStyled>
                 <TdbodyStyled>
                   <p>{data.checkin}</p> <span>{data.checkinTime}</span>

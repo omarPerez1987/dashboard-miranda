@@ -18,6 +18,8 @@ import {
   deleteRoomApiThunk,
   updateRoomApiThunk,
 } from "../features/rooms/roomsThunk";
+import { CreateButton } from "../componentsStyle/general/ButtonStyled";
+import { faker } from "@faker-js/faker";
 
 const EditRoomPage = () => {
   const navigate = useNavigate();
@@ -37,6 +39,8 @@ const EditRoomPage = () => {
     room: "",
     status: "",
   });
+
+  console.log(room);
 
   useEffect(() => {
     const searchRoom = roomsListData.find((room) => room._id.toString() === id);
@@ -66,20 +70,19 @@ const EditRoomPage = () => {
 
   const handleDelete = async (_id: string) => {
     try {
-      await dispatch(deleteRoomApiThunk({ _id }));
-      toast.warn("Habitación eliminada con éxito!");
+      // await dispatch(deleteRoomApiThunk({ _id }));
+      toast.info("Habla con el departamento técnico para eliminarla");
       navigate("/home/rooms");
     } catch (error) {
       toast.error("Error al eliminar la habitación");
     }
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const fileInput = event.target;
-    if (fileInput.files && fileInput.files.length > 0) {
-      const file = fileInput.files[0];
-      setRoom((prevRoomData) => ({ ...prevRoomData, image: file }));
-    }
+  const handleFileChange = () => {
+    setRoom((prevRoom) => ({
+      ...prevRoom,
+      photo: faker.image.urlPicsumPhotos(),
+    }));
   };
 
   const handleFacilityChange = (facility: string) => {
@@ -106,7 +109,9 @@ const EditRoomPage = () => {
         </ContainerModalImageStyled>
 
         <label>Photo</label>
-        <input type="file" name="image" onChange={(e) => handleFileChange(e)} />
+        <CreateButton type="button" onClick={handleFileChange}>
+          Change Image
+        </CreateButton>
 
         <label>Room Name</label>
         <input

@@ -17,6 +17,8 @@ import {
   deleteUserApiThunk,
   updateUserApiThunk,
 } from "../features/users/usersThunks";
+import { faker } from "@faker-js/faker";
+import { CreateButton } from "../componentsStyle/general/ButtonStyled";
 
 const EditUsersPage = () => {
   const navigate = useNavigate();
@@ -75,11 +77,11 @@ const EditUsersPage = () => {
     }
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setUser((prevUser) => ({ ...prevUser, image: file }));
-    }
+  const handleFileChange = () => {
+    setUser((prevUser) => ({
+      ...prevUser,
+      photo: faker.image.avatarLegacy(),
+    }));
   };
 
   return (
@@ -92,7 +94,9 @@ const EditUsersPage = () => {
         </ContainerModalImageStyled>
 
         <label>Photo</label>
-        <input type="file" name="image" onChange={(e) => handleFileChange(e)} />
+        <CreateButton type="button" onClick={handleFileChange}>
+          Change Image
+        </CreateButton>
 
         <label>Full Name</label>
         <input

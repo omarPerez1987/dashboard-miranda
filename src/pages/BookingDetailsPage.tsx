@@ -16,10 +16,7 @@ import { FaPhone } from "react-icons/fa6";
 import { BiMessageSquareDetail } from "react-icons/bi";
 import { SlOptionsVertical } from "react-icons/sl";
 import { useDispatch } from "react-redux";
-import {
-  deleteBooking,
-  getBookingsData,
-} from "../features/bookings/bookingsSlices";
+import { getBookingsData } from "../features/bookings/bookingsSlices";
 import {
   ButtonModalStyled,
   ContainerModalFlexStyled,
@@ -34,23 +31,7 @@ const BookingDetailsPage = () => {
   const dispatch: AppDispatch = useDispatch();
   const { id } = useParams();
   const bookingsListData = useAppSelector<BookingInterface[]>(getBookingsData);
-
   const [details, setDetails] = useState<BookingInterface>();
-
-  // useEffect(() => {
-  //   const fetchData = () => {
-  //     if (bookingsListStatus === "idle") {
-  //       dispatch(getOneBookingApiThunk({ _id: id }));
-  //     } else if (bookingsListStatus === "pending") {
-  //       setSpinner(true);
-  //     } else if (bookingsListStatus === "fulfilled") {
-  //       setSpinner(false);
-  //       searchBooking();
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [dispatch, bookingsListData, bookingsListStatus, id]);
 
   useEffect(() => {
     searchBooking();
@@ -146,19 +127,20 @@ const BookingDetailsPage = () => {
 
               <DetailsImageStyled>
                 <div className="container-label">
-                  {details.dataRoom.status === "booked" && (
-                    <DetailsLabelStyled type={details.dataRoom.status}>
+                  {}
+                  {details.check === "pending" && (
+                    <DetailsLabelStyled type={"booked"}>
                       <p>booked</p>
                     </DetailsLabelStyled>
                   )}
-                  {details.dataRoom.status === "available" && (
-                    <DetailsLabelStyled type={details.dataRoom.status}>
-                      <p>free</p>
+                  {details.check === "checked-in" && (
+                    <DetailsLabelStyled type={"booked"}>
+                      <p>booked</p>
                     </DetailsLabelStyled>
                   )}
-                  {details.dataRoom.status === "pending" && (
-                    <DetailsLabelStyled type={details.dataRoom.status}>
-                      <p>pending</p>
+                  {details.check === "checked-out" && (
+                    <DetailsLabelStyled type={"available"}>
+                      <p>available</p>
                     </DetailsLabelStyled>
                   )}
                 </div>

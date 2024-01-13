@@ -148,14 +148,14 @@ export const DetailsInfoFacilitiesStyled = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  
+
   & h6 {
     color: #6e6e6e;
     font-size: 1.2em;
     font-weight: 500;
     margin-bottom: 1em;
   }
-  
+
   & .container-buttons {
     display: flex;
     flex-wrap: wrap;
@@ -212,11 +212,11 @@ export const DetailsImageStyled = styled.div`
     }
     & p {
       font-size: 1.2rem;
-      color: #6E6E6E;
+      color: #6e6e6e;
     }
   }
 `;
-export const DetailsLabelStyled = styled.label<{type: string}>`
+export const DetailsLabelStyled = styled.label<{ type: string }>`
   position: relative;
   margin-top: 2.8em;
   margin-right: -4.7em;
@@ -237,10 +237,6 @@ export const DetailsLabelStyled = styled.label<{type: string}>`
       case "available":
         return css`
           background-color: #5ad07a;
-        `;
-      case "pending":
-        return css`
-          background-color: #e2e212;
         `;
     }
   }}

@@ -8,7 +8,7 @@ import {
 } from "../componentsStyle/modal/ModalStyled";
 import { CiCircleRemove } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsersData } from "../features/users/usersSlices";
+import { deleteUser, getUsersData } from "../features/users/usersSlices";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppDispatch, useAppSelector } from "../app/store";
@@ -69,8 +69,9 @@ const EditUsersPage = () => {
 
   const handleDelete = async (_id: string) => {
     try {
-      await dispatch(deleteUserApiThunk({ _id }));
-      toast.warn("Usuario eliminado con éxito!");
+      // await dispatch(deleteUserApiThunk({ _id }));
+      await dispatch(deleteUser(_id));
+      toast.info("Habla con el departamento técnico para eliminarlo");
       navigate("/home/users");
     } catch (error) {
       toast.error("Error al eliminar el usuario");

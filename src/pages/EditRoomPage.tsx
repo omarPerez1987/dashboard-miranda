@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { CiCircleRemove } from "react-icons/ci";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getRoomsData } from "../features/rooms/roomsSlices";
 import {
   ButtonModalStyled,
   ContainerModalFlexStyled,
@@ -14,12 +13,14 @@ import { ButtonFacilityFormStyled } from "../componentsStyle/forms/FormStyled";
 import { toast } from "react-toastify";
 import { AppDispatch, useAppSelector } from "../app/store";
 import { RoomsInterface } from "../interfaces/rooms/roomsInterface";
-import {
-  deleteRoomApiThunk,
-  updateRoomApiThunk,
-} from "../features/rooms/roomsThunk";
+import { updateRoomApiThunk } from "../features/rooms/roomsThunk";
 import { CreateButton } from "../componentsStyle/general/ButtonStyled";
 import { faker } from "@faker-js/faker";
+import {
+  getRoomsData,
+  deleteRoom,
+  updateRoom,
+} from "../features/rooms/roomsSlices";
 
 const EditRoomPage = () => {
   const navigate = useNavigate();
@@ -40,8 +41,6 @@ const EditRoomPage = () => {
     status: "",
   });
 
-  console.log(room);
-
   useEffect(() => {
     const searchRoom = roomsListData.find((room) => room._id.toString() === id);
     if (searchRoom) {
@@ -60,7 +59,8 @@ const EditRoomPage = () => {
     event.preventDefault();
 
     try {
-      await dispatch(updateRoomApiThunk({ body: room }));
+      // await dispatch(updateRoomApiThunk({ body: room }));
+      await dispatch(updateRoom(room));
       toast.success("Habitación editada con éxito");
       navigate("/home/rooms");
     } catch (error) {
@@ -68,9 +68,10 @@ const EditRoomPage = () => {
     }
   };
 
-  const handleDelete = async (_id: string) => {
+  const handleDelete = (_id: string) => {
     try {
       // await dispatch(deleteRoomApiThunk({ _id }));
+      dispatch(deleteRoom(_id));
       toast.info("Habla con el departamento técnico para eliminarla");
       navigate("/home/rooms");
     } catch (error) {

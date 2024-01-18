@@ -16,7 +16,7 @@ import { FaPhone } from "react-icons/fa6";
 import { BiMessageSquareDetail } from "react-icons/bi";
 import { SlOptionsVertical } from "react-icons/sl";
 import { useDispatch } from "react-redux";
-import { getBookingsData } from "../features/bookings/bookingsSlices";
+import { deleteBooking, getBookingsData } from "../features/bookings/bookingsSlices";
 import {
   ButtonModalStyled,
   ContainerModalFlexStyled,
@@ -24,7 +24,7 @@ import {
 import { toast } from "react-toastify";
 import { AppDispatch, useAppSelector } from "../app/store";
 import { BookingInterface } from "../interfaces/bookings/bookingsInterface";
-import { deleteBookingApiThunk } from "../features/bookings/bookingsThunks";
+// import { deleteBookingApiThunk } from "../features/bookings/bookingsThunks";
 
 const BookingDetailsPage = () => {
   const navigate = useNavigate();
@@ -46,7 +46,8 @@ const BookingDetailsPage = () => {
 
   const handleDelete = async (_id: string) => {
     try {
-      await dispatch(deleteBookingApiThunk({ _id }));
+      // await dispatch(deleteBookingApiThunk({ _id }));
+      await dispatch(deleteBooking(_id));
       toast.warn("Reserva eliminada con éxito!");
       navigate("/home/bookings");
     } catch (error) {

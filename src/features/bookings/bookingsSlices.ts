@@ -105,6 +105,8 @@ export const bookingsSlice = createSlice({
 
 export const { addBooking, updateBooking, deleteBooking } =
   bookingsSlice.actions;
+
+
 export const getBookingsData = (state: RootState): BookingInterface[] =>
   state.bookings.data;
 

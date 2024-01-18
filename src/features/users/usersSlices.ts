@@ -20,7 +20,22 @@ const initialState: UsersSliceInitialStateInterface = {
 export const usersSlice = createSlice({
   name: "users",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    addUser: (state, action): void => {
+      state.data = [action.payload, ...state.data];
+    },
+    updateUser: (state, action): void => {
+      const index = state.data.findIndex(
+        (room: any) => room.id === action.payload.id
+      );
+      if (index !== -1) {
+        state.data[index] = action.payload;
+      }
+    },
+    deleteUser: (state, action): void => {
+      state.data = state.data.filter((room: any) => room.id !== action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getAllUsersApiThunk.pending, (state) => {
@@ -95,6 +110,9 @@ export const usersSlice = createSlice({
       });
   },
 });
+
+
+export const { addUser, updateUser, deleteUser } = usersSlice.actions;
 
 export const getUsersData = (state: RootState): UsersInterfaces[] =>
   state.users.data;

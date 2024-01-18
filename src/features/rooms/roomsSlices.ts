@@ -20,20 +20,20 @@ export const roomsSlice = createSlice({
   name: "rooms",
   initialState: initialState,
   reducers: {
-    // addRoom: (state, action): void => {
-    //   state.data = [action.payload, ...state.data];
-    // },
-    // updateRoom: (state, action): void => {
-    //   const index = state.data.findIndex(
-    //     (room) => room.id === action.payload.id
-    //   );
-    //   if (index !== -1) {
-    //     state.data[index] = action.payload;
-    //   }
-    // },
-    // deleteRoom: (state, action): void => {
-    //   state.data = state.data.filter((room) => room.id !== action.payload);
-    // },
+    addRoom: (state, action): void => {
+      state.data = [action.payload, ...state.data];
+    },
+    updateRoom: (state, action): void => {
+      const index = state.data.findIndex(
+        (room: any) => room.id === action.payload.id
+      );
+      if (index !== -1) {
+        state.data[index] = action.payload;
+      }
+    },
+    deleteRoom: (state, action): void => {
+      state.data = state.data.filter((room: any) => room.id !== action.payload);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -101,6 +101,9 @@ export const roomsSlice = createSlice({
       });
   },
 });
+
+
+export const { addRoom, updateRoom, deleteRoom } = roomsSlice.actions;
 
 export const getRoomsData = (state: RootState): RoomsInterface[] =>
   state.rooms.data;

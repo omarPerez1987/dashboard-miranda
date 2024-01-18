@@ -21,9 +21,11 @@ import { MainStyled } from "../componentsStyle/general/MainStyled";
 import { RoomsInterface } from "../interfaces/rooms/roomsInterface";
 import { BookingInterface } from "../interfaces/bookings/bookingsInterface";
 import { AppDispatch, useAppSelector } from "../app/store";
-import { getAllBookingsApiThunk, updateBookingApiThunk } from "../features/bookings/bookingsThunks";
+import {
+  getAllBookingsApiThunk,
+  updateBookingApiThunk,
+} from "../features/bookings/bookingsThunks";
 import { getAllRoomsApiThunk } from "../features/rooms/roomsThunk";
-
 
 const EditBookingPage = () => {
   const navigate = useNavigate();
@@ -78,7 +80,7 @@ const EditBookingPage = () => {
     bookingsListData,
     bookingsListStatus,
     roomsListAvailable,
-    spinner
+    spinner,
   ]);
 
   useEffect(() => {
@@ -124,7 +126,6 @@ const EditBookingPage = () => {
   return (
     <MainStyled>
       <FormStyled onSubmit={handleSubmit}>
-  
         <LabelFormStyled>Name and Surname</LabelFormStyled>
         <InputFormStyled
           type="text"

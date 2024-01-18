@@ -48,6 +48,7 @@ const RoomsPage = () => {
     roomsListBooked,
   ]);
 
+
   const switchRoomsList = () => {
     switch (stateStatus) {
       case "All":

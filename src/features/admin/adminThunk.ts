@@ -28,7 +28,7 @@ export const getAdminTokenThunk = createAsyncThunk(
       }
 
       const responseData = await response.json();
-      console.log(responseData.token)
+
       localStorage.setItem("token", responseData.token);
       return responseData.token;
     } catch (error: any) {
